@@ -39,3 +39,42 @@ public class CardDemo extends Application {
     launch(args);
   }
 } 
+
+/*
+ * References (used for inspiration): 
+
+https://www.letsplayuno.com/
+
+https://www.unorules.org/how-many-cards-in-uno/
+https://www.adamthole.com/uno-attack-hack/
+https://www.ultraboardgames.com/uno/cards.php
+https://www.geekyhobbies.com/uno-games-the-complete-list-of-all-themed-decks-spinoffs/
+
+Coding References:
+
+https://openjfx.io/
+https://openjfx.io/javadoc/19/
+https://docs.oracle.com/en/java/javase/17/docs/api/
+https://liveexample.pearsoncmg.com/html/KeyEventDemo.html
+https://liveexample.pearsoncmg.com/html/ShowEllipse.html
+http://android-er.blogspot.com/2015/01/drag-and-drop-items-between-listview.html
+https://www.youtube.com/watch?v=f7KGXUrAH0g
+https://www.youtube.com/watch?v=O6FR_K-5GKM
+https://www.baeldung.com/javafx-listview-display-custom-items
+https://www.youtube.com/watch?v=9YWYxj6LAUE
+https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
+https://www.geeksforgeeks.org/javafx-popup-class/
+https://www.youtube.com/watch?v=YN6_lOH5ZG4
+https://www.youtube.com/watch?v=cqskg3DYH8g
+https://www.youtube.com/watch?v=UdGiuDDi7Rg
+https://www.youtube.com/watch?v=JNHKrG4IoOs
+https://www.youtube.com/watch?v=In7xBl0-I68
+
+Additional credit given to previous class projects by Jason Kauppila (with linked GitHub repositories). (Referenced for understanding how to make some UI elements in JavaFX work properly.)
+https://github.com/OrangeJuiceNoPulp/OrangeJuiceMusicApp
+https://github.com/OrangeJuiceNoPulp/ExtendedTicTacToe 
+https://github.com/OrangeJuiceNoPulp/UnitConverterGUI
+
+Additional credits also given to a previous class project by Stefan Coica, which was named FourKingdomsChess. (Referenced for understanding how to make some UI elements in JavaFX work properly.)
+
+ */
