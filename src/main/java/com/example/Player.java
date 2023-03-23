@@ -8,10 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.util.Pair;
 
 public class Player {
+    private static final int bigHandPenaltyPoints = 1000;
     private boolean isBot; // Whether the player is a bot or the user
     private int playerNum; // A number to identify the player in the game
     private boolean isSkipped;
     private long score; // The score of the player for the current round
+    private long overallScore; //The score of the player for the current game
     private Game game;
     private boolean isPlayerTurn; // TODO Remove this???
 
@@ -36,7 +38,7 @@ public class Player {
         // TODO add animation for penalty
 
         // Removes 1000 points from the player as a penalty
-        this.removePoints(5000);
+        this.removePoints(bigHandPenaltyPoints);
 
         ArrayList<Card> cardsToBeDiscarded = new ArrayList<Card>();
         // Adds all the cards in the player's hand to a list of cards to be discarded.
@@ -339,8 +341,24 @@ public class Player {
         }
     }
 
+    public long getRoundEndPoints() {
+        long points = 0;
+        for (Card card : playerHand) {
+            points += card.getPointValue(game.getIsDarkMode());
+        }
+        return points;
+    }
+
     public long getScore() {
         return this.score;
+    }
+    public long getOverallScore() {
+        return this.overallScore;
+    }
+
+    public void savePointsFromRound() {
+        this.overallScore += this.score;
+        this.score = 0;
     }
 
     public boolean getIsBot() {
@@ -371,7 +389,7 @@ public class Player {
     }
 
     public void endTurn() {
-        System.out.println(this.toString() + "'s turn has ended.\n");
+        System.out.println(this.toString() + "'s turn has ended.\n"); //TODO remove debug text
         this.isSkipped = false;
         this.isPlayerTurn = false;
         game.checkForBigHandPenalty();
@@ -379,6 +397,10 @@ public class Player {
             game.setCurrentPlayer(this.getNextPlayer());
             game.getCurrentPlayer().startTurn();
         }
+    }
+
+    public int getHandSize() {
+        return this.playerHand.size();
     }
 
     public void setLeftPlayer(Player leftPlayer) {
@@ -438,7 +460,7 @@ public class Player {
         return (initialScore - score);
     }
 
-    public Player(boolean isBot, int playerNum, Game game) {
+    public Player(boolean isBot, int playerNum, String playerName, Game game) {
         this.game = game;
         this.isBot = isBot;
         this.playerNum = playerNum;
@@ -446,8 +468,13 @@ public class Player {
         this.score = 0;
         this.isPlayerTurn = false;
 
-        this.playerName = "Player " + playerNum;
-
+        if (isBot) {
+            this.playerName = playerName + " (Bot)";
+        }
+        else {
+            this.playerName = playerName + " (You)";
+        }
+        
         playerHand = FXCollections.observableArrayList(new ArrayList<Card>(105));
     }
 

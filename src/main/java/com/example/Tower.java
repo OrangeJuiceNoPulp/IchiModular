@@ -11,7 +11,6 @@ public class Tower {
 
     private Game game;
 
-    private boolean isSelected;
     private TowerPosition position;
 
     private boolean isCastle;
@@ -23,8 +22,6 @@ public class Tower {
     private Card bottomCard;
 
     private int counter;
-
-    private TextArea towerDisplay;
 
     public TowerPosition getPosition() {
         return this.position;
@@ -47,35 +44,11 @@ public class Tower {
         }
     }
 
-    public TextArea getTowerDisplay() {
-        return this.towerDisplay;
+    public TowerDisplay getTowerDisplay() {
+        TowerDisplay display = new TowerDisplay(this);
+        return display;
     }
 
-    private void setSelection(boolean selection) {
-        this.isSelected = selection;
-    }
-
-    public void select() {
-        for (Tower tower : game.getTowers()) {
-            tower.setSelection(false);
-        }
-        this.isSelected = true;
-    }
-
-    public boolean getIsSelected() {
-        return this.isSelected;
-    }
-
-    public void refreshDisplay() {
-        String output = new String();
-        if (!isEmpty) {
-            output = getDisplayedCard().toString() + "\n\n\nTop Card: " + getTopCard().toString() + "\nBottom Card: "
-                    + getBottomCard().toString() +
-                    "\n\nOwner: " + owner + "\nIs Owned: " + isOwned;
-        }
-        output = output + "\n\nSelected: " + this.isSelected;
-        towerDisplay.setText(output);
-    }
 
     public void clear() {
         this.isEmpty = true;
@@ -212,45 +185,43 @@ public class Tower {
         this.game = game;
         this.position = position;
 
-        towerDisplay = new TextArea();
-        towerDisplay.setEditable(false);
-        towerDisplay.setOnDragDropped(e -> {
-            // System.out.println("Discard DragDone"); // TODO remove this after debugging
-            Dragboard db = e.getDragboard();
-            boolean dropSuccess = false;
-            boolean turnSuccess = false;
+        // towerDisplay.setOnDragDropped(e -> {
+        //     // System.out.println("Discard DragDone"); // TODO remove this after debugging
+        //     Dragboard db = e.getDragboard();
+        //     boolean dropSuccess = false;
+        //     boolean turnSuccess = false;
 
-            if (db.hasContent(CardCellFactory.cardFormat)) {
-                if (db.getContent(CardCellFactory.cardFormat) instanceof CardBase) {
+        //     if (db.hasContent(CardCellFactory.cardFormat)) {
+        //         if (db.getContent(CardCellFactory.cardFormat) instanceof CardBase) {
 
-                    CardBase draggedCard = (CardBase) db.getContent(CardCellFactory.cardFormat);
-                    Card selectedCard = game.getSelectedCard();
+        //             CardBase draggedCard = (CardBase) db.getContent(CardCellFactory.cardFormat);
+        //             Card selectedCard = game.getSelectedCard();
 
-                    // System.out.println(draggedCard.isTheSameCard(selectedCard)); // TODO remove
-                    // this after debugging
+        //             // System.out.println(draggedCard.isTheSameCard(selectedCard)); // TODO remove
+        //             // this after debugging
 
-                    if (draggedCard.isTheSameCard(selectedCard)) {
-                        turnSuccess = game.playCard(game.getCurrentPlayer(), this, selectedCard);
-                    }
-                }
+        //             if (draggedCard.isTheSameCard(selectedCard)) {
+        //                 turnSuccess = game.playCard(game.getCurrentPlayer(), this, selectedCard);
+        //             }
+        //         }
 
-                if (turnSuccess) {
-                    game.getCurrentPlayer().endTurn();
-                    game.refreshGamePane();
-                }
-                dropSuccess = true;
-            }
-            e.setDropCompleted(dropSuccess);
-            e.consume();
-        });
-        towerDisplay.setOnDragOver(e -> {
-            if (e.getGestureSource() != towerDisplay && e.getDragboard().hasContent(CardCellFactory.cardFormat)) {
-                e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-            }
-        });
-        towerDisplay.setOnMouseClicked(e -> {
-            this.select();
-            game.refreshGamePane();
-        });
+        //         if (turnSuccess) {
+        //             game.getCurrentPlayer().endTurn();
+        //             game.refreshGamePane();
+        //         }
+        //         dropSuccess = true;
+        //     }
+        //     e.setDropCompleted(dropSuccess);
+        //     e.consume();
+        // });
+        // towerDisplay.setOnDragOver(e -> {
+        //     if (e.getGestureSource() != towerDisplay && e.getDragboard().hasContent(CardCellFactory.cardFormat)) {
+        //         e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+        //     }
+        // });
+        // towerDisplay.setOnMouseClicked(e -> {
+        //     //this.select();
+        //     game.refreshGamePane();
+        // });
     }
 }

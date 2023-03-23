@@ -4,16 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import com.example.Deck.DeckType;
+import com.example.Tower.TowerPosition;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class Game {
+    private static final int POINT_MULTIPLIER_GAME = 1;
+    private static final int DARK_MODE_MULTIPLIER = 2;
+    private static final int LIGHT_MODE_MULTIPLIER = 1;
     private static final int startingCardAmount = 7;
     private static final int sizeForBigHandPenalty = 100;
     private Deck deck;
+    private DeckType deckType;
     private int numOfPlayers;
     private int numOfBuiltTowers;
+
+    private TowerPosition selectedTowerPosition;
 
     private DisputeDeck disputeDeck;
     private Stack stack;
@@ -24,11 +37,11 @@ public class Game {
     private boolean waitingForUserToTakeTurn;
     private boolean gameDirectionClockwise;
 
-    private Tower castle;
-    private Tower tower1;
-    private Tower tower2;
-    private Tower tower3;
-    private Tower tower4;
+    private Tower castle; //tower0
+    private Tower northTower; //tower1
+    private Tower southTower; //tower2
+    private Tower eastTower; //tower3
+    private Tower westTower; //tower4
 
     private Player player1; // player 1 is the user
     private Player player2;
@@ -44,7 +57,53 @@ public class Game {
     private int roundNumber; // the current round number
     private int numOfRounds; // the total number of rounds to be played
 
+    private long lastRoundVictoryBonus = 0;
+    private Player lastRoundWinner = null;
+
     private GamePane gamePane;
+
+    public GamePane getGamePane() {
+        return this.gamePane;
+    }
+
+    public DeckType getDeckType() {
+        return this.deckType;
+    }
+
+    public ArrayList<Text> getCurrentRankings() {
+        ArrayList<Player> tempPlayerArray = new ArrayList<Player>(5);
+        for (Player player: playerList) {
+            tempPlayerArray.add(player);
+        }
+        tempPlayerArray.sort(new PlayerScoreComparator());
+
+        ArrayList<Text> returnTextArray = new ArrayList<Text>(5);
+
+        for (Player player: tempPlayerArray) {
+            Text txtPlayerScore = new Text("\t" + player.getPlayerName() +": " + player.getOverallScore() + " points");
+            txtPlayerScore.setFill(Color.WHITESMOKE);
+            txtPlayerScore.setFont(new Font("Perpetua Bold Italic", 25));
+            txtPlayerScore.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+            returnTextArray.add(txtPlayerScore);
+        }
+
+        return returnTextArray;
+    }
+
+    public long getLastRoundVictoryBonus() {
+        return lastRoundVictoryBonus;
+    }
+    public Player getLastRoundWinner() {
+        return lastRoundWinner;
+    }
+
+    public int getNumOfPlayers() {
+        return this.numOfPlayers;
+    }
+
+    public Player getUser() {
+        return player1;
+    }
 
     public Random getRand() {
         return this.rand;
@@ -538,13 +597,37 @@ public class Game {
     }
 
     public Tower getSelectedTower() {
-        Tower selectedTower = castle;
-        for (Tower tower : getTowers()) {
-            if (tower.getIsSelected()) {
-                selectedTower = tower;
-            }
+        Tower selectedTower;
+        switch (selectedTowerPosition) {
+            case CENTER:
+                selectedTower = castle;
+                break;
+            case EAST:
+                selectedTower = eastTower;
+                break;
+            case NORTH:
+                selectedTower = northTower;
+                break;
+            case SOUTH:
+                selectedTower = southTower;
+                break;
+            case WEST:
+                selectedTower = westTower;
+                break;
+            default:
+                selectedTower = castle;
+                break;
+
         }
         return selectedTower;
+    }
+
+    public TowerPosition getSelectedTowerPosition() {
+        return selectedTowerPosition;
+    }
+
+    public void setSelectedTowerPosition(TowerPosition position) {
+        selectedTowerPosition = position;
     }
 
     public int getRoundNumber() {
@@ -570,10 +653,10 @@ public class Game {
     public ArrayList<Tower> getTowers() {
         ArrayList<Tower> towers = new ArrayList<Tower>(5);
         towers.add(this.castle);
-        towers.add(this.tower1);
-        towers.add(this.tower2);
-        towers.add(this.tower3);
-        towers.add(this.tower4);
+        towers.add(this.northTower);
+        towers.add(this.southTower);
+        towers.add(this.eastTower);
+        towers.add(this.westTower);
         return towers;
     }
 
@@ -619,7 +702,21 @@ public class Game {
 
     public Player getPlayer(int playerNumber) {
         // TODO finish implementing this method // Done?
-        return playerList.get(playerNumber - 1);
+        if (playerNumber == 1) {
+            return player1;
+        }
+        else if (playerNumber == 2) {
+            return player2;
+        }
+        else if (playerNumber == 3) {
+            return player3;
+        }
+        else if (playerNumber == 4) {
+            return player4;
+        }
+        else {
+            return null;
+        }
     }
 
     public Player getCurrentPlayer() {
@@ -627,6 +724,9 @@ public class Game {
     }
 
     public boolean playCard(Player player, Tower tower, Card card) {
+        if (tower.getIsEmpty()) {
+            return false;
+        }
         if (card.isPlayable(tower.getDisplayedCard(), isDarkMode.get())) {
             tower.addCard(card);
             player.discardCard(card);
@@ -751,10 +851,12 @@ public class Game {
         Player target = currentPlayer.selectTargetPlayer(); // TODO finish me
         // TODO add draw card animation
 
+        System.out.println("Before: Target has " + target.getHandSize() + " cards.");
         // For each iteration, draw a card
         for (int i = 0; i < numCards; i++) {
             target.drawCard(deck.drawCard());
         }
+        System.out.println("After: Target has " + target.getHandSize() + " cards.\n");
     }
 
     protected void draw(int numCards, Player player) {
@@ -934,70 +1036,70 @@ public class Game {
             }
             switch (currentTower.getDisplayedCard().getDarkValue()) {
                 case N_NINE:
-                    currentPlayer.getNextPlayer().removePoints(90);
+                    currentPlayer.getNextPlayer().removePoints(45 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_EIGHT:
-                    currentPlayer.getNextPlayer().removePoints(80);
+                    currentPlayer.getNextPlayer().removePoints(40 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_SEVEN:
-                    currentPlayer.getNextPlayer().removePoints(70);
+                    currentPlayer.getNextPlayer().removePoints(35 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_SIX:
-                    currentPlayer.getNextPlayer().removePoints(60);
+                    currentPlayer.getNextPlayer().removePoints(30 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_FIVE:
-                    currentPlayer.getNextPlayer().removePoints(50);
+                    currentPlayer.getNextPlayer().removePoints(25 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_FOUR:
-                    currentPlayer.getNextPlayer().removePoints(40);
+                    currentPlayer.getNextPlayer().removePoints(20 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_THREE:
-                    currentPlayer.getNextPlayer().removePoints(30);
+                    currentPlayer.getNextPlayer().removePoints(15 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_TWO:
-                    currentPlayer.getNextPlayer().removePoints(20);
+                    currentPlayer.getNextPlayer().removePoints(10 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case N_ONE:
-                    currentPlayer.getNextPlayer().removePoints(10);
+                    currentPlayer.getNextPlayer().removePoints(5 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case ZERO:
-                    currentPlayer.addPoints(75);
+                    currentPlayer.addPoints(75 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
                     break;
                 case ONE:
-                    currentPlayer.addPoints(4);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(6));
+                    currentPlayer.addPoints(2 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(3 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case TWO:
-                    currentPlayer.addPoints(8);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(12));
+                    currentPlayer.addPoints(4 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(6 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case THREE:
-                    currentPlayer.addPoints(12);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(18));
+                    currentPlayer.addPoints(6 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(9 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case FOUR:
-                    currentPlayer.addPoints(16);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(24));
+                    currentPlayer.addPoints(8 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(12 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case FIVE:
-                    currentPlayer.addPoints(20);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(30));
+                    currentPlayer.addPoints(10 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(15 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case SIX:
-                    currentPlayer.addPoints(24);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(36));
+                    currentPlayer.addPoints(12 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(18 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case SEVEN:
-                    currentPlayer.addPoints(28);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(42));
+                    currentPlayer.addPoints(14 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(21 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case EIGHT:
-                    currentPlayer.addPoints(32);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(48));
+                    currentPlayer.addPoints(16 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(24 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case NINE:
-                    currentPlayer.addPoints(36);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(54));
+                    currentPlayer.addPoints(18 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(27 * POINT_MULTIPLIER_GAME * DARK_MODE_MULTIPLIER));
                     break;
                 case FLIP:
                     isDarkMode.setValue(false);
@@ -1109,70 +1211,70 @@ public class Game {
             }
             switch (currentTower.getDisplayedCard().getLightValue()) {
                 case N_NINE:
-                    currentPlayer.getNextPlayer().removePoints(45);
+                    currentPlayer.getNextPlayer().removePoints(45 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_EIGHT:
-                    currentPlayer.getNextPlayer().removePoints(40);
+                    currentPlayer.getNextPlayer().removePoints(40 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_SEVEN:
-                    currentPlayer.getNextPlayer().removePoints(35);
+                    currentPlayer.getNextPlayer().removePoints(35 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_SIX:
-                    currentPlayer.getNextPlayer().removePoints(30);
+                    currentPlayer.getNextPlayer().removePoints(30 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_FIVE:
-                    currentPlayer.getNextPlayer().removePoints(25);
+                    currentPlayer.getNextPlayer().removePoints(25 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_FOUR:
-                    currentPlayer.getNextPlayer().removePoints(20);
+                    currentPlayer.getNextPlayer().removePoints(20 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_THREE:
-                    currentPlayer.getNextPlayer().removePoints(15);
+                    currentPlayer.getNextPlayer().removePoints(15 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_TWO:
-                    currentPlayer.getNextPlayer().removePoints(10);
+                    currentPlayer.getNextPlayer().removePoints(10 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case N_ONE:
-                    currentPlayer.getNextPlayer().removePoints(5);
+                    currentPlayer.getNextPlayer().removePoints(5 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case ZERO:
-                    currentPlayer.addPoints(50);
+                    currentPlayer.addPoints(50 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
                     break;
                 case ONE:
-                    currentPlayer.addPoints(4);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(1));
+                    currentPlayer.addPoints(4 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(1 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case TWO:
-                    currentPlayer.addPoints(8);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(2));
+                    currentPlayer.addPoints(8 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(2 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case THREE:
-                    currentPlayer.addPoints(12);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(3));
+                    currentPlayer.addPoints(12 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(3 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case FOUR:
-                    currentPlayer.addPoints(16);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(4));
+                    currentPlayer.addPoints(16 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(4 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case FIVE:
-                    currentPlayer.addPoints(20);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(5));
+                    currentPlayer.addPoints(20 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(5 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case SIX:
-                    currentPlayer.addPoints(24);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(6));
+                    currentPlayer.addPoints(24 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(6 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case SEVEN:
-                    currentPlayer.addPoints(28);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(7));
+                    currentPlayer.addPoints(28 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(7 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case EIGHT:
-                    currentPlayer.addPoints(32);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(8));
+                    currentPlayer.addPoints(32 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(8 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case NINE:
-                    currentPlayer.addPoints(36);
-                    currentPlayer.addPoints(currentTower.payTaxPoints(9));
+                    currentPlayer.addPoints(36 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER);
+                    currentPlayer.addPoints(currentTower.payTaxPoints(9 * POINT_MULTIPLIER_GAME * LIGHT_MODE_MULTIPLIER));
                     break;
                 case FLIP:
                     isDarkMode.setValue(true);
@@ -1293,7 +1395,11 @@ public class Game {
         numOfBuiltTowers = 0;
 
         castle.addCard(deck.drawCard());
-        castle.select();
+        if (roundNumber > 1) {
+            gamePane.getGameTable().selectTower(TowerPosition.CENTER);
+        }
+        
+
 
         for (Player player : playerList) {
             for (int i = 0; i < startingCardAmount; i++) {
@@ -1309,15 +1415,34 @@ public class Game {
     }
 
     public void startFirstPlayerTurn() {
+        if (roundNumber == 1) {
+            GameStartStage gameStartStage = new GameStartStage(this);
+            gameStartStage.showAndWait();
+        }
+        else {
+            gamePane.refreshGameTable();
+            RoundStartStage roundStartStage = new RoundStartStage(this);
+            roundStartStage.showAndWait();
+            //TODO show round start stage
+        }
+        
         curPlayer.startTurn();
     }
 
-    public void endRound() {
+    public void endRound(Player winner) {
+        lastRoundVictoryBonus = 0; //Resets the victory bonus from last round to be counter up again this round
+        lastRoundWinner = winner; //Sets the last round's winner to the winner of the round
+
         for (Player player : playerList) {
+            long pointsEarned = player.getRoundEndPoints();
+            lastRoundVictoryBonus += pointsEarned;
+            winner.addPoints(pointsEarned);
             player.getHand().clear();
             player.setIsSkipped(false);
+            player.savePointsFromRound();
         }
-        // TODO move the round's scores to a separate place
+        winner.savePointsFromRound();
+        // TODO move the round's scores to a separate place (Did, needs testing)
 
         if (roundNumber < numOfRounds) {
             roundNumber++;
@@ -1325,15 +1450,23 @@ public class Game {
             this.startFirstPlayerTurn();
         } else {
             System.out.println("Game end"); // TODO end the game
+
+            for (Tower tower : getTowers()) {
+                tower.clear();
+            }
+            gamePane.refreshGameTable();
+
+            GameEndStage gameEndStage = new GameEndStage(this, gamePane.getStage());
+            gameEndStage.show();
         }
-        gamePane.refreshGameTable();
+        //gamePane.refreshGameTable();
     }
 
     public boolean checkForRoundEnd() {
         boolean roundEnded = false;
         for (Player player : playerList) {
             if (player.getHand().size() <= 0) {
-                endRound();
+                endRound(player);
                 roundEnded = true;
                 break;
             }
@@ -1349,7 +1482,8 @@ public class Game {
         }
     }
 
-    public Game(int numOfRounds, int numOfPlayers, GamePane gamePane) {
+    public Game(int numOfRounds, int numOfPlayers, DeckType deckType, String userName, GamePane gamePane) {
+        this.deckType = deckType;
         if ((numOfRounds == 1) || (numOfRounds == 3) || (numOfRounds == 5)) {
             this.numOfRounds = numOfRounds;
         } else {
@@ -1367,10 +1501,10 @@ public class Game {
         stack = new Stack(this);
 
         castle = new Tower(true, Tower.TowerPosition.CENTER, this);
-        tower1 = new Tower(false, Tower.TowerPosition.NORTH, this);
-        tower2 = new Tower(false, Tower.TowerPosition.SOUTH, this);
-        tower3 = new Tower(false, Tower.TowerPosition.EAST, this);
-        tower4 = new Tower(false, Tower.TowerPosition.WEST, this);
+        northTower = new Tower(false, Tower.TowerPosition.NORTH, this);
+        southTower = new Tower(false, Tower.TowerPosition.SOUTH, this);
+        eastTower = new Tower(false, Tower.TowerPosition.EAST, this);
+        westTower = new Tower(false, Tower.TowerPosition.WEST, this);
 
         if ((numOfPlayers >= 2) && (numOfPlayers <= 4)) {
             this.numOfPlayers = numOfPlayers;
@@ -1380,9 +1514,9 @@ public class Game {
 
         playerList = new ArrayList<Player>();
         if (numOfPlayers == 3) {
-            player1 = new Player(false, 1, this);
-            player2 = new Player(true, 2, this);
-            player3 = new Player(true, 3, this);
+            player1 = new Player(false, 1, userName, this);
+            player2 = new Player(true, 2, "John", this);
+            player3 = new Player(true, 3, "Mike", this);
 
             player1.setLeftPlayer(player3);
             player1.setRightPlayer(player2);
@@ -1398,10 +1532,10 @@ public class Game {
             playerList.add(player3);
 
         } else if (numOfPlayers == 4) {
-            player1 = new Player(false, 1, this);
-            player2 = new Player(true, 2, this);
-            player3 = new Player(true, 3, this);
-            player4 = new Player(true, 4, this);
+            player1 = new Player(false, 1, userName, this);
+            player2 = new Player(true, 2, "John", this);
+            player3 = new Player(true, 3, "Mike", this);
+            player4 = new Player(true, 4, "Steve", this);
 
             player1.setLeftPlayer(player4);
             player1.setRightPlayer(player2);
@@ -1423,8 +1557,8 @@ public class Game {
         }
         // else 2 players
         else {
-            player1 = new Player(false, 1, this);
-            player2 = new Player(true, 2, this);
+            player1 = new Player(false, 1, userName, this);
+            player2 = new Player(true, 2, "Mike", this);
 
             player1.setLeftPlayer(player2);
             player1.setRightPlayer(player2);

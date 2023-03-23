@@ -2,7 +2,15 @@ package com.example;
 
 import java.util.Random;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -121,12 +129,26 @@ public class LightColorChooserStage extends Stage {
             this.close();
         });
 
-        redTriangle.setFill(Color.RED);
-        blueTriangle.setFill(Color.BLUE);
-        greenTriangle.setFill(Color.GREEN);
-        yellowTriangle.setFill(Color.YELLOW);
-        purpleTriangle.setFill(Color.PURPLE.darker());
-        orangeTriangle.setFill(Color.ORANGERED.brighter().brighter());
+        redTriangle.setFill(Color.rgb(255, 0, 0));
+        blueTriangle.setFill(Color.rgb(0, 38, 255));
+        greenTriangle.setFill(Color.rgb(0, 127, 14));
+        yellowTriangle.setFill(Color.rgb(255, 216, 0));
+        purpleTriangle.setFill(Color.rgb(87, 0, 127));
+        orangeTriangle.setFill(Color.rgb(255, 106, 0));
+
+        redTriangle.setStroke(Color.BLACK);
+        blueTriangle.setStroke(Color.BLACK);
+        greenTriangle.setStroke(Color.BLACK);
+        yellowTriangle.setStroke(Color.BLACK);
+        purpleTriangle.setStroke(Color.BLACK);
+        orangeTriangle.setStroke(Color.BLACK);
+
+        redTriangle.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        blueTriangle.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        greenTriangle.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        yellowTriangle.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        purpleTriangle.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        orangeTriangle.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
 
         Text redText = new Text("Red");
         Text blueText = new Text("Blue");
@@ -162,8 +184,26 @@ public class LightColorChooserStage extends Stage {
         purpleText.setMouseTransparent(true);
         orangeText.setMouseTransparent(true);
 
+        redText.setFill(Color.WHITESMOKE);
+        blueText.setFill(Color.WHITESMOKE);
+        greenText.setFill(Color.WHITESMOKE);
+        yellowText.setFill(Color.WHITESMOKE);
+        purpleText.setFill(Color.WHITESMOKE);
+        orangeText.setFill(Color.WHITESMOKE);
+
+        
+        redText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        blueText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        greenText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        yellowText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        purpleText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        orangeText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+
         lightColorChoicePane.getChildren().addAll(redTriangle, blueTriangle, greenTriangle, yellowTriangle, purpleTriangle, orangeTriangle,
         redText, blueText, greenText, yellowText, purpleText, orangeText);
+        lightColorChoicePane.setBackground(new Background(new BackgroundFill(Color.rgb(64, 64, 64), new CornerRadii(0), new Insets(0)))); 
+
+
         Scene mainScene = new Scene(lightColorChoicePane);
         this.setScene(mainScene);
     }

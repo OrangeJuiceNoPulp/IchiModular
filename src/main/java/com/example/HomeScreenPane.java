@@ -10,11 +10,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class HomeScreenPane extends StackPane {
@@ -26,7 +31,7 @@ public class HomeScreenPane extends StackPane {
 
     private ImageView logoView;
     
-    public HomeScreenPane(Stage stage) throws FileNotFoundException {
+    public HomeScreenPane(Stage stage) {
         super();
 
         this.setMinHeight(200);
@@ -68,21 +73,64 @@ public class HomeScreenPane extends StackPane {
 
         
 
-        btnPlayGame.setMinHeight(25);
-        btnPlayGame.setPrefHeight(25);
-        btnPlayGame.setMaxHeight(25);
+        btnPlayGame.setMinHeight(50);
+        btnPlayGame.setMaxHeight(50);
 
-        btnInstructions.setMinHeight(25);
-        btnInstructions.setPrefHeight(25);
-        btnInstructions.setMaxHeight(25);
+        btnPlayGame.setFont(new Font("Perpetua Bold Italic", 25));
+        btnPlayGame.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
+        btnPlayGame.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(5), new Insets(0))));
+        btnPlayGame.setTextFill(Color.WHITESMOKE);
+        btnPlayGame.setOnMouseEntered(e -> {
+            btnPlayGame.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+        });
+        btnPlayGame.setOnMouseExited(e -> {
+            btnPlayGame.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        });
 
-        btnLeaderboard.setMinHeight(25);
-        btnLeaderboard.setPrefHeight(25);
-        btnLeaderboard.setMaxHeight(25);
 
-        btnExit.setMinHeight(25);
-        btnExit.setPrefHeight(25);
-        btnExit.setMaxHeight(25);
+        btnInstructions.setMinHeight(50);
+        btnInstructions.setMaxHeight(50);
+
+        btnInstructions.setFont(new Font("Perpetua Bold Italic", 25));
+        btnInstructions.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
+        btnInstructions.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(5), new Insets(0))));
+        btnInstructions.setTextFill(Color.WHITESMOKE);
+        btnInstructions.setOnMouseEntered(e -> {
+            btnInstructions.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+        });
+        btnInstructions.setOnMouseExited(e -> {
+            btnInstructions.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        });
+
+
+        btnLeaderboard.setMinHeight(50);
+        btnLeaderboard.setMaxHeight(50);
+
+        btnLeaderboard.setFont(new Font("Perpetua Bold Italic", 25));
+        btnLeaderboard.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
+        btnLeaderboard.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(5), new Insets(0))));
+        btnLeaderboard.setTextFill(Color.WHITESMOKE);
+        btnLeaderboard.setOnMouseEntered(e -> {
+            btnLeaderboard.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+        });
+        btnLeaderboard.setOnMouseExited(e -> {
+            btnLeaderboard.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        });
+
+
+        btnExit.setMinHeight(50);
+        btnExit.setMaxHeight(50);
+
+        btnExit.setFont(new Font("Perpetua Bold Italic", 25));
+        btnExit.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
+        btnExit.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(5), new Insets(0))));
+        btnExit.setTextFill(Color.WHITESMOKE);
+        btnExit.setOnMouseEntered(e -> {
+            btnExit.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+        });
+        btnExit.setOnMouseExited(e -> {
+            btnExit.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        });
 
         vboxButtons.getChildren().addAll(btnPlayGame, btnLeaderboard, btnInstructions, btnExit);
         vboxButtons.setAlignment(Pos.CENTER);
@@ -149,7 +197,7 @@ public class HomeScreenPane extends StackPane {
     public void setHeight(double height) {
         super.setHeight(Math.max(height, 200));
 
-        double min = Math.min(Math.max(getHeight() - 130, 0), Math.max(getWidth(), 0));
+        double min = Math.min(Math.max(getHeight() - 230, 0), Math.max(getWidth(), 0));
 
         logoView.setFitHeight(min / 1.25);
         logoView.setFitWidth(min / 1.25);

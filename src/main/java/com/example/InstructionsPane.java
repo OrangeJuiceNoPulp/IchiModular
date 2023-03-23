@@ -21,12 +21,7 @@ public class InstructionsPane extends BorderPane {
         btnHome = new Button("Back");
 
         btnHome.setOnAction(e -> {
-            try {
-                stage.setScene(new Scene(new HomeScreenPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
-            }
-            catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
+            stage.setScene(new Scene(new HomeScreenPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
 
         VBox vboxInstructions = new VBox();

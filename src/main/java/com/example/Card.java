@@ -1,6 +1,7 @@
 package com.example;
 
 public class Card {
+    private static final int POINT_MULTIPLIER = 5;
 
     private LightColor lightColor;
     private DarkColor darkColor;
@@ -214,6 +215,16 @@ public class Card {
             display = new CardDisplay(activeDarkColor, darkValue);
         } else {
             display = new CardDisplay(activeLightColor, lightValue);
+        }
+        return display;
+    }
+
+    public CardDisplayOld getOldCardDisplay(boolean darkMode) {
+        CardDisplayOld display;
+        if (darkMode) {
+            display = new CardDisplayOld(activeDarkColor, darkValue);
+        } else {
+            display = new CardDisplayOld(activeLightColor, lightValue);
         }
         return display;
     }
@@ -712,6 +723,180 @@ public class Card {
 
     public CardBase getCardBase() {
         return new CardBase(this);
+    }
+
+    public int getPointValue(boolean darkMode) {
+        Card.Value val;
+        int points = 0;
+        if (darkMode) {
+            val = this.darkValue;
+        }
+        else {
+            val = this.lightValue;
+        }
+
+        switch (val) {
+            case N_NINE:
+                    points += POINT_MULTIPLIER * 9;
+                    break;
+                case N_EIGHT:
+                    points += POINT_MULTIPLIER * 8;
+                    break;
+                case N_SEVEN:
+                    points += POINT_MULTIPLIER * 7;
+                    break;
+                case N_SIX:
+                    points += POINT_MULTIPLIER * 6;
+                    break;
+                case N_FIVE:
+                    points += POINT_MULTIPLIER * 5;
+                    break;
+                case N_FOUR:
+                    points += POINT_MULTIPLIER * 4;
+                    break;
+                case N_THREE:
+                    points += POINT_MULTIPLIER * 3;
+                    break;
+                case N_TWO:
+                    points += POINT_MULTIPLIER * 2;
+                    break;
+                case N_ONE:
+                    points += POINT_MULTIPLIER * 1;
+                    break;
+                case ZERO:
+                    points += POINT_MULTIPLIER * 10;
+                    break;
+                case ONE:
+                    points += POINT_MULTIPLIER * 1;
+                    break;
+                case TWO:
+                    points += POINT_MULTIPLIER * 2;
+                    break;
+                case THREE:
+                    points += POINT_MULTIPLIER * 3;
+                    break;
+                case FOUR:
+                    points += POINT_MULTIPLIER * 4;
+                    break;
+                case FIVE:
+                    points += POINT_MULTIPLIER * 5;
+                    break;
+                case SIX:
+                    points += POINT_MULTIPLIER * 6;
+                    break;
+                case SEVEN:
+                    points += POINT_MULTIPLIER * 7;
+                    break;
+                case EIGHT:
+                    points += POINT_MULTIPLIER * 8;
+                    break;
+                case NINE:
+                    points += POINT_MULTIPLIER * 9;
+                    break;
+                case REVERSE:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case ROTATE:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case SWAP:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case SKIP:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case SKIP_ALL:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case FLIP:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case PRESS_1:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case PRESS_3:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case SPIN_1:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case SPIN_2:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case DRAW_2:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case DRAW_5:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case TARGET_DRAW_1:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case TARGET_DRAW_2:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case DISCARD_ALL:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case THIEF:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case TOWER_BUILD:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case TOWER_DESTROY:
+                    points += POINT_MULTIPLIER * 20;
+                    break;
+                case JACKPOT:
+                    points += POINT_MULTIPLIER * 15;
+                    break;
+                case WILD_REGULAR:
+                    points += POINT_MULTIPLIER * 30;
+                    break;
+                case WILD_REVERSE:
+                    points += POINT_MULTIPLIER * 35;
+                    break;
+                case WILD_SWAP:
+                    points += POINT_MULTIPLIER * 35;
+                    break;
+                case WILD_REDISTRIBUTE:
+                    points += POINT_MULTIPLIER * 35;
+                    break;
+                case WILD_SKIP:
+                    points += POINT_MULTIPLIER * 35;
+                    break;
+                case WILD_DRAW_4:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_DRAW_TO_MATCH:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_PRESS_2:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_EVERYONE_PRESS:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_PRESS_LOSE:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_SPIN_2:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_SPIN_3:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_TIMES_2:
+                    points += POINT_MULTIPLIER * 40;
+                    break;
+                case WILD_SHIELD:
+                    points += POINT_MULTIPLIER * 35;
+                    break;
+                case WILD_JACKPOT:
+                    points += POINT_MULTIPLIER * 35;
+                    break;
+        }
+        return points;
     }
 
     public int getID(boolean darkMode) {

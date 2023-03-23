@@ -28,6 +28,8 @@ public class CardDemo extends Application {
     Scene scene = new Scene(testPane, 1250, 750);
     primaryStage.setTitle("CardTowerDemo"); // Set the stage title
     primaryStage.setScene(scene); // Place the scene in the stage
+    primaryStage.setMinHeight(500);
+    primaryStage.setMinWidth(900);
     primaryStage.show(); // Display the stage
   }
 

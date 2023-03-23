@@ -2,7 +2,15 @@ package com.example;
 
 import java.util.Random;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -100,10 +108,20 @@ public class DarkColorChooserStage extends Stage {
         });
         
 
-        aquaDiamond.setFill(Color.CYAN);
-        limeDiamond.setFill(Color.LIME);
-        magentaDiamond.setFill(Color.MAGENTA);
-        currantDiamond.setFill(Color.MAROON);
+        aquaDiamond.setFill(Color.rgb(0, 255, 255));
+        limeDiamond.setFill(Color.rgb(76, 255, 0));
+        magentaDiamond.setFill(Color.rgb(255, 0, 220));
+        currantDiamond.setFill(Color.rgb(127, 0, 0));
+
+        aquaDiamond.setStroke(Color.BLACK);
+        limeDiamond.setStroke(Color.BLACK);
+        magentaDiamond.setStroke(Color.BLACK);
+        currantDiamond.setStroke(Color.BLACK);
+        
+        aquaDiamond.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        limeDiamond.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        magentaDiamond.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
+        currantDiamond.setEffect(new Blend(BlendMode.DARKEN, new InnerShadow(0.2 * 1000 * 0.125, Color.BLACK), new DropShadow(0.2 * 1000 * 0.125, Color.BLACK)));
 
 
         Text aquaText = new Text("Aqua");
@@ -132,9 +150,22 @@ public class DarkColorChooserStage extends Stage {
         limeText.setMouseTransparent(true);
         magentaText.setMouseTransparent(true);
         currantText.setMouseTransparent(true);
+
+        aquaText.setFill(Color.WHITESMOKE);
+        limeText.setFill(Color.WHITESMOKE);
+        magentaText.setFill(Color.WHITESMOKE);
+        currantText.setFill(Color.WHITESMOKE);
+
+        aquaText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        limeText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        magentaText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        currantText.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
         
 
         darkColorChoicePane.getChildren().addAll(aquaDiamond, limeDiamond, magentaDiamond, currantDiamond, aquaText, limeText, magentaText, currantText);
+        darkColorChoicePane.setBackground(new Background(new BackgroundFill(Color.rgb(64, 64, 64), new CornerRadii(0), new Insets(0)))); 
+        darkColorChoicePane.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+
         Scene mainScene = new Scene(darkColorChoicePane);
         this.setScene(mainScene);
     }

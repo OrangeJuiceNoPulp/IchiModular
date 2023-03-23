@@ -8,6 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Deck {
+
+    public enum DeckType {
+        Standard
+    }
     
     private ObservableList<Card> pile; // The pile of cards from which cards are drawn
     private ObservableList<Card> burn; // The pile of cards where cards go once played 
@@ -181,6 +185,9 @@ public class Deck {
 
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.FLIP, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.REVERSE, lightSides);
+
+        addLightPairs(64, 64, 64, 64, 0, 0, Card.Value.TOWER_BUILD, lightSides);
+        addLightPairs(64, 64, 64, 64, 0, 0, Card.Value.TOWER_DESTROY, lightSides);
 
 
 

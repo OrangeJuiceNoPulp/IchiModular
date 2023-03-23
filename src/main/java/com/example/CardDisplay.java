@@ -1,5 +1,6 @@
 package com.example;
 
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -13,23 +14,44 @@ public class CardDisplay extends StackPane {
     private ImageView cardValue;
     private ImageView cardColor;
 
-    public void scaleToHand() {
-        colorBackground.setFitHeight(100);
-        colorBackground.setFitWidth(70);
-        modeBorder.setFitHeight(100);
-        modeBorder.setFitWidth(70);
-        modeBackground.setFitHeight(100);
-        modeBackground.setFitWidth(70);
-        colorAccent.setFitHeight(100);
-        colorAccent.setFitWidth(70);
-        cardValue.setFitHeight(100);
-        cardValue.setFitWidth(70);
-        cardColor.setFitHeight(100);
-        cardColor.setFitWidth(70);
+    private double idealWidth;
+    private double idealHeight;
+
+    // public void scaleToHand() {
+    //     scaleToHand(84, 120);
+    // }
+
+    public void scaleToHand(double width, double height) {
+        if (colorBackground != null) {
+            colorBackground.setFitHeight(height);
+            colorBackground.setFitWidth(width);
+        }
+        if (modeBorder != null) {
+            modeBorder.setFitHeight(height);
+            modeBorder.setFitWidth(width);
+        }
+        if (modeBackground != null) {
+            modeBackground.setFitHeight(height);
+            modeBackground.setFitWidth(width);
+        }
+        if (colorAccent != null) {
+            colorAccent.setFitHeight(height);
+            colorAccent.setFitWidth(width);
+        }
+        if (cardValue != null) {
+            cardValue.setFitHeight(height);
+            cardValue.setFitWidth(width);
+        }
+        if (cardColor != null) {
+            cardColor.setFitHeight(height);
+            cardColor.setFitWidth(width);
+        }
+        
+        //this.setHeight(height); //TODO fix if broken
+        //this.setWidth(width);
     }
 
-    public CardDisplay(Card.LightColor color, Card.Value value) {
-        super();
+    public void updateDisplay(Card.LightColor color, Card.Value value) {
         modeBorder = new ImageView(new Image(this.getClass().getResourceAsStream("lightBorder.png")));
         modeBackground = new ImageView(new Image(this.getClass().getResourceAsStream("lightBackground.png")));
 
@@ -119,6 +141,7 @@ public class CardDisplay extends StackPane {
             
         }
 
+        this.getChildren().clear();
 
         this.getChildren().add(colorBackground);
         this.getChildren().add(modeBorder);
@@ -128,8 +151,50 @@ public class CardDisplay extends StackPane {
         this.getChildren().add(cardColor);
     }
 
-    public CardDisplay(Card.DarkColor color, Card.Value value) {
+    public CardDisplay(Card.LightColor color, Card.Value value) {
         super();
+
+        colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
+        modeBorder = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        modeBackground = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        colorAccent = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        cardValue = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        cardColor = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+
+        updateDisplay(color, value);
+
+        this.setAlignment(Pos.CENTER);
+    }
+
+    public void updateDisplay(Card card) {
+        if (card != null) {
+            if (card.getGame().getIsDarkMode()) {
+                updateDisplay(card.getActiveDarkColor(), card.getDarkValue());
+            }
+            else {
+                updateDisplay(card.getActiveLightColor(), card.getLightValue());
+            }
+        }
+        else {
+            colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
+            modeBorder = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+            modeBackground = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+            colorAccent = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+            cardValue = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+            cardColor = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+
+            this.getChildren().clear();
+        
+            this.getChildren().add(colorBackground);
+            this.getChildren().add(modeBorder);
+            this.getChildren().add(modeBackground);
+            this.getChildren().add(colorAccent);
+            this.getChildren().add(cardValue);
+            this.getChildren().add(cardColor);
+        }
+    }
+
+    public void updateDisplay(Card.DarkColor color, Card.Value value) {
         modeBorder = new ImageView(new Image(this.getClass().getResourceAsStream("darkBorder.png")));
         modeBackground = new ImageView(new Image(this.getClass().getResourceAsStream("darkBackground.png")));
 
@@ -204,14 +269,67 @@ public class CardDisplay extends StackPane {
             
         }
 
-
+        this.getChildren().clear();
         
+            this.getChildren().add(colorBackground);
+            this.getChildren().add(modeBorder);
+            this.getChildren().add(modeBackground);
+            this.getChildren().add(colorAccent);
+            this.getChildren().add(cardValue);
+            this.getChildren().add(cardColor);
+    }
+
+    public CardDisplay(Card.DarkColor color, Card.Value value) {
+        super();
+
+        colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
+        modeBorder = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        modeBackground = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        colorAccent = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        cardValue = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        cardColor = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+
+        updateDisplay(color, value);
+        this.setAlignment(Pos.CENTER);
+
+    }
+
+    public CardDisplay() {
+        super();
+
+        colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
+        modeBorder = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        modeBackground = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        colorAccent = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        cardValue = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+        cardColor = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
+
         this.getChildren().add(colorBackground);
         this.getChildren().add(modeBorder);
         this.getChildren().add(modeBackground);
         this.getChildren().add(colorAccent);
         this.getChildren().add(cardValue);
         this.getChildren().add(cardColor);
+        this.setAlignment(Pos.CENTER);
     }
     
+    @Override
+    public void setHeight(double height) {
+        super.setHeight(height);
+        this.idealHeight = height;
+
+        double minimumScale = Math.min(idealWidth / 7.0, idealHeight / 10.0);
+
+        scaleToHand(minimumScale * 7.0, minimumScale * 10.0);
+
+    }
+    public void setWidth(double width) {
+        super.setWidth(width);
+        this.idealWidth = width;
+
+        double minimumScale = Math.min(idealWidth / 7.0, idealHeight / 10.0);
+
+        scaleToHand(minimumScale * 7.0, minimumScale * 10.0);
+    }
+
 }
