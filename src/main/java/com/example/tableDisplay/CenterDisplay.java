@@ -1,6 +1,6 @@
 package com.example.tableDisplay;
 
-import com.example.CardDisplay;
+import com.example.CardDisplaySquare;
 import com.example.Game;
 import com.example.TowerPane;
 import com.example.Tower.TowerPosition;
@@ -24,7 +24,7 @@ import javafx.scene.text.Font;
 public class CenterDisplay extends HBox {
     private TowerPane towerPane;
     private VBox vboxDrawArea;
-    private CardDisplay imgDeckCard;
+    private CardDisplaySquare imgDeckCard;
     private Button btnDraw;
 
     private Game game;
@@ -57,7 +57,7 @@ public class CenterDisplay extends HBox {
         towerPane = new TowerPane(game, 600);
         towerPane.setAlignment(Pos.CENTER);
 
-        imgDeckCard = new CardDisplay();
+        imgDeckCard = new CardDisplaySquare(game.getImageLoader());
         imgDeckCard.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
 
         //imgDeckCard.scaleToHand(70, 100); //TODO fix if broken
@@ -191,8 +191,8 @@ public class CenterDisplay extends HBox {
 
 
         //imgDeckCard.scaleToHand(minimumWidth * 0.7, minimumWidth); //TODO fix if broken
-        imgDeckCard.setMinHeight(minimumWidth);
-        imgDeckCard.setMaxHeight(minimumWidth);
+        imgDeckCard.setMaxWidth(minimumWidth);
+        imgDeckCard.setMinWidth(minimumWidth);
 
         btnDraw.setMinWidth(minimumWidth);
         btnDraw.setMaxWidth(minimumWidth);

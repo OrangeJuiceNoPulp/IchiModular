@@ -1,0 +1,69 @@
+•	Objective of the game:
+o	Obtain the most points during each round and have the most points at the end of the game.
+•	Game options:
+o	The game will consist of a set number of rounds which the user chooses:
+		Best of 1
+		Best of 3
+		Best of 5
+o	The game will be played by the user and 1 to 3 computer units (with varying difficulties?):
+	1v1 (2 players)
+	1v1v1 (3 players)
+	1v1v1v1 (4 players)
+o	The player with the most points at the end of the game will be the overall winner.
+•	Leaderboard:
+o	There will be a leaderboard divided into 3 pages (2/3/4 Players). Each page will display 3 columns for the high scores (Best of 1/3/5). The top 10 scores for each category are displayed.
+•	Set-up:
+o	Each player is dealt 10 cards. A player is randomly selected to go first. A card is flipped from the top of the deck and put in the first discard pile which is called the castle. If that card has an effect, that effect is applied to the player selected to go first. The player selected to go first may then take their first turn unless the effect of the card skips their turn. The default order of play is clockwise unless the effect of the first card reverses the order of play.
+•	Play:
+o	During their turn, the player must play at least one card from their hand. The played card is set on top of the selected discard pile (the castle or a tower). In order for a card to be played, it must match the color or value of the card at the top of the discard pile, unless it is a wild card or semi-wild card (semi-wild cards must match the value of the card at the top of the discard pile to be played unless the top card is a wild or semi-wild card). If at least one card cannot be played during the player’s turn, they must draw cards until they get a card which is possible for them to play (up to a maximum of 10 cards). The player can choose to either keep this card or play it (unless none of the 10 cards are playable). If it is possible for a player to play multiple cards during their turn, they may choose to do so; however, at least one card must be played unless the player chooses to draw cards and the cards must be played at different discard piles (towers or the castle). During a stacking event, only one card is playable per turn.
+o	Number of playable cards per turn:
+	Castle – 1 card
+	Castle and 1 tower – 1 card
+	Castle and 2 towers – up to 2 cards
+	Castle and 3 towers – up to 3 cards
+	Castle and 4 towers – up to 4 cards
+•	Special game events:
+o	A player has more than 100 (?) cards:
+	The player with more than 100 (?) cards returns their hand to the deck. The deck is shuffled and 10 new cards are dealt to the player. The player loses their next turn and takes a penalty of 1000 (?) points.
+o	Stacking:
+	Certain specialty cards (draw 2, draw 4, push the button 2 times, etc.) can be stacked depending upon their stack group type (draw, push, etc.), resulting in the effect of the cards being added together and passed to the next player. If a player cannot continue the stack, they may choose to accept the stack or to draw the top card of the deck (with a penalty of 50 (?) points) to try to continue the stack. If they fail to continue the stack, the card they drew goes to their hand along with any cards obtained from the result of the stack.
+o	A player has 2 cards or less left:
+	When a player has 2 cards or less left, they can only play one card per turn. If in the process of playing multiple cards during their turn the total number of cards in their hand reaches 2, then their turn will end and they will not have the option to continue playing cards during their turn, regardless of how many towers are on the board.
+o	A play has 1 card in their hand:
+	When a player has 1 card in their hand, they must press the “UNO” (change the word?) button. If another player presses the “UNO” button before that player, then the player who had 1 card in their hand must draw 2 cards. The “UNO” button will appear immediately for the player who reached 1 card left and 1.5 (?) seconds later for all the other players. The player who presses the “UNO” button will get a bonus 25 (?) points, regardless of who it is.
+•	Card Types:
+o	Card colors:
+	Light mode colors:
+•	Red
+•	Blue
+•	Yellow
+•	Green
+•	Orange
+•	Purple
+	Dark mode colors:
+•	Cyan
+•	Magenta
+•	Lime
+•	Maroon
+•	Semi-wild
+o	Semi-wild card can only be played if they match the value of the previous card or if the card at the top of the discard pile is a wild card or semi-wild card of any kind. After playing a semi-wild card, the player may specify the next color of play, like with regular wild cards.
+o	Card values (types):
+(All-color – all colors, light and dark mode. Most-color – all colors except semi-wild. Lightmode-color – all colors in light mode. Darkmode-color – all colors in dark mode except for semi-wild)
+	Number card:
+•	An all-color card with a number 0 – 9 (light mode) or 0 – 19 (?) on it (dark mode).
+	Reverse card:
+•	An all-color card which switches the order of play from clockwise to counterclockwise (or the other way around). In a 2-player game (1v1), this card functions as a skip.
+	Single Skip card:
+•	A most-color card which causes the next player to lose their turn.
+	Skip-All card:
+•	A darkmode-color card which causes all of the other players to lose a turn.
+	Flip card:
+•	A most-color card which causes all the cards (the players’ hands, the deck, the castle, and the towers) to switch from light mode to dark mode or from dark mode to light mode.
+	Tower Build card:
+•	A most-color card. If this card is played at the castle and a player is not yet in control of the castle (main discard pile), then this card will allow them to take automatic ownership of it. If the castle is already under control (whether by this player or another), then this card allows the player of this card to construct a new tower (or battle for control of an existing tower if the maximum number of towers are already built). A new tower is constructed by flipping over the top card from the deck to create a new discard pile. The owner of this new tower is the player who played this card. The maximum number of towers which can be in play at once is equal to the number of players. If this card is played at a tower, then a battle for the tower commences. The current owner of the castle and player who played this card both draw a card from the top of the deck. The player who draws a card with the highest point value wins the tower. (If there is a tie, then this process is repeated until the ownership of the tower is decided).
+	Tower Destroy Card:
+•	A most-color card. If this card is played at the castle, then a battle for the castle commences. The current owner of the castle and player who played this card both draw a card from the top of the deck. If the castle is unowned, then all players will draw a card from the top of the deck. The player who draws a card with the highest point value wins the castle. (If there is a tie, then this process is repeated until the ownership of the castle is decided). If the player who played this card owns the castle and this card is played at the castle, then they may destroy a tower of their choice (or none at all). If this card is played at a tower, that tower is destroyed without exception, no matter who owns it.
+	Jackpot (slots/spinner?) card:
+•	A darkmode-color card. This card allows the player of the card one use of the jackpot (slots/spinner?) system.
+	Discard all (color) card:
+•	A darkmode-color (and semi-wild?) card which allows the player to discard all the cards in their hand of that color. The discard all (color) card will be placed at the top of the pile (so the order of discarding does not matter). The player must discard all the cards of that color, discarded cards will not have their action take effect.

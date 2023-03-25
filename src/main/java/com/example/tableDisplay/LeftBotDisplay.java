@@ -28,7 +28,7 @@ public class LeftBotDisplay extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setBackground(new Background(new BackgroundFill(Color.rgb(64, 64, 64), new CornerRadii(0), new Insets(0))));
         statsDisplay = new BotStatsDisplay(game, playerNum);
-        handDisplay = new HandDisplay(game, playerNum);
+        handDisplay = new HandDisplay(game, playerNum, game.getImageLoader());
         handDisplay.setRotate(90);
         handDisplay.fitToSize(100, 70);
         this.getChildren().addAll(statsDisplay, handDisplay);

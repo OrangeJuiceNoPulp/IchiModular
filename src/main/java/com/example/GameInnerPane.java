@@ -1,31 +1,16 @@
 package com.example;
 
 import com.example.Deck.DeckType;
-import com.example.SoundEffectPlayer.SoundEffectType;
 import com.example.Tower.TowerPosition;
 import com.example.tableDisplay.BottomUserDisplay;
 import com.example.tableDisplay.CenterDisplay;
-import com.example.tableDisplay.LeftBotDisplay;
-import com.example.tableDisplay.RightBotDisplay;
 import com.example.tableDisplay.TopBotDisplay;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -46,8 +31,8 @@ public class GameInnerPane extends VBox {
     // private Button btnSortColor;
     // private Button btnSortValue;
 
-    private Button btnDraw;
-    private Button btnPlayCard;
+    // private Button btnDraw;
+    // private Button btnPlayCard;
 
     private Game game;
 
@@ -157,115 +142,115 @@ public class GameInnerPane extends VBox {
     //     txtPlayerScores.setText(scoreString);
     // }
 
-    private void initializeNodeActions() {
-        // chkViewDarkMode.setOnAction(e -> {
-        //     game.setViewingDarkMode(chkViewDarkMode.isSelected());
-        //     refreshListViews();
-        //     lstPlayerHand1.refresh();
-        //     lstPlayerHand2.refresh();
-        //     if (numPlayers >= 3) {
-        //         lstPlayerHand3.refresh();
-        //     }
-        //     if (numPlayers >= 4) {
-        //         lstPlayerHand4.refresh();
-        //     }
-        // });
+    // private void initializeNodeActions() {
+    //     // chkViewDarkMode.setOnAction(e -> {
+    //     //     game.setViewingDarkMode(chkViewDarkMode.isSelected());
+    //     //     refreshListViews();
+    //     //     lstPlayerHand1.refresh();
+    //     //     lstPlayerHand2.refresh();
+    //     //     if (numPlayers >= 3) {
+    //     //         lstPlayerHand3.refresh();
+    //     //     }
+    //     //     if (numPlayers >= 4) {
+    //     //         lstPlayerHand4.refresh();
+    //     //     }
+    //     // });
 
-        // TODO fix this so that only the user's hand is playable once done debugging
-        // Check if it is the user's turn/ waiting for user input
-        btnPlayCard.setOnAction(e -> {
+    //     // TODO fix this so that only the user's hand is playable once done debugging
+    //     // Check if it is the user's turn/ waiting for user input
+    //     btnPlayCard.setOnAction(e -> {
 
-            System.out.println("Tried Playing Card at " + game.getSelectedTower().getPosition());
-            System.out.println("The game is waiting for user turn: " + game.getWaitingForUserToTakeTurn());
-            if(game.getWaitingForUserToTakeTurn()) {
-                game.setWaitingForUserToTakeTurn(false);
-                Card selectedCard = getSelectedCard(); //TODO namely, fix this method
+    //         System.out.println("Tried Playing Card at " + game.getSelectedTower().getPosition());
+    //         System.out.println("The game is waiting for user turn: " + game.getWaitingForUserToTakeTurn());
+    //         if(game.getWaitingForUserToTakeTurn()) {
+    //             game.setWaitingForUserToTakeTurn(false);
+    //             Card selectedCard = getSelectedCard(); //TODO namely, fix this method
 
-                boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
+    //             boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
     
-                if (success) {
-                    game.getUser().endTurn();
-                    //refreshPane();
-                }
-                else {
-                    game.setWaitingForUserToTakeTurn(true);
-                }
-            }
+    //             if (success) {
+    //                 game.getUser().endTurn();
+    //                 //refreshPane();
+    //             }
+    //             else {
+    //                 game.setWaitingForUserToTakeTurn(true);
+    //             }
+    //         }
             
 
-        });
+    //     });
 
-        //TODO Fix this method to only let the user draw a card, not the current player
-        // Check if it is the user's turn/ waiting for user input
-        btnDraw.setOnAction(e -> {
-            if (game.getWaitingForUserToTakeTurn()) {
-                game.setWaitingForUserToTakeTurn(false);
-                game.drawCard(game.getUser());
-                game.getUser().endTurn();
-            }
+    //     //TODO Fix this method to only let the user draw a card, not the current player
+    //     // Check if it is the user's turn/ waiting for user input
+    //     btnDraw.setOnAction(e -> {
+    //         if (game.getWaitingForUserToTakeTurn()) {
+    //             game.setWaitingForUserToTakeTurn(false);
+    //             game.drawCard(game.getUser());
+    //             game.getUser().endTurn();
+    //         }
             
-            //refreshPane();
-        });
+    //         //refreshPane();
+    //     });
 
-        // btnSortDarkColor.setOnAction(e -> {
-        //     lstPlayerHand1.getItems().sort(new CardDarkColorComparator());
-        //     lstPlayerHand2.getItems().sort(new CardDarkColorComparator());
-        //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardDarkColorComparator());
-        //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardDarkColorComparator());
-        // });
+    //     // btnSortDarkColor.setOnAction(e -> {
+    //     //     lstPlayerHand1.getItems().sort(new CardDarkColorComparator());
+    //     //     lstPlayerHand2.getItems().sort(new CardDarkColorComparator());
+    //     //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardDarkColorComparator());
+    //     //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardDarkColorComparator());
+    //     // });
 
-        // btnSortLightColor.setOnAction(e -> {
-        //     lstPlayerHand1.getItems().sort(new CardLightColorComparator());
-        //     lstPlayerHand2.getItems().sort(new CardLightColorComparator());
-        //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardLightColorComparator());
-        //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardLightColorComparator());
-        // });
+    //     // btnSortLightColor.setOnAction(e -> {
+    //     //     lstPlayerHand1.getItems().sort(new CardLightColorComparator());
+    //     //     lstPlayerHand2.getItems().sort(new CardLightColorComparator());
+    //     //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardLightColorComparator());
+    //     //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardLightColorComparator());
+    //     // });
 
-        // btnSortDarkValue.setOnAction(e -> {
-        //     lstPlayerHand1.getItems().sort(new CardDarkValueComparator());
-        //     lstPlayerHand2.getItems().sort(new CardDarkValueComparator());
-        //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardDarkValueComparator());
-        //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardDarkValueComparator());
-        // });
+    //     // btnSortDarkValue.setOnAction(e -> {
+    //     //     lstPlayerHand1.getItems().sort(new CardDarkValueComparator());
+    //     //     lstPlayerHand2.getItems().sort(new CardDarkValueComparator());
+    //     //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardDarkValueComparator());
+    //     //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardDarkValueComparator());
+    //     // });
 
-        // btnSortLightValue.setOnAction(e -> {
-        //     lstPlayerHand1.getItems().sort(new CardLightValueComparator());
-        //     lstPlayerHand2.getItems().sort(new CardLightValueComparator());
-        //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardLightValueComparator());
-        //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardLightValueComparator());
-        // });
+    //     // btnSortLightValue.setOnAction(e -> {
+    //     //     lstPlayerHand1.getItems().sort(new CardLightValueComparator());
+    //     //     lstPlayerHand2.getItems().sort(new CardLightValueComparator());
+    //     //     if (numPlayers >= 3) lstPlayerHand3.getItems().sort(new CardLightValueComparator());
+    //     //     if (numPlayers >= 4) lstPlayerHand4.getItems().sort(new CardLightValueComparator());
+    //     // });
 
-        // btnViewMode.setOnAction(e -> {
-        //     game.setViewingDarkMode(!game.getViewingDarkMode());
-        //     refreshPlayerHand();
-        //     lstPlayerHand1.refresh();
-        //     if (game.getViewingDarkMode()) {
-        //         btnViewMode.setText("View Light Mode");
-        //     }
-        //     else {
-        //         btnViewMode.setText("View Dark Mode");
-        //     }
-        // });
+    //     // btnViewMode.setOnAction(e -> {
+    //     //     game.setViewingDarkMode(!game.getViewingDarkMode());
+    //     //     refreshPlayerHand();
+    //     //     lstPlayerHand1.refresh();
+    //     //     if (game.getViewingDarkMode()) {
+    //     //         btnViewMode.setText("View Light Mode");
+    //     //     }
+    //     //     else {
+    //     //         btnViewMode.setText("View Dark Mode");
+    //     //     }
+    //     // });
 
-        // btnSortColor.setOnAction(e -> {
-        //     if (game.getViewingDarkMode()) {
-        //         lstPlayerHand1.getItems().sort(new CardDarkColorComparator());
-        //     }
-        //     else {
-        //         lstPlayerHand1.getItems().sort(new CardLightColorComparator());
-        //     }
-        // });
+    //     // btnSortColor.setOnAction(e -> {
+    //     //     if (game.getViewingDarkMode()) {
+    //     //         lstPlayerHand1.getItems().sort(new CardDarkColorComparator());
+    //     //     }
+    //     //     else {
+    //     //         lstPlayerHand1.getItems().sort(new CardLightColorComparator());
+    //     //     }
+    //     // });
 
-        // btnSortValue.setOnAction(e -> {
-        //     if (game.getViewingDarkMode()) {
-        //         lstPlayerHand1.getItems().sort(new CardDarkValueComparator());
-        //     }
-        //     else {
-        //         lstPlayerHand1.getItems().sort(new CardLightValueComparator());
-        //     }
-        // });
+    //     // btnSortValue.setOnAction(e -> {
+    //     //     if (game.getViewingDarkMode()) {
+    //     //         lstPlayerHand1.getItems().sort(new CardDarkValueComparator());
+    //     //     }
+    //     //     else {
+    //     //         lstPlayerHand1.getItems().sort(new CardLightValueComparator());
+    //     //     }
+    //     // });
 
-    }
+    // }
 
     public GameInnerPane(int numOfRounds, int numOfPlayers, DeckType deckType, String userName, GamePane outerPane) {
         super();

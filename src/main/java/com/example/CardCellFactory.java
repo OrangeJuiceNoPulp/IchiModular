@@ -1,7 +1,6 @@
 package com.example;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.ClipboardContent;
@@ -37,24 +36,24 @@ public class CardCellFactory implements Callback<ListView<Card>, ListCell<Card>>
                 else {
                     //setItem(card);
                     if (card.getGame().getViewingDarkMode()) {
-                        CardDisplayOld display = card.getOldCardDisplay(true);
+                        CardDisplaySquare display = card.getSquareCardDisplay(true);
 
                         //display.setMinSize(param.getHeight() * 0.49, param.getHeight() * 0.7); //TODO fix if broken //Won't work right if uncommented, leave as is
                         //display.setMaxSize(param.getHeight() * 0.49, param.getHeight() * 0.7);
 
-                        display.scaleToHand(param.getHeight() * 0.49, param.getHeight() * 0.7);
+                        display.scaleToHand(param.getHeight() * 0.7, param.getHeight() * 0.7);
                         //display.setAlignment(Pos.CENTER_LEFT);
 
                         setGraphic(display);
                         //setText(card.getDarkValue().toString());
                     }
                     else {
-                        CardDisplayOld display = card.getOldCardDisplay(false);
+                        CardDisplaySquare display = card.getSquareCardDisplay(false);
 
                         //display.setMinSize(param.getHeight() * 0.49, param.getHeight() * 0.7); //TODO fix if broken //Won't work right if uncommented, leave as is
                         //display.setMaxSize(param.getHeight() * 0.49, param.getHeight() * 0.7);
 
-                        display.scaleToHand(param.getHeight() * 0.49, param.getHeight() * 0.7);
+                        display.scaleToHand(param.getHeight() * 0.7, param.getHeight() * 0.7);
                         //display.setAlignment(Pos.CENTER_LEFT);
 
 

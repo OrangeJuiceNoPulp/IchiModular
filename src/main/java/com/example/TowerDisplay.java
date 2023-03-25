@@ -2,13 +2,11 @@ package com.example;
 
 import com.example.SoundEffectPlayer.SoundEffectType;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -18,7 +16,7 @@ import javafx.scene.text.Text;
 public class TowerDisplay extends StackPane {
     private Text lblOwner;
     private Text lblOwnerName;
-    private CardDisplay imgCardView;
+    private CardDisplaySquare imgCardView;
     private VBox vboxTowerDisplay;
     private Tower tower;
 
@@ -37,12 +35,14 @@ public class TowerDisplay extends StackPane {
         lblOwner.setFill(Color.WHITESMOKE);
         lblOwnerName.setFill(Color.WHITESMOKE);
 
-        imgCardView = new CardDisplay();
-        imgCardView.setRotate(270);
+        imgCardView = new CardDisplaySquare(tower.getGame().getImageLoader());
         
 
         vboxTowerDisplay = new VBox(0);
-        vboxTowerDisplay.getChildren().addAll(lblOwner, lblOwnerName, imgCardView);
+        HBox hboxAlignment = new HBox();
+        hboxAlignment.getChildren().add(imgCardView);
+        hboxAlignment.setAlignment(Pos.CENTER);
+        vboxTowerDisplay.getChildren().addAll(lblOwner, lblOwnerName, hboxAlignment);
         vboxTowerDisplay.setAlignment(Pos.CENTER);
         scale(150);
         this.getChildren().addAll(vboxTowerDisplay);
@@ -108,12 +108,12 @@ public class TowerDisplay extends StackPane {
 
         //imgCardView.scaleToHand(0.7 * size, size); //TODO fix if broken
 
-        imgCardView.setMaxHeight(0.7 * size);
-        imgCardView.setMinHeight(0.7 * size);
+        imgCardView.setMaxHeight(size * 0.7);
+        imgCardView.setMinHeight(size * 0.7);
         imgCardView.setEffect(new DropShadow(0.10 * size, Color.BLACK));
 
-        imgCardView.setMaxWidth(size);
-        imgCardView.setMinWidth(size);
+        imgCardView.setMaxWidth(size * 0.7);
+        imgCardView.setMinWidth(size * 0.7);
 
         if (tower.getIsOwned()) {
             ownerName = tower.getOwner().getPlayerName();
@@ -149,12 +149,12 @@ public class TowerDisplay extends StackPane {
         //imgCardView.scaleToHand(0.7 * size, size); //TODO fix if broken 
 
 
-        imgCardView.setMaxHeight(0.7 * size);
-        imgCardView.setMinHeight(0.7 * size);
+        imgCardView.setMaxHeight(size * 0.7);
+        imgCardView.setMinHeight(size * 0.7);
         imgCardView.setEffect(new DropShadow(0.10 * size, Color.BLACK));
 
-        imgCardView.setMaxWidth(size);
-        imgCardView.setMinWidth(size);
+        imgCardView.setMaxWidth(size * 0.7);
+        imgCardView.setMinWidth(size * 0.7);
 
         vboxTowerDisplay.setMaxWidth(size);
         vboxTowerDisplay.setMinWidth(size);

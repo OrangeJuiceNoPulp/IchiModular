@@ -1,20 +1,14 @@
 package com.example;
 
+import com.example.GameImageLoader.HandCards;
+
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class HandDisplay extends StackPane {
-    private Image img0Card;
-    private Image img1Card;
-    private Image img2Card;
-    private Image img3Card;
-    private Image img4Card;
-    private Image img5Card;
-    private Image img6Card;
-    private Image img7Card;
+    private GameImageLoader imageLoader;
 
     private double inputHeight;
     private double inputWidth;
@@ -49,28 +43,28 @@ public class HandDisplay extends StackPane {
         }
 
         if (numCards < 1) {
-            cardDisplay.setImage(img0Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.ZERO));
         }
         else if (numCards == 1) {
-            cardDisplay.setImage(img1Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.ONE));
         }
         else if (numCards == 2) {
-            cardDisplay.setImage(img2Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.TWO));
         }
         else if (numCards == 3) {
-            cardDisplay.setImage(img3Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.THREE));
         }
         else if (numCards == 4) {
-            cardDisplay.setImage(img4Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.FOUR));
         }
         else if (numCards == 5) {
-            cardDisplay.setImage(img5Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.FIVE));
         }
         else if (numCards == 6) {
-            cardDisplay.setImage(img6Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.SIX));
         }
         else if (numCards >= 7) {
-            cardDisplay.setImage(img7Card);
+            cardDisplay.setImage(imageLoader.getHandCards(HandCards.SEVEN));
         }
 
         cardDisplay.setFitHeight(inputHeight);
@@ -80,16 +74,9 @@ public class HandDisplay extends StackPane {
         this.setMaxSize(inputWidth, inputHeight);
     }
 
-    public HandDisplay(Game game, int playerNum) {
+    public HandDisplay(Game game, int playerNum, GameImageLoader imageLoader) {
         super();
-        img0Card = new Image(this.getClass().getResourceAsStream("zeroCards.png"));
-        img1Card = new Image(this.getClass().getResourceAsStream("oneCards.png"));
-        img2Card = new Image(this.getClass().getResourceAsStream("twoCards.png"));
-        img3Card = new Image(this.getClass().getResourceAsStream("threeCards.png"));
-        img4Card = new Image(this.getClass().getResourceAsStream("fourCards.png"));
-        img5Card = new Image(this.getClass().getResourceAsStream("fiveCards.png"));
-        img6Card = new Image(this.getClass().getResourceAsStream("sixCards.png"));
-        img7Card = new Image(this.getClass().getResourceAsStream("sevenCards.png"));
+        this.imageLoader = imageLoader;
 
         inputHeight = 70;
         inputWidth = 100;
@@ -98,7 +85,7 @@ public class HandDisplay extends StackPane {
         this.game = game;
 
 
-        cardDisplay = new ImageView(img0Card);
+        cardDisplay = new ImageView(imageLoader.getHandCards(HandCards.ZERO));
 
         this.setEffect(new DropShadow(0.075 * inputHeight, Color.BLACK));
 

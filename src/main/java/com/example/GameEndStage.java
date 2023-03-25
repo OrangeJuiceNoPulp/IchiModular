@@ -44,7 +44,7 @@ public class GameEndStage extends Stage {
         this.setOnCloseRequest(e -> {
 
             //TODO update leaderboard here
-
+            game.getGamePane().closeSoundResources();
             mainStage.close();
             this.close();
         });
@@ -75,7 +75,7 @@ public class GameEndStage extends Stage {
         btnPlayAgain.setOnAction(e -> {
 
             //TODO update leaderboard here
-
+            game.getGamePane().closeSoundResources();
             mainStage.setScene(new Scene(new GameSetupPane(mainStage), mainStage.getScene().getWidth(), mainStage.getScene().getHeight()));
             this.close();
         });
@@ -102,7 +102,7 @@ public class GameEndStage extends Stage {
         btnHome.setOnAction(e -> {
 
         //TODO update leaderboard here
-
+            game.getGamePane().closeSoundResources();
             mainStage.setScene(new Scene(new HomeScreenPane(mainStage), mainStage.getScene().getWidth(), mainStage.getScene().getHeight()));
             this.close();
         });
@@ -128,7 +128,7 @@ public class GameEndStage extends Stage {
         btnClose.setOnAction(e -> {
 
             //TODO update leaderboard here
-
+            game.getGamePane().closeSoundResources();
             mainStage.close();
             this.close();
         });

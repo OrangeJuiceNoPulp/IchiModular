@@ -60,7 +60,12 @@ public class Game {
     private long lastRoundVictoryBonus = 0;
     private Player lastRoundWinner = null;
 
+    private GameImageLoader imageLoader;
     private GamePane gamePane;
+
+    public GameImageLoader getImageLoader() {
+        return imageLoader;
+    }
 
     public GamePane getGamePane() {
         return this.gamePane;
@@ -1484,6 +1489,7 @@ public class Game {
 
     public Game(int numOfRounds, int numOfPlayers, DeckType deckType, String userName, GamePane gamePane) {
         this.deckType = deckType;
+        this.imageLoader = new GameImageLoader();
         if ((numOfRounds == 1) || (numOfRounds == 3) || (numOfRounds == 5)) {
             this.numOfRounds = numOfRounds;
         } else {
@@ -1515,8 +1521,8 @@ public class Game {
         playerList = new ArrayList<Player>();
         if (numOfPlayers == 3) {
             player1 = new Player(false, 1, userName, this);
-            player2 = new Player(true, 2, "John", this);
-            player3 = new Player(true, 3, "Mike", this);
+            player2 = new Player(true, 2, new NameGenerator().getRandomName(2), this);
+            player3 = new Player(true, 3, new NameGenerator().getRandomName(3), this);
 
             player1.setLeftPlayer(player3);
             player1.setRightPlayer(player2);
@@ -1533,9 +1539,9 @@ public class Game {
 
         } else if (numOfPlayers == 4) {
             player1 = new Player(false, 1, userName, this);
-            player2 = new Player(true, 2, "John", this);
-            player3 = new Player(true, 3, "Mike", this);
-            player4 = new Player(true, 4, "Steve", this);
+            player2 = new Player(true, 2, new NameGenerator().getRandomName(2), this);
+            player3 = new Player(true, 3, new NameGenerator().getRandomName(3), this);
+            player4 = new Player(true, 4, new NameGenerator().getRandomName(4), this);
 
             player1.setLeftPlayer(player4);
             player1.setRightPlayer(player2);
@@ -1558,7 +1564,7 @@ public class Game {
         // else 2 players
         else {
             player1 = new Player(false, 1, userName, this);
-            player2 = new Player(true, 2, "Mike", this);
+            player2 = new Player(true, 2, new NameGenerator().getRandomName(2), this);
 
             player1.setLeftPlayer(player2);
             player1.setRightPlayer(player2);

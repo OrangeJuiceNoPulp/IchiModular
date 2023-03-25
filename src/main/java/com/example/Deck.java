@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 public class Deck {
 
     public enum DeckType {
-        Standard
+        Standard, Classic
     }
     
     private ObservableList<Card> pile; // The pile of cards from which cards are drawn
@@ -18,6 +18,8 @@ public class Deck {
                                        //or discarded so that they may be returned to the draw pile after shuffling
     private Random rand;
     private Game game;
+
+    private DeckType deckType;
 
     public boolean burnCard(Card card) {
         if ((card.getLightColor() == Card.LightColor.WILD) || 
@@ -67,7 +69,7 @@ public class Deck {
         Collections.shuffle(pile, rand);
     }
 
-    public void addLightPairs(int numRed, int numBlue, int numGreen, int numYellow, int numOrange, int numPurple, Card.Value cardValue, ArrayList<LightPair> lightSides){
+    private void addLightPairs(int numRed, int numBlue, int numGreen, int numYellow, int numOrange, int numPurple, Card.Value cardValue, ArrayList<LightPair> lightSides){
         for (int i = 0; i < numRed; i ++) {
             lightSides.add(new LightPair(Card.LightColor.RED, cardValue));
         }
@@ -88,7 +90,7 @@ public class Deck {
         }
     }
 
-    public void addLightPairs(int numRed, int numBlue, int numGreen, int numYellow, int numOrange, int numPurple, int numWild, Card.Value cardValue, ArrayList<LightPair> lightSides){
+    private void addLightPairs(int numRed, int numBlue, int numGreen, int numYellow, int numOrange, int numPurple, int numWild, Card.Value cardValue, ArrayList<LightPair> lightSides){
         for (int i = 0; i < numRed; i ++) {
             lightSides.add(new LightPair(Card.LightColor.RED, cardValue));
         }

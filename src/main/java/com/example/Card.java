@@ -209,22 +209,32 @@ public class Card {
 
     }
 
-    public CardDisplay getCardDisplay(boolean darkMode) {
-        CardDisplay display;
-        if (darkMode) {
-            display = new CardDisplay(activeDarkColor, darkValue);
-        } else {
-            display = new CardDisplay(activeLightColor, lightValue);
-        }
-        return display;
-    }
+    // public CardDisplay getCardDisplay(boolean darkMode) {
+    //     CardDisplay display;
+    //     if (darkMode) {
+    //         display = new CardDisplay(activeDarkColor, darkValue);
+    //     } else {
+    //         display = new CardDisplay(activeLightColor, lightValue);
+    //     }
+    //     return display;
+    // }
 
-    public CardDisplayOld getOldCardDisplay(boolean darkMode) {
-        CardDisplayOld display;
+    // public CardDisplayOld getOldCardDisplay(boolean darkMode) {
+    //     CardDisplayOld display;
+    //     if (darkMode) {
+    //         display = new CardDisplayOld(activeDarkColor, darkValue);
+    //     } else {
+    //         display = new CardDisplayOld(activeLightColor, lightValue);
+    //     }
+    //     return display;
+    // }
+
+    public CardDisplaySquare getSquareCardDisplay(boolean darkMode) {
+        CardDisplaySquare display;
         if (darkMode) {
-            display = new CardDisplayOld(activeDarkColor, darkValue);
+            display = new CardDisplaySquare(activeDarkColor, darkValue, game.getImageLoader());
         } else {
-            display = new CardDisplayOld(activeLightColor, lightValue);
+            display = new CardDisplaySquare(activeLightColor, lightValue, game.getImageLoader());
         }
         return display;
     }

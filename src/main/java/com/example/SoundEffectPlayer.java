@@ -17,20 +17,36 @@ public class SoundEffectPlayer {
         //TODO implement me
         switch (type) {
             case DRAW:
+                drawPlayer.stop();
                 drawPlayer.play();
                 break;
             case ERROR:
+                errorPlayer.stop();
                 errorPlayer.play();
                 break;
             case GAIN_POINTS:
+                gainPointsPlayer.stop();
                 gainPointsPlayer.play();
                 break;
             case LOSE_POINTS:
+                losePointsPlayer.stop();
                 losePointsPlayer.play();
                 break;
             default:
                 break;
         }
+    }
+
+    public void close() {
+        errorPlayer.stop();
+        drawPlayer.stop();
+        gainPointsPlayer.stop();
+        losePointsPlayer.stop();
+
+        errorPlayer.dispose();;
+        drawPlayer.dispose();
+        gainPointsPlayer.dispose();
+        losePointsPlayer.dispose();
     }
 
     public SoundEffectPlayer() {

@@ -1,11 +1,12 @@
-package com.example;
+package com.example.unused;
 
-import javafx.geometry.Pos;
+import com.example.Card;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class CardDisplay extends StackPane {
+public class CardDisplayOld extends StackPane {
 
     private ImageView colorBackground;
     private ImageView modeBorder;
@@ -14,8 +15,8 @@ public class CardDisplay extends StackPane {
     private ImageView cardValue;
     private ImageView cardColor;
 
-    private double idealWidth;
-    private double idealHeight;
+    // private double idealWidth;
+    // private double idealHeight;
 
     // public void scaleToHand() {
     //     scaleToHand(84, 120);
@@ -47,8 +48,8 @@ public class CardDisplay extends StackPane {
             cardColor.setFitWidth(width);
         }
         
-        //this.setHeight(height); //TODO fix if broken
-        //this.setWidth(width);
+        this.setHeight(height);
+        this.setWidth(width);
     }
 
     public void updateDisplay(Card.LightColor color, Card.Value value) {
@@ -151,7 +152,7 @@ public class CardDisplay extends StackPane {
         this.getChildren().add(cardColor);
     }
 
-    public CardDisplay(Card.LightColor color, Card.Value value) {
+    public CardDisplayOld(Card.LightColor color, Card.Value value) {
         super();
 
         colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
@@ -162,8 +163,8 @@ public class CardDisplay extends StackPane {
         cardColor = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
 
         updateDisplay(color, value);
+        //this.setAlignment(Pos.CENTER);
 
-        this.setAlignment(Pos.CENTER);
     }
 
     public void updateDisplay(Card card) {
@@ -279,7 +280,7 @@ public class CardDisplay extends StackPane {
             this.getChildren().add(cardColor);
     }
 
-    public CardDisplay(Card.DarkColor color, Card.Value value) {
+    public CardDisplayOld(Card.DarkColor color, Card.Value value) {
         super();
 
         colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
@@ -290,11 +291,11 @@ public class CardDisplay extends StackPane {
         cardColor = new ImageView(new Image(this.getClass().getResourceAsStream("blank.png")));
 
         updateDisplay(color, value);
-        this.setAlignment(Pos.CENTER);
+        //this.setAlignment(Pos.CENTER);
 
     }
 
-    public CardDisplay() {
+    public CardDisplayOld() {
         super();
 
         colorBackground = new ImageView(new Image(this.getClass().getResourceAsStream("cardBack.png")));
@@ -310,26 +311,28 @@ public class CardDisplay extends StackPane {
         this.getChildren().add(colorAccent);
         this.getChildren().add(cardValue);
         this.getChildren().add(cardColor);
-        this.setAlignment(Pos.CENTER);
+        //this.setAlignment(Pos.CENTER);
     }
     
-    @Override
-    public void setHeight(double height) {
-        super.setHeight(height);
-        this.idealHeight = height;
+    // @Override
+    // public void setHeight(double height) {
+    //     super.setHeight(height);
+    //     this.idealHeight = height;
 
-        double minimumScale = Math.min(idealWidth / 7.0, idealHeight / 10.0);
+    //     double minimumScale = Math.min(idealWidth / 7.0, idealHeight / 10.0);
+    //     super.setHeight(minimumScale * 10.0);
 
-        scaleToHand(minimumScale * 7.0, minimumScale * 10.0);
+    //     scaleToHand(minimumScale * 7.0, minimumScale * 10.0);
 
-    }
-    public void setWidth(double width) {
-        super.setWidth(width);
-        this.idealWidth = width;
+    // }
+    // public void setWidth(double width) {
+        
+    //     this.idealWidth = width;
 
-        double minimumScale = Math.min(idealWidth / 7.0, idealHeight / 10.0);
+    //     double minimumScale = Math.min(idealWidth / 7.0, idealHeight / 10.0);
+    //     super.setWidth(minimumScale * 7.0);
 
-        scaleToHand(minimumScale * 7.0, minimumScale * 10.0);
-    }
+    //     scaleToHand(minimumScale * 7.0, minimumScale * 10.0);
+    // }
 
 }

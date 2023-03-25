@@ -1,9 +1,6 @@
 package com.example.unused;
 
 import com.example.Card;
-import com.example.Card.DarkColor;
-import com.example.Card.LightColor;
-import com.example.Card.Value;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

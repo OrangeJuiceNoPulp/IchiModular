@@ -47,6 +47,12 @@ public class GamePane extends StackPane {
         firstAnimation.play();
     }
 
+    public void closeSoundResources() {
+        this.backgroundMediaPlayer.stop();
+        this.backgroundMediaPlayer.dispose();
+        this.soundEffectPlayer.close();
+    }
+
     public void playSoundEffect(SoundEffectType type) {
         if (doSoundEffects) {
             this.soundEffectPlayer.playSoundEffect(type);

@@ -1,7 +1,5 @@
 package com.example;
 
-import java.io.FileNotFoundException;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

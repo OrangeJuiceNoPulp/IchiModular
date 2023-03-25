@@ -1,9 +1,5 @@
 package com.example;
 
-import javafx.scene.control.TextArea;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-
 public class Tower {
     public enum TowerPosition {
         CENTER, NORTH, SOUTH, EAST, WEST

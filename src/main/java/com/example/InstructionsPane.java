@@ -1,12 +1,23 @@
 package com.example;
 
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -71,7 +82,23 @@ public class InstructionsPane extends BorderPane {
 
         textPane.setContent(vboxInstructions);
 
-        this.setCenter(textPane);
+        TextArea textArea = new TextArea();
+        Scanner fileReader = new Scanner(this.getClass().getResourceAsStream("instructions.txt"));
+        while (fileReader.hasNext()) {
+            String line = fileReader.nextLine() + "\n";
+            textArea.appendText(line);
+        }
+        fileReader.close();
+        textArea.setFont(new Font("Perpetua Bold Italic", 18));
+        textArea.setStyle("-fx-text-inner-color: #FFFFFF; -fx-control-inner-background: #404040;");
+        textArea.setBorder(new Border(new BorderStroke(Color.rgb(64, 64, 64), BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(0), new Insets(0))));
+
+       
+        this.setBackground(new Background(new BackgroundFill(Color.rgb(64, 64, 64), new CornerRadii(0), new Insets(0))));
+        textArea.setEditable(false);
+
+        textArea.setWrapText(true);
+        this.setCenter(textArea);
         this.setBottom(btnHome);
     }
 
