@@ -73,11 +73,12 @@ public class GameEndStage extends Stage {
 
         btnPlayAgain.setText("Play Again");
         btnPlayAgain.setOnAction(e -> {
-
             //TODO update leaderboard here
             game.getGamePane().closeSoundResources();
+            game.setGameNull();
             mainStage.setScene(new Scene(new GameSetupPane(mainStage), mainStage.getScene().getWidth(), mainStage.getScene().getHeight()));
             this.close();
+            Runtime.getRuntime().gc();
         });
 
 
@@ -103,8 +104,10 @@ public class GameEndStage extends Stage {
 
         //TODO update leaderboard here
             game.getGamePane().closeSoundResources();
+            game.setGameNull();
             mainStage.setScene(new Scene(new HomeScreenPane(mainStage), mainStage.getScene().getWidth(), mainStage.getScene().getHeight()));
             this.close();
+            Runtime.getRuntime().gc();
         });
 
         Button btnClose = new Button();

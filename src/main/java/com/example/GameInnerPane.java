@@ -40,7 +40,7 @@ public class GameInnerPane extends VBox {
 
     // private CheckBox chkViewDarkMode;
 
-    private TowerPane towerPane;
+    
 
     //private TextArea txtPlayerScores;
     // private UserStatsDisplay txtPlayerInfo;
@@ -74,8 +74,16 @@ public class GameInnerPane extends VBox {
         centerDisplay.selectTower(position);
     }
 
-    public TowerPane getTowerPane() {
-        return towerPane;
+
+    public void setGameNull() {
+        this.outerPane = null;
+        bottomDisplay.clear();
+        this.bottomDisplay = null;
+        topDisplay.clear();
+        this.topDisplay = null;
+        centerDisplay.clear();
+        this.centerDisplay = null;
+        this.game = null;
     }
 
     // public void refreshPlayerHand() {

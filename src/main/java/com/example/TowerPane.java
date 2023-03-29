@@ -37,6 +37,13 @@ public class TowerPane extends StackPane {
         //new Exception().printStackTrace(System.out); //TODO remove this after debugging
     }
 
+    public void clear() {
+        this.getChildren().clear();
+        game = null;
+        towerBackgroundPane = null;
+        towerBackgroundPane = null;
+    }
+
     // public void selectTower(Tower.TowerPosition position) {
     //     switch(position) {
     //         case CENTER:
@@ -132,7 +139,7 @@ public class TowerPane extends StackPane {
         // GridPane.setMargin(eastTower, new Insets(10, 10, 10, 10));
         // GridPane.setMargin(westTower, new Insets(10, 30, 10, 0));
 
-        towerBackgroundPane = new TowerBackgroundPane(initialSize, game);
+        towerBackgroundPane = new TowerBackgroundPane(initialSize);
         towerCardPane = new TowerCardPane(initialSize, towerBackgroundPane);
         
         this.getChildren().addAll(towerBackgroundPane, towerCardPane);
@@ -383,7 +390,7 @@ public class TowerPane extends StackPane {
             }
         }
 
-        public TowerBackgroundPane(double size, Game game) {
+        public TowerBackgroundPane(double size) {
             super();
             super.setHeight(size);
             super.setWidth(size);

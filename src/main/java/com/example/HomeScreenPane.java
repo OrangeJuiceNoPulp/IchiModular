@@ -142,14 +142,17 @@ public class HomeScreenPane extends StackPane {
         vboxTextSpacing.setMaxHeight(getHeight());
 
         btnPlayGame.setOnAction(e -> {
+            this.getChildren().clear();
             stage.setScene(new Scene(new GameSetupPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
 
         btnLeaderboard.setOnAction(e -> {
+            this.getChildren().clear();
             stage.setScene(new Scene(new LeaderboardPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
 
         btnInstructions.setOnAction(e -> {
+            this.getChildren().clear();
             stage.setScene(new Scene(new InstructionsPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
 

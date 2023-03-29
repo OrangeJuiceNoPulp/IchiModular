@@ -58,11 +58,14 @@ public class NameGenerator {
             return names3[randomNumber];
         }
         else {
-            int randomNumber1 = rand.nextInt(foods1.length);
-            int randomNumber2 = rand.nextInt(furnitures1.length);
+            // int randomNumber1 = rand.nextInt(foods1.length);
+            // int randomNumber2 = rand.nextInt(furnitures1.length);
 
-            String name = foods1[randomNumber1] + furnitures1[randomNumber2] + String.format("%02d", rand.nextInt(100));
-            return name;
+            // String name = foods1[randomNumber1] + furnitures1[randomNumber2] + String.format("%02d", rand.nextInt(100));
+            // return name;
+
+            int randomNumber = rand.nextInt(names4.length);
+            return names4[randomNumber];
         }
 
     }

@@ -3,6 +3,8 @@ package com.example;
 import com.example.CustomRadioButtonDisplay.Position;
 import com.example.Deck.DeckType;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -30,6 +32,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GameSetupPane extends StackPane {
+    private boolean doneInitializing = false;
 
     private Button btnHome;
     private Button btnStartGame;
@@ -68,6 +71,7 @@ public class GameSetupPane extends StackPane {
 
     public GameSetupPane(Stage stage) {
         super();
+        
 
         BorderPane innerPane = new BorderPane();
 
@@ -76,17 +80,19 @@ public class GameSetupPane extends StackPane {
         btnHome.setMaxSize(getWidth() / 2, getHeight() / 4);
         
         btnHome.setOnAction(e -> {
+            this.getChildren().clear();
             stage.setScene(new Scene(new HomeScreenPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
-        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getHeight() * 0.325, 1)));
-        btnHome.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
-        btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getMinHeight() * 0.325, 1)));
+        btnHome.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2)))); ////Caused an error for some reason
+        //btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        btnHome.setStyle("-fx-background-color: #808080");
         btnHome.setTextFill(Color.WHITESMOKE);
         btnHome.setOnMouseEntered(e -> {
-            btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+            btnHome.setStyle("-fx-background-color: #202020");
         });
         btnHome.setOnMouseExited(e -> {
-            btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+            btnHome.setStyle("-fx-background-color: #808080");
         });
 
 
@@ -94,18 +100,20 @@ public class GameSetupPane extends StackPane {
         btnStartGame.setMinSize(getWidth() / 2, getHeight() / 4);
         btnStartGame.setMaxSize(getWidth() / 2, getHeight() / 4);
 
-        btnStartGame.setFont(new Font("Perpetua Bold Italic", Math.max(btnStartGame.getHeight() * 0.325, 1)));
+        btnStartGame.setFont(new Font("Perpetua Bold Italic", Math.max(btnStartGame.getMinHeight() * 0.325, 1)));
         btnStartGame.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
-        btnStartGame.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+        //btnStartGame.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0)))); //Caused an error for some reason
+        btnStartGame.setStyle("-fx-background-color: #808080");
         btnStartGame.setTextFill(Color.WHITESMOKE);
         btnStartGame.setOnMouseEntered(e -> {
-            btnStartGame.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+            btnStartGame.setStyle("-fx-background-color: #202020");
         });
         btnStartGame.setOnMouseExited(e -> {
-            btnStartGame.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+            btnStartGame.setStyle("-fx-background-color: #808080");
         });
 
         btnStartGame.setOnAction(e -> {
+            this.getChildren().clear();
             int numPlayers;
             int numRounds;
 
@@ -228,7 +236,6 @@ public class GameSetupPane extends StackPane {
 
         hboxGameDeck.setAlignment(Pos.CENTER_LEFT);
         hboxGameDeck.getChildren().addAll(txtGameDeck, cboGameDeck);
-        
 
         VBox vboxCheckBoxes = new VBox(10);
         vboxCheckBoxes.setAlignment(Pos.CENTER);
@@ -252,7 +259,8 @@ public class GameSetupPane extends StackPane {
         this.setBackground(new Background(new BackgroundFill(Color.rgb(64,64,64), new CornerRadii(0.0), new Insets(0,0,0,0))));
 
         this.getChildren().addAll(innerPane);
-        this.setHeight(stage.getScene().getHeight());
+        System.gc();
+        doneInitializing = true;
     }
 
     @Override
@@ -284,19 +292,18 @@ public class GameSetupPane extends StackPane {
 
         btnStartGame.setMinHeight(minHeight / 3.0);
         btnStartGame.setMaxHeight(minHeight / 4.0);
-        btnStartGame.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getHeight() * 0.325, 1)));
+        btnStartGame.setFont(new Font("Perpetua Bold Italic", Math.max(btnStartGame.getMinHeight() * 0.325, 1)));
 
         btnHome.setMinHeight(minHeight / 3.0);
         btnHome.setMaxHeight(minHeight / 3.0);
-        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getHeight() * 0.325, 1)));
+        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getMinHeight() * 0.325, 1)));
 
         leftDisplay.setMinHeight(minHeight * 2.0 / 3.0);
         leftDisplay.setMaxHeight(minHeight * 2.0 / 3.0);
 
         rightDisplay.setMinHeight(minHeight * 2.0 / 3.0);
         rightDisplay.setMaxHeight(minHeight * 2.0 / 3.0);
-
-        
+ 
     }
     
 }

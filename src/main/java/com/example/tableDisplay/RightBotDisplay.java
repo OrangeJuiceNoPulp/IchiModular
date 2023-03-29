@@ -22,6 +22,13 @@ public class RightBotDisplay extends VBox {
         handDisplay.updateDisplay();
     }
 
+    public void clear() {
+        statsDisplay.clear();
+        statsDisplay = null;
+        handDisplay = null;
+        this.getChildren().clear();
+    }
+
     public RightBotDisplay(Game game, int playerNum) {
         super(50);
         this.setPadding(new Insets(0, 25, 25, 25));

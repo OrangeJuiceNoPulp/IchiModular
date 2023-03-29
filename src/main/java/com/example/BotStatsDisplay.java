@@ -25,6 +25,13 @@ public class BotStatsDisplay extends StackPane {
     private Rectangle background;
     private VBox vboxText;
 
+    public void clear() {
+        this.getChildren().clear();
+        this.background = null;
+        this.vboxText = null;
+        this.game = null;
+    }
+
     public Rectangle getBackgroundRectangle() {
         return background;
     }

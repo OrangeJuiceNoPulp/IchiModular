@@ -51,6 +51,20 @@ public class BottomUserDisplay extends HBox {
         refreshHandDisplay();
     }
 
+    public void clear() {
+        statsDisplay.clear();
+        statsDisplay = null;
+        handDisplay = null;
+        btnSortColor = null;
+        btnSortValue = null;
+        hboxSortButtons = null;
+        vboxInfoSortButtons = null;
+        vboxPlayViewModeButtons = null;
+        btnPlayCard = null;
+        btnViewMode = null;
+        this.getChildren().clear();
+    }
+
     private void refreshHandDisplay() {
         handDisplay.refresh();
     }

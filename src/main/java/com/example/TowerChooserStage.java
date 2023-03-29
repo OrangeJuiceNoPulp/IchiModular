@@ -44,7 +44,6 @@ public class TowerChooserStage extends Stage {
 
     private Tower choice;
 
-    private Game game;
 
     private TowerBackgroundPane towerBackgroundPane;
     private TowerCardPane towerCardPane;
@@ -53,8 +52,8 @@ public class TowerChooserStage extends Stage {
         return this.choice;
     }
 
-    public void selectTower(TowerPosition position) {
-        towerBackgroundPane.selectTower(position);
+    public void selectTower(TowerPosition position, Game game) {
+        towerBackgroundPane.selectTower(position, game);
     }
 
     public TowerChooserStage(ArrayList<Tower> towerChoices, Game game) {
@@ -64,7 +63,6 @@ public class TowerChooserStage extends Stage {
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
 
-        this.game = game;
 
         //GridPane towerChoicePane = new GridPane();
 
@@ -206,7 +204,7 @@ public class TowerChooserStage extends Stage {
 
 
         towerBackgroundPane = new TowerBackgroundPane(500, game);
-        towerCardPane = new TowerCardPane(500, towerBackgroundPane);
+        towerCardPane = new TowerCardPane(500, towerBackgroundPane, game);
         
 
         for (Tower tower : towerChoices) {
@@ -217,16 +215,16 @@ public class TowerChooserStage extends Stage {
                     //selectTower(TowerPosition.CENTER);
                     break;
                 case EAST:
-                    selectTower(TowerPosition.EAST);
+                    selectTower(TowerPosition.EAST, game);
                     break;
                 case NORTH:
-                    selectTower(TowerPosition.NORTH);
+                    selectTower(TowerPosition.NORTH, game);
                     break;
                 case SOUTH:
-                    selectTower(TowerPosition.SOUTH);
+                    selectTower(TowerPosition.SOUTH, game);
                     break;
                 case WEST:
-                    selectTower(TowerPosition.WEST);
+                    selectTower(TowerPosition.WEST, game);
                     break;
                 default:
                     choice = null;
@@ -283,7 +281,7 @@ public class TowerChooserStage extends Stage {
             backgroundAnimation.play();
         }
 
-        public void selectTower(TowerPosition position) {
+        public void selectTower(TowerPosition position, Game game) {
 
             //game.setSelectedTowerPosition(position); //TODO selectTowerhere
 
@@ -415,7 +413,7 @@ public class TowerChooserStage extends Stage {
             eastBackground.setEffect(blendEffect);
             westBackground.setEffect(blendEffect);
             
-            selectTower(TowerPosition.CENTER);
+            selectTower(TowerPosition.CENTER, game);
             
             this.getChildren().addAll(castleBackground, northBackground, southBackground, eastBackground, westBackground);
 
@@ -604,7 +602,7 @@ public class TowerChooserStage extends Stage {
         //     westTower.relocate((23.0 / 34.0 ) * width, (12.0 / 34.0 ) *  width);
         // }
 
-        public TowerCardPane(double size, TowerBackgroundPane background) {
+        public TowerCardPane(double size, TowerBackgroundPane background, Game game) {
             super();
             super.setHeight(size);
             super.setWidth(size);
@@ -631,7 +629,7 @@ public class TowerChooserStage extends Stage {
 
             castleTower.setOnMouseClicked(e -> {
                 if (center) {
-                    selectTower(TowerPosition.CENTER);
+                    selectTower(TowerPosition.CENTER, game);
                 }
                 else {
                     game.getGamePane().playSoundEffect(SoundEffectType.ERROR);
@@ -639,7 +637,7 @@ public class TowerChooserStage extends Stage {
             });
             northTower.setOnMouseClicked(e -> {
                 if (north) {
-                    selectTower(TowerPosition.NORTH);
+                    selectTower(TowerPosition.NORTH, game);
                 }
                 else {
                     game.getGamePane().playSoundEffect(SoundEffectType.ERROR);
@@ -647,7 +645,7 @@ public class TowerChooserStage extends Stage {
             });
             southTower.setOnMouseClicked(e -> {
                 if (south) {
-                    selectTower(TowerPosition.SOUTH);
+                    selectTower(TowerPosition.SOUTH, game);
                 }
                 else {
                     game.getGamePane().playSoundEffect(SoundEffectType.ERROR);
@@ -655,7 +653,7 @@ public class TowerChooserStage extends Stage {
             });
             eastTower.setOnMouseClicked(e -> {
                 if (east) {
-                    selectTower(TowerPosition.EAST);
+                    selectTower(TowerPosition.EAST, game);
                 }
                 else {
                     game.getGamePane().playSoundEffect(SoundEffectType.ERROR);
@@ -663,7 +661,7 @@ public class TowerChooserStage extends Stage {
             });
             westTower.setOnMouseClicked(e -> {
                 if (west) {
-                    selectTower(TowerPosition.WEST);
+                    selectTower(TowerPosition.WEST, game);
                 }
                 else {
                     game.getGamePane().playSoundEffect(SoundEffectType.ERROR);

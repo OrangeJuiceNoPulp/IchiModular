@@ -28,6 +28,13 @@ public class UserStatsDisplay extends StackPane {
     private Rectangle background;
     private VBox vboxText;
 
+    public void clear() {
+        this.getChildren().clear();
+        this.background = null;
+        this.vboxText = null;
+        this.game = null;
+    }
+
     public void scaleToHeight(double height) {
         inputHeight = height;
         // inputWidth = height * 2.0;

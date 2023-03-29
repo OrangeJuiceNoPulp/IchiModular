@@ -63,6 +63,32 @@ public class Game {
     private GameImageLoader imageLoader;
     private GamePane gamePane;
 
+    public void setGameNull() {
+        this.gamePane.setGameNull();
+        this.rand = null;
+        this.curPlayer = null;
+        this.imageLoader.clearImages();
+        this.imageLoader = null;
+        this.deck = null;
+        this.deckType = null;
+        this.castle = null;
+        this.northTower = null;
+        this.southTower = null;
+        this.eastTower = null;
+        this.westTower = null;
+        this.player1 = null;
+        this.player2 = null;
+        this.player3 = null;
+        this.player4 = null;
+        this.gamePane = null;
+        this.playerList = null;
+        this.isDarkMode = null;
+        this.userViewingDarkMode = null;
+        this.stack = null;
+        this.disputeDeck = null;
+        this.selectedTowerPosition = null;
+    }
+
     public GameImageLoader getImageLoader() {
         return imageLoader;
     }

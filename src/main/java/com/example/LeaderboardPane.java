@@ -28,18 +28,20 @@ public class LeaderboardPane extends BorderPane {
 
         //ScrollPane textPane = new ScrollPane();
         btnHome = new Button("Back");
-        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getHeight() * 0.325, 18)));
+        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getMinHeight() * 0.325, 18)));
         btnHome.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
-        btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(5), new Insets(0))));
+        //btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(5), new Insets(0))));
+        btnHome.setStyle("-fx-background-color: #808080");
         btnHome.setTextFill(Color.WHITESMOKE);
         btnHome.setOnMouseEntered(e -> {
-            btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
+            btnHome.setStyle("-fx-background-color: #202020");
         });
         btnHome.setOnMouseExited(e -> {
-            btnHome.setBackground(new Background(new BackgroundFill(Color.rgb(128, 128, 128), new CornerRadii(0), new Insets(0))));
+            btnHome.setStyle("-fx-background-color: #808080");
         });
 
         btnHome.setOnAction(e -> {
+            this.getChildren().clear();
             stage.setScene(new Scene(new HomeScreenPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
 
@@ -72,9 +74,9 @@ public class LeaderboardPane extends BorderPane {
     @Override
     public void setHeight(double height) {
         super.setHeight(height);
-        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getHeight() * 0.325, 18)));
+        
         btnHome.setMinHeight(height / 8);
-        btnHome.setPrefHeight(height / 8);
         btnHome.setMaxHeight(height / 8);
+        btnHome.setFont(new Font("Perpetua Bold Italic", Math.max(btnHome.getMinHeight() * 0.325, 18)));
     }
 }

@@ -47,6 +47,18 @@ public class GamePane extends StackPane {
         firstAnimation.play();
     }
 
+    public void setGameNull() {
+        this.gameTable.setGameNull();
+        this.gameTable = null;
+        this.stage = null;
+        this.animationPane = null;
+        this.animationQueue = null;
+        soundEffectPlayer.close();
+        this.soundEffectPlayer = null;
+        this.backgroundMediaPlayer.dispose();
+        this.backgroundMediaPlayer = null;
+    }
+
     public void closeSoundResources() {
         this.backgroundMediaPlayer.stop();
         this.backgroundMediaPlayer.dispose();

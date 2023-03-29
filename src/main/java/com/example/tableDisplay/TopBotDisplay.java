@@ -23,6 +23,13 @@ public class TopBotDisplay extends HBox {
         handDisplay.updateDisplay();
     }
 
+    public void clear() {
+        statsDisplay.clear();
+        statsDisplay = null;
+        handDisplay = null;
+        this.getChildren().clear();
+    }
+
     public TopBotDisplay(Game game, int playerNum) {
         super(50);
         this.setPadding(new Insets(25));

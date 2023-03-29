@@ -26,7 +26,7 @@ public class CardDemo extends Application {
 
     // Create a scene and place the pane in the stage
     Scene scene = new Scene(testPane, 1250, 750);
-    primaryStage.setTitle("CardTowerDemo"); // Set the stage title
+    primaryStage.setTitle("Ichi"); // Set the stage title
     primaryStage.setScene(scene); // Place the scene in the stage
     primaryStage.setMinHeight(500);
     primaryStage.setMinWidth(900);

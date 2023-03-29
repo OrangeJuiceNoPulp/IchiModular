@@ -174,7 +174,7 @@ public class Deck {
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.N_THREE, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.N_TWO, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.N_ONE, lightSides);
-        addLightPairs(2, 2, 2, 2, 0, 0, Card.Value.ZERO, lightSides);
+        addLightPairs(8, 8, 8, 8, 0, 0, Card.Value.ZERO, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.ONE, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.TWO, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.THREE, lightSides);
@@ -185,11 +185,17 @@ public class Deck {
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.EIGHT, lightSides);
         addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.NINE, lightSides);
 
-        addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.FLIP, lightSides);
-        addLightPairs(4, 4, 4, 4, 0, 0, Card.Value.REVERSE, lightSides);
+        addLightPairs(8, 8, 8, 8, 0, 0, Card.Value.FLIP, lightSides);
+        addLightPairs(8, 8, 8, 8, 0, 0, Card.Value.REVERSE, lightSides);
+        addLightPairs(8, 8, 8, 8, 0, 0, Card.Value.SKIP, lightSides);
 
-        addLightPairs(64, 64, 64, 64, 0, 0, Card.Value.TOWER_BUILD, lightSides);
-        addLightPairs(64, 64, 64, 64, 0, 0, Card.Value.TOWER_DESTROY, lightSides);
+        addLightPairs(16, 16, 16, 16, 0, 0, Card.Value.TOWER_BUILD, lightSides);
+        addLightPairs(16, 16, 16, 16, 0, 0, Card.Value.TOWER_DESTROY, lightSides);
+
+        addLightPairs(0, 0, 0, 0, 0, 0, 64, Card.Value.WILD_REGULAR, lightSides);
+        addLightPairs(0, 0, 0, 0, 0, 0, 8, Card.Value.WILD_DRAW_4, lightSides);
+        addLightPairs(0, 0, 0, 0, 0, 0, 8, Card.Value.WILD_SKIP, lightSides);
+        addLightPairs(0, 0, 0, 0, 0, 0, 8, Card.Value.WILD_REVERSE, lightSides);
 
 
 
@@ -262,7 +268,7 @@ public class Deck {
         addDarkPairs(4, 4, 4, 4, Card.Value.N_THREE, darkSides);
         addDarkPairs(4, 4, 4, 4, Card.Value.N_TWO, darkSides);
         addDarkPairs(4, 4, 4, 4, Card.Value.N_ONE, darkSides);
-        addDarkPairs(2, 2, 2, 2, Card.Value.ZERO, darkSides);
+        addDarkPairs(8, 8, 8, 8, Card.Value.ZERO, darkSides);
         addDarkPairs(4, 4, 4, 4, Card.Value.ONE, darkSides);
         addDarkPairs(4, 4, 4, 4, Card.Value.TWO, darkSides);
         addDarkPairs(4, 4, 4, 4, Card.Value.THREE, darkSides);
@@ -273,8 +279,17 @@ public class Deck {
         addDarkPairs(4, 4, 4, 4, Card.Value.EIGHT, darkSides);
         addDarkPairs(4, 4, 4, 4, Card.Value.NINE, darkSides);
 
-        addDarkPairs(4, 4, 4, 4, Card.Value.FLIP, darkSides);
-        addDarkPairs(4, 4, 4, 4, Card.Value.REVERSE, darkSides);
+        addDarkPairs(8, 8, 8, 8, Card.Value.FLIP, darkSides);
+        addDarkPairs(8, 8, 8, 8, Card.Value.REVERSE, darkSides);
+        addDarkPairs(8, 8, 8, 8, Card.Value.SKIP, darkSides);
+
+        addDarkPairs(16, 16, 16, 16, Card.Value.TOWER_BUILD, darkSides);
+        addDarkPairs(16, 16, 16, 16, Card.Value.TOWER_DESTROY, darkSides);
+
+        addDarkPairs(0, 0, 0, 0, 0, 64, Card.Value.WILD_REGULAR, darkSides);
+        addDarkPairs(0, 0, 0, 0, 0, 8, Card.Value.WILD_DRAW_TO_MATCH, darkSides);
+        addDarkPairs(0, 0, 0, 0, 0, 8, Card.Value.WILD_REVERSE, darkSides);
+        addDarkPairs(0, 0, 0, 0, 0, 8, Card.Value.WILD_SKIP, darkSides);
 
 
         // FOR TESTING ROTATE / SWAP
