@@ -50,7 +50,9 @@ public class CustomRadioButtonDisplay extends StackPane {
     private Position selection;
 
     public void stopAnimation() {
-        buttonAnimation.stop();
+        if (buttonAnimation != null) {
+            buttonAnimation.stop();
+        }
     }
 
     private void setButtonAnimation(Circle circle) {

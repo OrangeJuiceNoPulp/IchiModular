@@ -218,6 +218,29 @@ public class BottomUserDisplay extends HBox {
         handDisplay.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
 
 
+        handDisplay.setOnMouseClicked(e -> {
+            System.out.println("Mouse clicked");
+            if (e.getClickCount() == 2) {
+                System.out.println("Mouse double clicked");
+                System.out.println("Tried Playing Card at " + game.getSelectedTower().getPosition()); //TODO remove debug text
+                System.out.println("The game is waiting for user turn: " + game.getWaitingForUserToTakeTurn()); //TODO remove debug text
+                if(game.getWaitingForUserToTakeTurn()) {
+                    game.setWaitingForUserToTakeTurn(false);
+                    Card selectedCard = getSelectedCard(); 
+    
+                    boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
+        
+                    if (success) {
+                        game.getUser().endTurn();
+                        //refreshPane();
+                    }
+                    else {
+                        game.getGamePane().playSoundEffect(SoundEffectType.ERROR);
+                        game.setWaitingForUserToTakeTurn(true);
+                    }
+                }
+            }});
+
         this.getChildren().addAll(vboxInfoSortButtons, handDisplay, vboxPlayViewModeButtons);
     }
 

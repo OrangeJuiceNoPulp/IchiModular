@@ -36,14 +36,21 @@ public class CenterDisplay extends HBox {
     private double towerWidth;
 
     public void clear() {
+        towerPane.stopAnimation();
         towerPane = null;
         vboxDrawArea = null;
         imgDeckCard = null;
         btnDraw = null;
         game = null;
-        leftDisplay.clear();
+        
+        if (leftDisplay != null) {
+            leftDisplay.clear();
+        }
         leftDisplay = null;
-        rightDisplay.clear();
+
+        if (rightDisplay != null) {
+            rightDisplay.clear();
+        }
         rightDisplay = null;
     }
 

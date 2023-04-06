@@ -32,6 +32,14 @@ public class TowerPane extends StackPane {
     private double towerWidth;
     private double towerSize;
 
+    public void stopAnimation() {
+        if (towerBackgroundPane != null) {
+            if (towerBackgroundPane.backgroundAnimation != null) {
+                towerBackgroundPane.backgroundAnimation.stop();
+            }
+        }
+    }
+
     public void refresh() {
         towerCardPane.refresh();
         //new Exception().printStackTrace(System.out); //TODO remove this after debugging

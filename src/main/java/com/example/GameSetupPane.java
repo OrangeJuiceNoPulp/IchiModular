@@ -3,8 +3,6 @@ package com.example;
 import com.example.CustomRadioButtonDisplay.Position;
 import com.example.Deck.DeckType;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -32,8 +30,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GameSetupPane extends StackPane {
-    private boolean doneInitializing = false;
-
     private Button btnHome;
     private Button btnStartGame;
 
@@ -51,11 +47,20 @@ public class GameSetupPane extends StackPane {
     private DeckType getDeckType() {
         return cboGameDeck.getSelectionModel().getSelectedItem();
     }
+    
+    private void stopAnimation() {
+        if (leftDisplay != null) {
+            leftDisplay.stopAnimation();
+        }
+        if (rightDisplay != null) {
+            rightDisplay.stopAnimation();
+        }
+    }
 
     private String getUserName() {
-        int textLength = Math.min(12, txtEnterPlayerName.getText().length());
-        String playerName = txtEnterPlayerName.getText(0, textLength);
-        if (playerName.compareTo("") == 0) {
+        
+        String playerName = txtEnterPlayerName.getText();
+        if ((playerName.compareTo("") == 0) || (playerName.contains("\n"))) {
             playerName = new NameGenerator().getRandomName(1);
         }
         return playerName;
@@ -80,6 +85,7 @@ public class GameSetupPane extends StackPane {
         btnHome.setMaxSize(getWidth() / 2, getHeight() / 4);
         
         btnHome.setOnAction(e -> {
+            this.stopAnimation();
             this.getChildren().clear();
             stage.setScene(new Scene(new HomeScreenPane(stage), stage.getScene().getWidth(), stage.getScene().getHeight()));
         });
@@ -113,6 +119,7 @@ public class GameSetupPane extends StackPane {
         });
 
         btnStartGame.setOnAction(e -> {
+            this.stopAnimation();
             this.getChildren().clear();
             int numPlayers;
             int numRounds;
@@ -204,7 +211,7 @@ public class GameSetupPane extends StackPane {
         txtGameDeck.setFont(new Font("Perpetua Bold Italic", 25));
 
 
-        ObservableList<Deck.DeckType> deckTypesList = FXCollections.observableArrayList(DeckType.Standard, DeckType.Classic);
+        ObservableList<Deck.DeckType> deckTypesList = FXCollections.observableArrayList(DeckType.Standard, DeckType.Classic, DeckType.Classic_Flip);
 
         cboGameDeck = new ComboBox<Deck.DeckType>();
         cboGameDeck.getItems().addAll(deckTypesList);
@@ -228,7 +235,7 @@ public class GameSetupPane extends StackPane {
                 if(empty || type == null){
                     setText(null);
                 } else {
-                    setText(type.toString());
+                    setText(type.toString().replace('_', ' '));
                 }
             }
     
@@ -260,7 +267,6 @@ public class GameSetupPane extends StackPane {
 
         this.getChildren().addAll(innerPane);
         System.gc();
-        doneInitializing = true;
     }
 
     @Override

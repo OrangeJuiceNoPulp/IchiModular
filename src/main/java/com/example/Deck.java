@@ -10,8 +10,9 @@ import javafx.collections.ObservableList;
 public class Deck {
 
     public enum DeckType {
-        Standard, Classic
+        Standard, Classic, Classic_Flip
     }
+
     
     private ObservableList<Card> pile; // The pile of cards from which cards are drawn
     private ObservableList<Card> burn; // The pile of cards where cards go once played 
@@ -20,6 +21,18 @@ public class Deck {
     private Game game;
 
     private DeckType deckType;
+
+
+    private void generateDeck(ArrayList<LightPair> lightSides, ArrayList<DarkPair> darkSides) {
+        switch (deckType) {
+            case Classic:
+                break;
+            case Classic_Flip:
+                break;
+            case Standard:
+                break;
+        }
+    }
 
     public boolean burnCard(Card card) {
         if ((card.getLightColor() == Card.LightColor.WILD) || 
@@ -150,13 +163,14 @@ public class Deck {
         }
     }
 
-    public Deck(Game game, Random rand) {
+    public Deck(Game game, DeckType deckType, Random rand) {
         burn = FXCollections.observableArrayList(new ArrayList<Card>(632));
         pile = FXCollections.observableArrayList(new ArrayList<Card>(632));
 
         this.rand = rand;
 
         this.game = game;
+        this.deckType = deckType;
 
         ArrayList<LightPair> lightSides = new ArrayList<LightPair>();
         ArrayList<DarkPair> darkSides = new ArrayList<DarkPair>();
@@ -347,6 +361,7 @@ public class Deck {
         // //addDarkPairs(64, 64, 0, 0, Card.Value.TOWER_DESTROY, darkSides);
 
         // CARD GENERATION
+        generateDeck(lightSides, darkSides);
 
         Collections.shuffle(darkSides, rand);
         Collections.shuffle(lightSides, rand);

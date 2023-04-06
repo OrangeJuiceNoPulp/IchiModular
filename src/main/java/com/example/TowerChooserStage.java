@@ -48,6 +48,14 @@ public class TowerChooserStage extends Stage {
     private TowerBackgroundPane towerBackgroundPane;
     private TowerCardPane towerCardPane;
 
+    public void stopAnimation() {
+        if (towerBackgroundPane != null) {
+            if (towerBackgroundPane.backgroundAnimation != null) {
+                towerBackgroundPane.backgroundAnimation.stop();
+            }
+        }
+    }
+
     public Tower getChoice() {
         return this.choice;
     }
@@ -196,10 +204,14 @@ public class TowerChooserStage extends Stage {
         });
 
         btnConfirmSelection.setOnAction(e -> {
+            this.stopAnimation();
             this.close();
         });
 
-        
+        this.setOnCloseRequest(e -> {
+            this.stopAnimation();
+            this.close();
+        });
 
 
 

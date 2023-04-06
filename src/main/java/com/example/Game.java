@@ -23,7 +23,7 @@ public class Game {
     private static final int sizeForBigHandPenalty = 100;
     private Deck deck;
     private DeckType deckType;
-    private int numOfPlayers;
+    private int numOfPlayers; // the number of players in this game
     private int numOfBuiltTowers;
 
     private TowerPosition selectedTowerPosition;
@@ -57,11 +57,21 @@ public class Game {
     private int roundNumber; // the current round number
     private int numOfRounds; // the total number of rounds to be played
 
-    private long lastRoundVictoryBonus = 0;
+    private int lastRoundVictoryBonus = 0;
     private Player lastRoundWinner = null;
 
     private GameImageLoader imageLoader;
     private GamePane gamePane;
+
+    public void updateLeaderboard() {
+        try {
+            Leaderboard leaderboard = new Leaderboard();
+            leaderboard.updateLeaderboard(playerList, numOfPlayers, numOfRounds);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void setGameNull() {
         this.gamePane.setGameNull();
@@ -121,7 +131,7 @@ public class Game {
         return returnTextArray;
     }
 
-    public long getLastRoundVictoryBonus() {
+    public int getLastRoundVictoryBonus() {
         return lastRoundVictoryBonus;
     }
     public Player getLastRoundWinner() {
@@ -1417,7 +1427,7 @@ public class Game {
     public void startRound() {
         isDarkMode.set(false);
         userViewingDarkMode.set(false);
-        deck = new Deck(this, rand);
+        deck = new Deck(this, deckType, rand);
         stack.clearStack();
 
         for (Tower tower : getTowers()) {
@@ -1465,7 +1475,7 @@ public class Game {
         lastRoundWinner = winner; //Sets the last round's winner to the winner of the round
 
         for (Player player : playerList) {
-            long pointsEarned = player.getRoundEndPoints();
+            int pointsEarned = player.getRoundEndPoints();
             lastRoundVictoryBonus += pointsEarned;
             winner.addPoints(pointsEarned);
             player.getHand().clear();

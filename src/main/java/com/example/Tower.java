@@ -83,7 +83,7 @@ public class Tower {
         return this.bottomCard;
     }
 
-    public long payTaxPoints(long points) {
+    public int payTaxPoints(int points) {
         if (isOwned) {
             owner.addPoints(points);
             return 0;

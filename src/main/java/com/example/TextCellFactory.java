@@ -33,7 +33,7 @@ public class TextCellFactory implements Callback<ListView<DeckType>, ListCell<De
                 else {
                     setFont(new Font("Perpetua Bold Italic", 18));
                     setTextFill(Color.WHITESMOKE);
-                    setText(type.toString());
+                    setText(type.toString().replace('_', ' '));
                 }
             }
         };

@@ -4,7 +4,6 @@ import com.example.Card.Value;
 
 import javafx.scene.image.Image;
 
-
 public class GameImageLoader {
     public enum HandCards {
         ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN
@@ -96,39 +95,78 @@ public class GameImageLoader {
         imgFiveCards = null;
         imgSixCards = null;
         imgSevenCards = null;
+
+
+        imgRegWild = null;
+        imgDiscardAll = null;
+        imgEveryonePress = null;
+        imgPress1 = null;
+        imgPress2 = null;
+        imgPress3 = null;
+        imgPressTillLose = null;
+        imgRedistribute = null;
+        imgRotate = null;
+        imgShield = null;
+        imgSkipAll = null;
+        imgSwap = null;
+        imgTargetD1 = null;
+        imgTargetD2 = null;
+        imgThief = null;
+        imgTimes2 = null;
+
     }
 
     private Image imgBlank = new Image(this.getClass().getResource("blankSquare.png").toExternalForm());
     private Image imgCardBack = new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm());
 
     private Image imgRedBackground = new Image(this.getClass().getResource("redBackgroundSquare.png").toExternalForm());
-    private Image imgBlueBackground = new Image(this.getClass().getResource("blueBackgroundSquare.png").toExternalForm());
-    private Image imgYellowBackground = new Image(this.getClass().getResource("yellowBackgroundSquare.png").toExternalForm());
-    private Image imgGreenBackground = new Image(this.getClass().getResource("greenBackgroundSquare.png").toExternalForm());
-    private Image imgPurpleBackground = new Image(this.getClass().getResource("purpleBackgroundSquare.png").toExternalForm());
-    private Image imgOrangeBackground = new Image(this.getClass().getResource("orangeBackgroundSquare.png").toExternalForm());
+    private Image imgBlueBackground = new Image(
+            this.getClass().getResource("blueBackgroundSquare.png").toExternalForm());
+    private Image imgYellowBackground = new Image(
+            this.getClass().getResource("yellowBackgroundSquare.png").toExternalForm());
+    private Image imgGreenBackground = new Image(
+            this.getClass().getResource("greenBackgroundSquare.png").toExternalForm());
+    private Image imgPurpleBackground = new Image(
+            this.getClass().getResource("purpleBackgroundSquare.png").toExternalForm());
+    private Image imgOrangeBackground = new Image(
+            this.getClass().getResource("orangeBackgroundSquare.png").toExternalForm());
 
-    private Image imgLightWildBackground = new Image(this.getClass().getResource("wildLightBackgroundSquare.png").toExternalForm());
-    private Image imgWildRedBackground = new Image(this.getClass().getResource("wildRedBackgroundSquare.png").toExternalForm());
-    private Image imgWildBlueBackground = new Image(this.getClass().getResource("wildBlueBackgroundSquare.png").toExternalForm());
-    private Image imgWildYellowBackground = new Image(this.getClass().getResource("wildYellowBackgroundSquare.png").toExternalForm());
-    private Image imgWildGreenBackground = new Image(this.getClass().getResource("wildGreenBackgroundSquare.png").toExternalForm());
-    private Image imgWildPurpleBackground = new Image(this.getClass().getResource("wildPurpleBackgroundSquare.png").toExternalForm());
-    private Image imgWildOrangeBackground = new Image(this.getClass().getResource("wildOrangeBackgroundSquare.png").toExternalForm());
+    private Image imgLightWildBackground = new Image(
+            this.getClass().getResource("wildLightBackgroundSquare.png").toExternalForm());
+    private Image imgWildRedBackground = new Image(
+            this.getClass().getResource("wildRedBackgroundSquare.png").toExternalForm());
+    private Image imgWildBlueBackground = new Image(
+            this.getClass().getResource("wildBlueBackgroundSquare.png").toExternalForm());
+    private Image imgWildYellowBackground = new Image(
+            this.getClass().getResource("wildYellowBackgroundSquare.png").toExternalForm());
+    private Image imgWildGreenBackground = new Image(
+            this.getClass().getResource("wildGreenBackgroundSquare.png").toExternalForm());
+    private Image imgWildPurpleBackground = new Image(
+            this.getClass().getResource("wildPurpleBackgroundSquare.png").toExternalForm());
+    private Image imgWildOrangeBackground = new Image(
+            this.getClass().getResource("wildOrangeBackgroundSquare.png").toExternalForm());
 
+    private Image imgAquaBackground = new Image(
+            this.getClass().getResource("aquaBackgroundSquare.png").toExternalForm());
+    private Image imgLimeBackground = new Image(
+            this.getClass().getResource("limeBackgroundSquare.png").toExternalForm());
+    private Image imgMagentaBackground = new Image(
+            this.getClass().getResource("magentaBackgroundSquare.png").toExternalForm());
+    private Image imgCurrantBackground = new Image(
+            this.getClass().getResource("currantBackgroundSquare.png").toExternalForm());
 
-
-    private Image imgAquaBackground = new Image(this.getClass().getResource("aquaBackgroundSquare.png").toExternalForm());
-    private Image imgLimeBackground = new Image(this.getClass().getResource("limeBackgroundSquare.png").toExternalForm());
-    private Image imgMagentaBackground = new Image(this.getClass().getResource("magentaBackgroundSquare.png").toExternalForm());
-    private Image imgCurrantBackground = new Image(this.getClass().getResource("currantBackgroundSquare.png").toExternalForm());
-
-    private Image imgSemiWildBackground = new Image(this.getClass().getResource("wildSemiBackgroundSquare.png").toExternalForm());
-    private Image imgDarkWildBackground = new Image(this.getClass().getResource("wildDarkBackgroundSquare.png").toExternalForm());
-    private Image imgWildAquaBackground = new Image(this.getClass().getResource("wildAquaBackgroundSquare.png").toExternalForm());
-    private Image imgWildLimeBackground = new Image(this.getClass().getResource("wildLimeBackgroundSquare.png").toExternalForm());
-    private Image imgWildMagentaBackground = new Image(this.getClass().getResource("wildMagentaBackgroundSquare.png").toExternalForm());
-    private Image imgWildCurrantBackground = new Image(this.getClass().getResource("wildCurrantBackgroundSquare.png").toExternalForm());
+    private Image imgSemiWildBackground = new Image(
+            this.getClass().getResource("wildSemiBackgroundSquare.png").toExternalForm());
+    private Image imgDarkWildBackground = new Image(
+            this.getClass().getResource("wildDarkBackgroundSquare.png").toExternalForm());
+    private Image imgWildAquaBackground = new Image(
+            this.getClass().getResource("wildAquaBackgroundSquare.png").toExternalForm());
+    private Image imgWildLimeBackground = new Image(
+            this.getClass().getResource("wildLimeBackgroundSquare.png").toExternalForm());
+    private Image imgWildMagentaBackground = new Image(
+            this.getClass().getResource("wildMagentaBackgroundSquare.png").toExternalForm());
+    private Image imgWildCurrantBackground = new Image(
+            this.getClass().getResource("wildCurrantBackgroundSquare.png").toExternalForm());
 
     private Image imgN9 = new Image(this.getClass().getResource("lightN9Square.png").toExternalForm());
     private Image imgN8 = new Image(this.getClass().getResource("lightN8Square.png").toExternalForm());
@@ -160,8 +198,8 @@ public class GameImageLoader {
     private Image imgSkip = new Image(this.getClass().getResource("lightSkipSquare.png").toExternalForm());
 
     private Image imgTowerBuild = new Image(this.getClass().getResource("lightTowerBuildSquare.png").toExternalForm());
-    private Image imgTowerDestroy = new Image(this.getClass().getResource("lightTowerDestroySquare.png").toExternalForm());
-
+    private Image imgTowerDestroy = new Image(
+            this.getClass().getResource("lightTowerDestroySquare.png").toExternalForm());
 
     private Image imgRed = new Image(this.getClass().getResource("lightRedSquare.png").toExternalForm());
     private Image imgBlue = new Image(this.getClass().getResource("lightBlueSquare.png").toExternalForm());
@@ -178,8 +216,6 @@ public class GameImageLoader {
     private Image imgWild = new Image(this.getClass().getResource("lightWildSquare.png").toExternalForm());
     private Image imgSemiwild = new Image(this.getClass().getResource("lightSemiwildSquare.png").toExternalForm());
 
-
-
     private Image imgZeroCards = new Image(this.getClass().getResource("zeroCardsSquare.png").toExternalForm());
     private Image imgOneCards = new Image(this.getClass().getResource("oneCardsSquare.png").toExternalForm());
     private Image imgTwoCards = new Image(this.getClass().getResource("twoCardsSquare.png").toExternalForm());
@@ -188,6 +224,25 @@ public class GameImageLoader {
     private Image imgFiveCards = new Image(this.getClass().getResource("fiveCardsSquare.png").toExternalForm());
     private Image imgSixCards = new Image(this.getClass().getResource("sixCardsSquare.png").toExternalForm());
     private Image imgSevenCards = new Image(this.getClass().getResource("sevenCardsSquare.png").toExternalForm());
+
+    private Image imgRegWild = new Image(this.getClass().getResource("lightRegWildSquare.png").toExternalForm());
+    private Image imgDiscardAll = new Image(this.getClass().getResource("lightDiscardAllSquare.png").toExternalForm());
+    private Image imgEveryonePress = new Image(this.getClass().getResource("lightEveryonePressSquare.png").toExternalForm());
+    private Image imgPress1 = new Image(this.getClass().getResource("lightPress1Square.png").toExternalForm());
+    private Image imgPress2 = new Image(this.getClass().getResource("lightPress2Square.png").toExternalForm());
+    private Image imgPress3 = new Image(this.getClass().getResource("lightPress3Square.png").toExternalForm());
+    private Image imgPressTillLose = new Image(this.getClass().getResource("lightPressTillLoseSquare.png").toExternalForm());
+    private Image imgRedistribute  = new Image(this.getClass().getResource("lightRedistributeHandsSquare.png").toExternalForm());
+    private Image imgRotate  = new Image(this.getClass().getResource("lightRotateHandsSquare.png").toExternalForm());
+    private Image imgShield = new Image(this.getClass().getResource("lightShieldSquare.png").toExternalForm());
+    private Image imgSkipAll = new Image(this.getClass().getResource("lightSkipAllSquare.png").toExternalForm());
+    private Image imgSwap = new Image(this.getClass().getResource("lightSwapHandsSquare.png").toExternalForm());
+    private Image imgTargetD1 = new Image(this.getClass().getResource("lightTargetedDraw1Square.png").toExternalForm());
+    private Image imgTargetD2 = new Image(this.getClass().getResource("lightTargetedDraw2Square.png").toExternalForm());
+    private Image imgThief = new Image(this.getClass().getResource("lightThiefSquare.png").toExternalForm());
+    private Image imgTimes2 = new Image(this.getClass().getResource("lightTimes2Square.png").toExternalForm());
+
+
 
     public Image getCardBack() {
         return imgCardBack;
@@ -344,237 +399,119 @@ public class GameImageLoader {
     }
 
     public Image getValueImage(Value value, boolean isDarkMode) {
-        if (isDarkMode) {
-            switch (value) {
-                case N_NINE:
-                    return imgN9;
-                case N_EIGHT:
-                    return imgN8;
-                case N_SEVEN:
-                    return imgN7;
-                case N_SIX:
-                    return imgN6;
-                case N_FIVE:
-                    return imgN5;
-                case N_FOUR:
-                    return imgN4;
-                case N_THREE:
-                    return imgN3;
-                case N_TWO:
-                    return imgN2;
-                case N_ONE:
-                    return imgN1;
-                case ZERO:
-                    return img0;
-                case ONE:
-                    return img1;
-                case TWO:
-                    return img2;
-                case THREE:
-                    return img3;
-                case FOUR:
-                    return img4;
-                case FIVE:
-                    return img5;
-                case SIX:
-                    return img6;
-                case SEVEN:
-                    return img7;
-                case EIGHT:
-                    return img8;
-                case NINE:
-                    return img9;
-                case DISCARD_ALL:
-                    break;
-                case DRAW_2:
-                    return imgD2;
-                case DRAW_5:
-                    return imgD5;
-                case FLIP:
-                    return imgFlip;
-                case JACKPOT:
-                    break;
-                case PRESS_1:
-                    break;
-                case PRESS_3:
-                    break;
-                case REVERSE:
-                    return imgReverse;
-                case ROTATE:
-                    break;
-                case SKIP:
-                    return imgSkip;
-                case SKIP_ALL:
-                    break;
-                case SPIN_1:
-                    break;
-                case SPIN_2:
-                    break;
-                case SWAP:
-                    break;
-                case TARGET_DRAW_1:
-                    break;
-                case TARGET_DRAW_2:
-                    break;
-                case THIEF:
-                    break;
-                case TOWER_BUILD:
-                    return imgTowerBuild;
-                case TOWER_DESTROY:
-                    return imgTowerDestroy;
-                case WILD_DRAW_4:
-                    return imgD4;
-                case WILD_DRAW_TO_MATCH:
-                    return imgDrawMatch;
-                case WILD_EVERYONE_PRESS:
-                    break;
-                case WILD_JACKPOT:
-                    break;
-                case WILD_PRESS_2:
-                    break;
-                case WILD_PRESS_LOSE:
-                    break;
-                case WILD_REDISTRIBUTE:
-                    break;
-                case WILD_REGULAR:
-                    return imgBlank;
-                case WILD_REVERSE:
-                    return imgReverse;
-                case WILD_SHIELD:
-                    break;
-                case WILD_SKIP:
-                    return imgSkip;
-                case WILD_SPIN_2:
-                    break;
-                case WILD_SPIN_3:
-                    break;
-                case WILD_SWAP:
-                    break;
-                case WILD_TIMES_2:
-                    break;
-                default:
-                    return imgBlank;
-            }
 
-
-            return imgBlank; //TODO Make the right images and return them
+        switch (value) {
+            case N_NINE:
+                return imgN9;
+            case N_EIGHT:
+                return imgN8;
+            case N_SEVEN:
+                return imgN7;
+            case N_SIX:
+                return imgN6;
+            case N_FIVE:
+                return imgN5;
+            case N_FOUR:
+                return imgN4;
+            case N_THREE:
+                return imgN3;
+            case N_TWO:
+                return imgN2;
+            case N_ONE:
+                return imgN1;
+            case ZERO:
+                return img0;
+            case ONE:
+                return img1;
+            case TWO:
+                return img2;
+            case THREE:
+                return img3;
+            case FOUR:
+                return img4;
+            case FIVE:
+                return img5;
+            case SIX:
+                return img6;
+            case SEVEN:
+                return img7;
+            case EIGHT:
+                return img8;
+            case NINE:
+                return img9;
+            case DISCARD_ALL:
+                return imgDiscardAll;
+            case DRAW_2:
+                return imgD2;
+            case DRAW_5:
+                return imgD5;
+            case FLIP:
+                return imgFlip;
+            case JACKPOT:
+                break;
+            case PRESS_1:
+                return imgPress1;
+            case PRESS_3:
+                return imgPress3;
+            case REVERSE:
+                return imgReverse;
+            case ROTATE:
+                return imgRotate;
+            case SKIP:
+                return imgSkip;
+            case SKIP_ALL:
+                return imgSkipAll;
+            case SPIN_1:
+                break;
+            case SPIN_2:
+                break;
+            case SWAP:
+                return imgSwap;
+            case TARGET_DRAW_1:
+                return imgTargetD1;
+            case TARGET_DRAW_2:
+                return imgTargetD2;
+            case THIEF:
+                return imgThief;
+            case TOWER_BUILD:
+                return imgTowerBuild;
+            case TOWER_DESTROY:
+                return imgTowerDestroy;
+            case WILD_DRAW_4:
+                return imgD4;
+            case WILD_DRAW_TO_MATCH:
+                return imgDrawMatch;
+            case WILD_EVERYONE_PRESS:
+                return imgEveryonePress;
+            case WILD_JACKPOT:
+                break;
+            case WILD_PRESS_2:
+                return imgPress2;
+            case WILD_PRESS_LOSE:
+                return imgPressTillLose;
+            case WILD_REDISTRIBUTE:
+                return imgRedistribute;
+            case WILD_REGULAR:
+                return imgRegWild;
+            case WILD_REVERSE:
+                return imgReverse;
+            case WILD_SHIELD:
+                return imgShield;
+            case WILD_SKIP:
+                return imgSkip;
+            case WILD_SPIN_2:
+                break;
+            case WILD_SPIN_3:
+                break;
+            case WILD_SWAP:
+                return imgSwap;
+            case WILD_TIMES_2:
+                return imgTimes2;
+            default:
+                return imgBlank;
         }
-        else {
-            switch (value) {
-                case N_NINE:
-                    return imgN9;
-                case N_EIGHT:
-                    return imgN8;
-                case N_SEVEN:
-                    return imgN7;
-                case N_SIX:
-                    return imgN6;
-                case N_FIVE:
-                    return imgN5;
-                case N_FOUR:
-                    return imgN4;
-                case N_THREE:
-                    return imgN3;
-                case N_TWO:
-                    return imgN2;
-                case N_ONE:
-                    return imgN1;
-                case ZERO:
-                    return img0;
-                case ONE:
-                    return img1;
-                case TWO:
-                    return img2;
-                case THREE:
-                    return img3;
-                case FOUR:
-                    return img4;
-                case FIVE:
-                    return img5;
-                case SIX:
-                    return img6;
-                case SEVEN:
-                    return img7;
-                case EIGHT:
-                    return img8;
-                case NINE:
-                    return img9;
-                case DISCARD_ALL:
-                    break;
-                case DRAW_2:
-                    return imgD2;
-                case DRAW_5:
-                    return imgD5;
-                case FLIP:
-                    return imgFlip;
-                case JACKPOT:
-                    break;
-                case PRESS_1:
-                    break;
-                case PRESS_3:
-                    break;
-                case REVERSE:
-                    return imgReverse;
-                case ROTATE:
-                    break;
-                case SKIP:
-                    return imgSkip;
-                case SKIP_ALL:
-                    break;
-                case SPIN_1:
-                    break;
-                case SPIN_2:
-                    break;
-                case SWAP:
-                    break;
-                case TARGET_DRAW_1:
-                    break;
-                case TARGET_DRAW_2:
-                    break;
-                case THIEF:
-                    break;
-                case TOWER_BUILD:
-                    return imgTowerBuild;
-                case TOWER_DESTROY:
-                    return imgTowerDestroy;
-                case WILD_DRAW_4:
-                    return imgD4;
-                case WILD_DRAW_TO_MATCH:
-                    return imgDrawMatch;
-                case WILD_EVERYONE_PRESS:
-                    break;
-                case WILD_JACKPOT:
-                    break;
-                case WILD_PRESS_2:
-                    break;
-                case WILD_PRESS_LOSE:
-                    break;
-                case WILD_REDISTRIBUTE:
-                    break;
-                case WILD_REGULAR:
-                    return imgBlank;
-                case WILD_REVERSE:
-                    return imgReverse;
-                case WILD_SHIELD:
-                    break;
-                case WILD_SKIP:
-                    return imgSkip;
-                case WILD_SPIN_2:
-                    break;
-                case WILD_SPIN_3:
-                    break;
-                case WILD_SWAP:
-                    break;
-                case WILD_TIMES_2:
-                    break;
-                default:
-                    return imgBlank;
-            }
 
-
-
-            return imgBlank; //TODO Make the right images and return them
-        }
+        return imgBlank; // TODO Make the right images and return them //Done, except for Spin and Jackpot cards which were decided to be dropped.
     }
 
 }

@@ -12,8 +12,8 @@ public class Player {
     private boolean isBot; // Whether the player is a bot or the user
     private int playerNum; // A number to identify the player in the game
     private boolean isSkipped;
-    private long score; // The score of the player for the current round
-    private long overallScore; //The score of the player for the current game
+    private int score; // The score of the player for the current round
+    private int overallScore; //The score of the player for the current game
     private Game game;
     private boolean isPlayerTurn; // TODO Remove this???
 
@@ -341,18 +341,18 @@ public class Player {
         }
     }
 
-    public long getRoundEndPoints() {
-        long points = 0;
+    public int getRoundEndPoints() {
+        int points = 0;
         for (Card card : playerHand) {
             points += card.getPointValue(game.getIsDarkMode());
         }
         return points;
     }
 
-    public long getScore() {
+    public int getScore() {
         return this.score;
     }
-    public long getOverallScore() {
+    public int getOverallScore() {
         return this.overallScore;
     }
 
@@ -365,8 +365,35 @@ public class Player {
         return this.isBot;
     }
 
+    
+
     public String getPlayerName() {
-        return this.playerName;
+        String correctedPlayerName = new String(playerName);
+
+        int textLength = Math.min(12, correctedPlayerName.length());
+        correctedPlayerName = correctedPlayerName.substring(0, textLength);
+
+        if (playerName.length() > 12) {
+            correctedPlayerName = correctedPlayerName + "...";
+        } 
+
+        if (isBot) {
+            correctedPlayerName = correctedPlayerName + " (Bot)";
+        }
+        else {
+            correctedPlayerName = correctedPlayerName + " (You)";
+        }
+        return correctedPlayerName;
+    }
+
+    public String getTrueName() {
+        String correctedPlayerName = new String(playerName);
+
+        if (isBot) {
+            correctedPlayerName = correctedPlayerName + " (Bot)";
+        }
+
+        return correctedPlayerName;
     }
 
     // Returns a pointer to the player whose turn is next.
@@ -437,11 +464,11 @@ public class Player {
         return this.playerHand;
     }
 
-    public void addPoints(long points) {
+    public void addPoints(int points) {
         score += points;
     }
 
-    public void removePoints(long points) {
+    public void removePoints(int points) {
         score -= points;
     }
 
@@ -451,8 +478,8 @@ public class Player {
 
     // Tries to remove the given number of points until the player's points become
     // zero. Returns the number of points successfully taken.
-    public long takePoints(long points) {
-        long initialScore = score;
+    public int takePoints(int points) {
+        int initialScore = score;
         score -= points;
         if (score < 0) {
             score = 0;
@@ -468,12 +495,14 @@ public class Player {
         this.score = 0;
         this.isPlayerTurn = false;
 
-        if (isBot) {
-            this.playerName = playerName + " (Bot)";
-        }
-        else {
-            this.playerName = playerName + " (You)";
-        }
+        this.playerName = playerName;
+
+        // if (isBot) {
+        //     this.playerName = playerName + " (Bot)";
+        // }
+        // else {
+        //     this.playerName = playerName + " (You)";
+        // }
         
         playerHand = FXCollections.observableArrayList(new ArrayList<Card>(105));
     }
