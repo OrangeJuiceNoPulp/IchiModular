@@ -74,6 +74,9 @@ public class GameInnerPane extends VBox {
         centerDisplay.selectTower(position);
     }
 
+    public void refreshPlayerHand() {
+        bottomDisplay.refreshPlayerHand();
+    }
 
     public void setGameNull() {
         this.outerPane = null;

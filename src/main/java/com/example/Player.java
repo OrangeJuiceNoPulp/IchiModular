@@ -90,11 +90,11 @@ public class Player {
                 if (cardChoicesList.size() > 0) {
                     cardChoicesList.sort(new Comparator<Card>() {
                         public int compare(Card o1, Card o2) {
-                            if (Card.getPriorityValue(game.getStack().getTower(), o1, o1.getHolder()) < Card
-                                    .getPriorityValue(game.getStack().getTower(), o2, o2.getHolder())) {
+                            if (Card.getPriorityValue(game.getStack().getTower(), o1, Player.this) < Card
+                                    .getPriorityValue(game.getStack().getTower(), o2, Player.this)) {
                                 return 1;
-                            } else if (Card.getPriorityValue(game.getStack().getTower(), o1, o1.getHolder()) > Card
-                                    .getPriorityValue(game.getStack().getTower(), o2, o2.getHolder())) {
+                            } else if (Card.getPriorityValue(game.getStack().getTower(), o1, Player.this) > Card
+                                    .getPriorityValue(game.getStack().getTower(), o2, Player.this)) {
                                 return -1;
                             } else {
                                 return 0;
@@ -253,11 +253,11 @@ public class Player {
         if (possibleMoves.size() > 0) {
             possibleMoves.sort(new Comparator<Pair<Card, Tower>>() {
                 public int compare(javafx.util.Pair<Card, Tower> o1, javafx.util.Pair<Card, Tower> o2) {
-                    if (Card.getPriorityValue(o1.getValue(), o1.getKey(), o1.getKey().getHolder()) < Card
-                            .getPriorityValue(o2.getValue(), o2.getKey(), o2.getKey().getHolder())) {
+                    if (Card.getPriorityValue(o1.getValue(), o1.getKey(), Player.this) < Card
+                            .getPriorityValue(o2.getValue(), o2.getKey(), Player.this)) {
                         return 1;
-                    } else if (Card.getPriorityValue(o1.getValue(), o1.getKey(), o1.getKey().getHolder()) > Card
-                            .getPriorityValue(o2.getValue(), o2.getKey(), o2.getKey().getHolder())) {
+                    } else if (Card.getPriorityValue(o1.getValue(), o1.getKey(), Player.this) > Card
+                            .getPriorityValue(o2.getValue(), o2.getKey(), Player.this)) {
                         return -1;
                     } else {
                         return 0;
@@ -451,12 +451,12 @@ public class Player {
     }
 
     public boolean drawCard(Card card) {
-        card.setHolder(this);
+        //card.setHolder(this);
         return playerHand.add(card);
     }
 
     public boolean discardCard(Card card) {
-        card.setHolder(null);
+        //card.setHolder(null);
         return playerHand.remove(card);
     }
 

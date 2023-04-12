@@ -54,7 +54,7 @@ public class Stack {
         stackMagnitude = 0;
         stackType = null;
         stackingActive = false;
-        stackingTower = null;
+        //stackingTower = null;
     }
 
     // The specified player accepts the stack of cards.
@@ -133,6 +133,14 @@ public class Stack {
     // Adds the card to the stack
     public void addToStack(Card card, Player player, Tower tower) {
         // If the stack is currently active, so increase the stack magnitude
+
+        if (tower == null) {
+            System.out.println("Tower is null");
+        }
+        else {
+            System.out.println("Tower not null");
+        }
+
         if (this.stackingActive) {
             if (isStackable(card)) {
                 Card.Value value;
@@ -189,6 +197,7 @@ public class Stack {
         }
         // Else the stack is not active, so a new stack is started
         else {
+            System.out.println("Stack started");
             startStack(card, tower);
         }
     }

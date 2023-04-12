@@ -26,6 +26,10 @@ public class GamePane extends StackPane {
     private SoundEffectPlayer soundEffectPlayer;
     private MediaPlayer backgroundMediaPlayer;
 
+    public void refreshPlayerHand() {
+        gameTable.refreshPlayerHand();
+    }
+
     public void playAnimationsInQueue() {
         Animation firstAnimation = animationQueue.get(0);
 

@@ -15,7 +15,7 @@ public class Card {
     private StackType darkStackType;
 
     private Game game;
-    private Player holder;
+    //private Player holder;
 
     public static Card makeRandomCard(Game game) {
         int lightSideNum = game.getRand().nextInt(6);
@@ -349,13 +349,13 @@ public class Card {
         this.setStackType();
     }
 
-    public void setHolder(Player holder) {
-        this.holder = holder;
-    }
+    // public void setHolder(Player holder) {
+    //     this.holder = holder;
+    // }
 
-    public Player getHolder() {
-        return this.holder;
-    }
+    // public Player getHolder() {
+    //     return this.holder;
+    // }
 
     public String toString() {
         String card_info;
@@ -446,7 +446,8 @@ public class Card {
                     if ((topCard.getActiveDarkColor() == DarkColor.WILD_AQUA)
                             || (topCard.getActiveDarkColor() == DarkColor.WILD_MAGENTA)
                             || (topCard.getActiveDarkColor() == DarkColor.WILD_LIME)
-                            || (topCard.getActiveDarkColor() == DarkColor.WILD_CURRANT)) {
+                            || (topCard.getActiveDarkColor() == DarkColor.WILD_CURRANT
+                            || (topCard.getActiveDarkColor() == DarkColor.SEMIWILD))) {
                         return true;
                     } else {
                         break;

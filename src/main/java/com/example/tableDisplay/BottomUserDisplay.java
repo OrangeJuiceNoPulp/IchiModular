@@ -7,6 +7,7 @@ import com.example.CardDarkValueComparator;
 import com.example.CardLightColorComparator;
 import com.example.CardLightValueComparator;
 import com.example.Game;
+import com.example.Player;
 import com.example.UserStatsDisplay;
 import com.example.SoundEffectPlayer.SoundEffectType;
 
@@ -31,6 +32,7 @@ import javafx.scene.text.Font;
 public class BottomUserDisplay extends HBox {
     private UserStatsDisplay statsDisplay;
     private ListView<Card> handDisplay;
+    private Player user;
 
     private Button btnSortColor;
     private Button btnSortValue;
@@ -69,12 +71,17 @@ public class BottomUserDisplay extends HBox {
         handDisplay.refresh();
     }
 
+    public void refreshPlayerHand() {
+        handDisplay.setItems(user.getHand());
+    }
+
     public BottomUserDisplay(Game game) {
         super();
         //this.setPadding(new Insets(25));
         this.setAlignment(Pos.CENTER);
         this.setBackground(new Background(new BackgroundFill(Color.rgb(64, 64, 64), new CornerRadii(0), new Insets(0))));
         this.setEffect(new DropShadow(0.2 * 1000 * 0.125, Color.BLACK));
+        this.user = game.getUser();
         statsDisplay = new UserStatsDisplay(game);
 
         btnPlayCard = new Button("Play");

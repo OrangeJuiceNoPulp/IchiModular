@@ -1,10 +1,10 @@
+Alice (Bot)
+Nora (Bot)
+Bill (Bot)
+Ellie (Bot)
+Ellie (Bot)
 Jordan
-Jordan (Bot)
-Jordan (Bot)
-Jason (Bot)
-Cassie (Bot)
-Dave (Bot)
-Jordan (Bot)
-Stefan (Bot)
+Alice (Bot)
+Jordan
 Benny (Bot)
-Stefan (Bot)
+Jordan
