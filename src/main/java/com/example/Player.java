@@ -177,39 +177,17 @@ public class Player {
             } else {
 
                 StackContributeStage stackContributeStage = new StackContributeStage(this, game);
-                stackContributeStage.showAndWait();
+                stackContributeStage.show();
 
-                Card cardToStack = stackContributeStage.getStackedCard();
-
-                if (cardToStack != null) {
-                    if (game.getStack().isStackable(cardToStack)) {
-                        game.getStack().addToStack(cardToStack, this, game.getStack().getTower());
-                        game.getStack().getTower().addCard(cardToStack);
-                        this.discardCard(cardToStack);
-                        if (game.getIsDarkMode()) {
-                            if (cardToStack.getDarkColor() == Card.DarkColor.WILD) {
-                                game.performWild(this, game.getStack().getTower());
-                            }
-                        } else {
-                            if (cardToStack.getLightColor() == Card.LightColor.WILD) {
-                                game.performWild(this, game.getStack().getTower());
-                            }
-                        }
-                    } else {
-                        game.getStack().acceptStack(this);
-                    }
-                } else {
-                    game.getStack().acceptStack(this);
-                }
-                this.endTurn();
-                return;
+                
             }
         }
 
         // If the player is a bot, their turn is automatically taken
         if (this.isBot) {
             this.doBotTurn();
-            this.endTurn();
+            game.getGamePane().playAnimationsInQueue();
+            //this.endTurn();
             return;
         }
         // Else the player is the user, so the method returns and the game will continue
@@ -287,6 +265,7 @@ public class Player {
         // Else, there are no possible moves, so a card is drawn
         else {
             game.drawCard(this);
+            this.endTurn();
             return null; // null is returned to tell the doBotTurn method to end this player's turn
         }
     }

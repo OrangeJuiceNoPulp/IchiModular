@@ -109,7 +109,8 @@ public class BottomUserDisplay extends HBox {
                 boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
     
                 if (success) {
-                    game.getUser().endTurn();
+                    //game.getUser().endTurn();
+                    game.getGamePane().playAnimationsInQueue();
                     //refreshPane();
                 }
                 else {
@@ -238,7 +239,8 @@ public class BottomUserDisplay extends HBox {
                     boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
         
                     if (success) {
-                        game.getUser().endTurn();
+                        //game.getUser().endTurn();
+                        game.getGamePane().playAnimationsInQueue();
                         //refreshPane();
                     }
                     else {

@@ -70,7 +70,8 @@ public class TowerDisplay extends StackPane {
                         }
         
                         if (turnSuccess) {
-                            tower.getGame().getUser().endTurn();
+                            //tower.getGame().getUser().endTurn();
+                            tower.getGame().getGamePane().playAnimationsInQueue();
                             //tower.getGame().refreshGamePane();
                         }
                         else {

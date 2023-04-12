@@ -1111,6 +1111,8 @@ public class Game {
 
     private void performCardAction(Player currentPlayer, Tower currentTower) {
 
+        gamePane.addPlayCardAnimation(currentPlayer.getPlayerNum(), numOfPlayers, isDarkMode.get(), currentTower.getDisplayedCard());
+
         if (isDarkMode.get()) {
             if ( (currentTower.getDisplayedCard().getDarkColor() == Card.DarkColor.WILD) || 
             (currentTower.getDisplayedCard().getDarkColor() == Card.DarkColor.SEMIWILD) ){
@@ -1479,6 +1481,7 @@ public class Game {
             }
         }
 
+        
     }
 
     public void startRound() {

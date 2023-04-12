@@ -35,6 +35,33 @@ public class StackContributeStage extends Stage {
     private Game game;
     private Player player;
 
+    private void performBeforeClosing() {
+        Card cardToStack = getStackedCard();
+
+                if (cardToStack != null) {
+                    if (game.getStack().isStackable(cardToStack)) {
+                        game.getStack().addToStack(cardToStack, player, game.getStack().getTower());
+                        game.getStack().getTower().addCard(cardToStack);
+                        player.discardCard(cardToStack);
+                        if (game.getIsDarkMode()) {
+                            if (cardToStack.getDarkColor() == Card.DarkColor.WILD) {
+                                game.performWild(player, game.getStack().getTower());
+                            }
+                        } else {
+                            if (cardToStack.getLightColor() == Card.LightColor.WILD) {
+                                game.performWild(player, game.getStack().getTower());
+                            }
+                        }
+                    } else {
+                        game.getStack().acceptStack(player);
+                    }
+                } else {
+                    game.getStack().acceptStack(player);
+                }
+                player.endTurn();
+                return;
+    }
+
     public Card getStackedCard() {
         return this.selectedCard;
     }
@@ -204,6 +231,13 @@ public class StackContributeStage extends Stage {
         btnTopDeck.setTextAlignment(TextAlignment.CENTER);
         btnTopDeck.setOnAction(e -> {
             topDeck();
+            performBeforeClosing();
+            this.close();
+        });
+
+        this.setOnCloseRequest(e -> {
+            topDeck();
+            performBeforeClosing();
             this.close();
         });
       
@@ -213,6 +247,7 @@ public class StackContributeStage extends Stage {
             if (selectedCard == null) {
                 topDeck();
             }
+            performBeforeClosing();
             this.close();
         });
 
