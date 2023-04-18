@@ -119,9 +119,9 @@ public class GamePane extends StackPane {
         for (int i = 0; i < animationQueue.size(); i++) {
             if (i == (animationQueue.size() - 1)) {
                 animationQueue.get(i).setOnFinished(e -> {
-                    gameTable.getGame().getCurrentPlayer().endTurn();
+                    gameTable.getGame().getCurrentPlayer().startNextTurn();
                     //animationPane.getChildren().clear();
-                    gameTable.refreshPane();
+                    //gameTable.refreshPane();
                 });
             }
             else {

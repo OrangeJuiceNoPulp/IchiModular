@@ -64,6 +64,7 @@ public class Player {
     // Start's the bot's turn.
     public void startTurn() {
         System.out.println(this.toString() + "'s turn has started.");
+        game.refreshGamePane();
         if (this.isSkipped) {
             // TODO add skip animation
             System.out.println(this.toString() + " was skipped.\n");
@@ -186,8 +187,8 @@ public class Player {
         // If the player is a bot, their turn is automatically taken
         if (this.isBot) {
             this.doBotTurn();
-            game.getGamePane().playAnimationsInQueue();
-            //this.endTurn();
+            //game.getGamePane().playAnimationsInQueue();
+            this.endTurn();
             return;
         }
         // Else the player is the user, so the method returns and the game will continue
@@ -394,15 +395,19 @@ public class Player {
         }
     }
 
-    public void endTurn() {
-        System.out.println(this.toString() + "'s turn has ended.\n"); //TODO remove debug text
-        this.isSkipped = false;
-        this.isPlayerTurn = false;
+    public void startNextTurn() {
         game.checkForBigHandPenalty();
         if (!(game.checkForRoundEnd())) {
             game.setCurrentPlayer(this.getNextPlayer());
             game.getCurrentPlayer().startTurn();
         }
+    }
+
+    public void endTurn() {
+        System.out.println(this.toString() + "'s turn has ended.\n"); //TODO remove debug text
+        this.isSkipped = false;
+        this.isPlayerTurn = false;
+        game.getGamePane().playAnimationsInQueue();
     }
 
     public int getHandSize() {

@@ -779,25 +779,11 @@ public class Game {
     }
 
     private void swapHands(Player player) {
-
-        int j = 1;
-        for (Player person: playerList) {
-            System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-            j++;
-        }
-        System.out.println("");
-
         Player target = player.selectTargetPlayer();
         ObservableList<Card> temp = player.getHand();
         player.setHand(target.getHand());
         target.setHand(temp);
         gamePane.refreshPlayerHand();
-
-        j = 1;
-        for (Player person: playerList) {
-            System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-            j++;
-        }
     }
 
     private void rotateHands(Player player) {
