@@ -1524,7 +1524,9 @@ public class Game {
             //TODO show round start stage
         }
         
-        curPlayer.startTurn();
+        TurnThread startTurnThread = new TurnThread(curPlayer);
+        startTurnThread.start();
+        //curPlayer.startTurn();
     }
 
     public void endRound(Player winner) {

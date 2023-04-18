@@ -9,6 +9,7 @@ import com.example.CardLightValueComparator;
 import com.example.Game;
 import com.example.Player;
 import com.example.UserStatsDisplay;
+import com.example.UserTurnThread;
 import com.example.SoundEffectPlayer.SoundEffectType;
 
 import javafx.geometry.Insets;
@@ -109,6 +110,8 @@ public class BottomUserDisplay extends HBox {
                 boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
     
                 if (success) {
+                    //UserTurnThread endUserTurn = new UserTurnThread(game.getUser());
+                    //endUserTurn.start();
                     game.getUser().endTurn();
                     //refreshPane();
                 }
@@ -238,6 +241,8 @@ public class BottomUserDisplay extends HBox {
                     boolean success = game.playCard(game.getUser(), game.getSelectedTower(), selectedCard);
         
                     if (success) {
+                        // UserTurnThread endUserTurn = new UserTurnThread(game.getUser());
+                        // endUserTurn.start();
                         game.getUser().endTurn();
                         //refreshPane();
                     }

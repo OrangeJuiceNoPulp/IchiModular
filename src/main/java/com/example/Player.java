@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.util.Pair;
 
 public class Player {
@@ -215,7 +216,7 @@ public class Player {
         // Else the player is the user, so the method returns and the game will continue
         // upon the player's next input
         else {
-            game.refreshGamePane();
+            //game.refreshGamePane();
             game.setWaitingForUserToTakeTurn(true); // TODO set to false whenever the play button is pressed or card is
                                                     // dragged
             return;
@@ -415,15 +416,38 @@ public class Player {
         }
     }
 
+    //Code from https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
+    //Answer by DaveB October 19, 2014
+    public static void delay(long millis, Runnable continuation) {
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try { Thread.sleep(millis); }
+                catch (InterruptedException e) { }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(event -> continuation.run());
+        new Thread(sleeper).start();
+      }
+
     public void endTurn() {
         System.out.println(this.toString() + "'s turn has ended.\n"); //TODO remove debug text
         this.isSkipped = false;
         this.isPlayerTurn = false;
-        game.checkForBigHandPenalty();
-        if (!(game.checkForRoundEnd())) {
-            game.setCurrentPlayer(this.getNextPlayer());
-            game.getCurrentPlayer().startTurn();
-        }
+
+        
+        game.refreshGamePane();
+
+        delay(1500, () -> {
+            game.checkForBigHandPenalty();
+            if (!(game.checkForRoundEnd())) {
+                game.setCurrentPlayer(this.getNextPlayer());
+                game.getCurrentPlayer().startTurn();
+            }
+        });
+
+        
     }
 
     public int getHandSize() {

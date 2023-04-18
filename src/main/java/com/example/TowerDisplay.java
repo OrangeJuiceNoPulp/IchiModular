@@ -70,6 +70,8 @@ public class TowerDisplay extends StackPane {
                         }
         
                         if (turnSuccess) {
+                            //UserTurnThread endUserTurn = new UserTurnThread(tower.getGame().getUser());
+                            //endUserTurn.start();
                             tower.getGame().getUser().endTurn();
                             //tower.getGame().refreshGamePane();
                         }
