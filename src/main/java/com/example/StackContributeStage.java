@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -55,6 +56,7 @@ public class StackContributeStage extends Stage {
             notEnoughPointsStage.setTitle("Top Deck Failed");
             notEnoughPointsStage.initModality(Modality.APPLICATION_MODAL);
             notEnoughPointsStage.setResizable(false);
+            notEnoughPointsStage.setIconified(false);
 
             BorderPane notEnoughPointsPane = new BorderPane();
             notEnoughPointsPane.setBackground(new Background(new BackgroundFill(Color.rgb(64, 64, 64), new CornerRadii(0), new Insets(0))));
@@ -103,6 +105,7 @@ public class StackContributeStage extends Stage {
 
             Scene notEnoughPointsScene = new Scene(notEnoughPointsPane);
 
+            //notEnoughPointsStage.getIcons().add(new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm()));
             notEnoughPointsStage.setScene(notEnoughPointsScene);
             notEnoughPointsStage.showAndWait();
         }
@@ -118,6 +121,8 @@ public class StackContributeStage extends Stage {
         this.setTitle("Continue the Stack");
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
+
+        this.getIcons().add(new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm()));
 
         BorderPane stackChoicePane = new BorderPane();
 

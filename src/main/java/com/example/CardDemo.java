@@ -5,6 +5,7 @@ package com.example;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class CardDemo extends Application {
@@ -23,6 +24,8 @@ public class CardDemo extends Application {
     HomeScreenPane testPane = new HomeScreenPane(primaryStage);
     // testStage.setScene(new Scene(new HomeScreenPane(testStage)));
     // testStage.show();
+
+    primaryStage.getIcons().add(new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm()));
 
     // Create a scene and place the pane in the stage
     Scene scene = new Scene(testPane, 1250, 750);

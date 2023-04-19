@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -50,6 +51,8 @@ public class GameEndStage extends Stage {
             mainStage.close();
             this.close();
         });
+
+        this.getIcons().add(new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm()));
 
         BorderPane startGamePane = new BorderPane();
 

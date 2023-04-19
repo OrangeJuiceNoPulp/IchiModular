@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -29,6 +30,8 @@ public class RoundStartStage extends Stage {
         this.setTitle("Round " + game.getRoundNumber() + " Start!");
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
+
+        this.getIcons().add(new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm()));
 
         BorderPane startRoundPane = new BorderPane();
 

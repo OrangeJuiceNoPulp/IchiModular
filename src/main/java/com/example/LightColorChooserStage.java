@@ -8,6 +8,7 @@ import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -60,6 +61,8 @@ public class LightColorChooserStage extends Stage {
         this.setTitle("Choose a Color");
         this.initModality(Modality.APPLICATION_MODAL);
         this.setResizable(false);
+
+        this.getIcons().add(new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm()));
 
         Pane lightColorChoicePane = new Pane();
 
