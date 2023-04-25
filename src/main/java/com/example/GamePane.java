@@ -388,7 +388,7 @@ public class GamePane extends StackPane {
             card3Display.setVisible(false);
 
             CardDisplaySquare card4Display = new CardDisplaySquare(gameTable.getGame().getImageLoader());
-            card3Display.setVisible(false);
+            card4Display.setVisible(false);
     
     
             double cardDimensions = Math.min(this.getScene().getHeight() * 0.1, this.getScene().getWidth()* 0.1);

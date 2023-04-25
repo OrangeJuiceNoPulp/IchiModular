@@ -65,10 +65,13 @@ public class CardCellFactory implements Callback<ListView<Card>, ListCell<Card>>
         };
 
         cell.setOnDragDetected(e -> {
-            Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent();
-            content.put(cardFormat, param.getFocusModel().getFocusedItem().getCardBase());
-            db.setContent(content);
+            if (param.getFocusModel().getFocusedItem().getGame().getWaitingForUserToTakeTurn()) {
+                Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                content.put(cardFormat, param.getFocusModel().getFocusedItem().getCardBase());
+                db.setContent(content);
+            }
+            
             e.consume();
         });
         cell.setOnDragDone(e -> {

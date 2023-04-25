@@ -6,6 +6,12 @@ import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.Event;
+import javafx.event.EventTarget;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
 
 public class Player {
@@ -185,7 +191,7 @@ public class Player {
             } else {
 
                 StackContributeStage stackContributeStage = new StackContributeStage(this, game);
-                
+
                 stackContributeStage.showAndWait();
 
                 Card cardToStack = stackContributeStage.getStackedCard();
@@ -447,12 +453,14 @@ public class Player {
         this.isPlayerTurn = false;
 
         
+
         game.getGamePane().playAnimationsInQueue();
 
-        delay((game.getGamePane().getDelayTime() + 500), () -> {
+        delay((game.getGamePane().getDelayTime() + 250), () -> {
             game.checkForBigHandPenalty();
             if (!(game.checkForRoundEnd())) {
                 game.setCurrentPlayer(this.getNextPlayer());
+                    
                 game.getCurrentPlayer().startTurn();
             }
         });
