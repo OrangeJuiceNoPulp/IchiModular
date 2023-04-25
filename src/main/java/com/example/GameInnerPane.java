@@ -7,6 +7,7 @@ import com.example.tableDisplay.CenterDisplay;
 import com.example.tableDisplay.TopBotDisplay;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -69,6 +70,30 @@ public class GameInnerPane extends VBox {
     // private VBox vboxBotArea2;
     // private HBox hboxBotArea3;
     // private VBox vboxRoundInfo;
+
+    public Point2D getPlayerPositionInScene(int playerNum, int numOfPlayers) {
+        if (numOfPlayers == 2 && playerNum == 2) {
+            return topDisplay.getHandDisplayPosition();
+        }
+        else if (playerNum == 3) {
+            return topDisplay.getHandDisplayPosition();
+        }
+        else if (playerNum == 1) {
+            return bottomDisplay.getHandDisplayPosition();
+        }
+        else {
+            return centerDisplay.getHandDisplayPosition(playerNum, numOfPlayers);
+        }
+        
+    }
+
+    public Point2D getTowerPositionInScene(TowerPosition position) {
+        return centerDisplay.getTowerPositionInScene(position);
+    }
+
+    public Point2D getDrawPilePosition() {
+        return centerDisplay.getDrawPilePosition();
+    }
 
     public void selectTower(TowerPosition position) {
         centerDisplay.selectTower(position);

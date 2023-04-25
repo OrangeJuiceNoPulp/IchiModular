@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.SoundEffectPlayer.SoundEffectType;
 
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.Dragboard;
@@ -21,6 +22,10 @@ public class TowerDisplay extends StackPane {
     private Tower tower;
 
     private String ownerName;
+
+    public Point2D getCardDisplayPosition() {
+        return imgCardView.localToScene(0, 0);
+    }
 
     public TowerDisplay(Tower tower) {
         super();

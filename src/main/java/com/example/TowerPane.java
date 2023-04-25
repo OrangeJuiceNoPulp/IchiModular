@@ -8,6 +8,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
@@ -31,6 +32,10 @@ public class TowerPane extends StackPane {
     private double towerHeight;
     private double towerWidth;
     private double towerSize;
+
+    public Point2D getTowerPositionInScene(TowerPosition position) {
+        return towerCardPane.getTowerPositionInScene(position);
+    }
 
     public void stopAnimation() {
         if (towerBackgroundPane != null) {
@@ -225,6 +230,23 @@ public class TowerPane extends StackPane {
             southTower.updateTowerInformation();
             eastTower.updateTowerInformation();
             westTower.updateTowerInformation();
+        }
+
+        public Point2D getTowerPositionInScene(TowerPosition position) {
+            switch (position) {
+                case CENTER:
+                    return castleTower.getCardDisplayPosition();
+                case EAST:
+                    return eastTower.getCardDisplayPosition();
+                case NORTH:
+                    return northTower.getCardDisplayPosition();
+                case SOUTH:
+                    return southTower.getCardDisplayPosition();
+                case WEST:
+                    return westTower.getCardDisplayPosition();
+                default:
+                    return castleTower.getCardDisplayPosition();
+            }
         }
 
         public void setHeight(double height) {

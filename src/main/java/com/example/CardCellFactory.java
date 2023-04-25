@@ -73,8 +73,8 @@ public class CardCellFactory implements Callback<ListView<Card>, ListCell<Card>>
         });
         cell.setOnDragDone(e -> {
             //System.out.println("CellFactory DragDone"); // TODO remove this after debugging
-            if (e.getTransferMode() == TransferMode.MOVE) {
-            }
+            // if (e.getTransferMode() == TransferMode.MOVE) {
+            // }
             e.consume();
         });
         cell.setOnMouseEntered(e -> {

@@ -194,8 +194,8 @@ public class GameSetupPane extends StackPane {
         txtPlayerName.setFont(new Font("Perpetua Bold Italic", 25));
 
         txtEnterPlayerName = new TextField("Jordan");
-        txtEnterPlayerName.setMinWidth(150);
-        txtEnterPlayerName.setMaxWidth(150);
+        txtEnterPlayerName.setMinWidth(200);
+        txtEnterPlayerName.setMaxWidth(200);
         txtEnterPlayerName.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
         txtEnterPlayerName.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
         txtEnterPlayerName.setFont(new Font("Perpetua Bold Italic", 18));
@@ -211,14 +211,14 @@ public class GameSetupPane extends StackPane {
         txtGameDeck.setFont(new Font("Perpetua Bold Italic", 25));
 
 
-        ObservableList<Deck.DeckType> deckTypesList = FXCollections.observableArrayList(DeckType.Standard, DeckType.Classic, DeckType.Classic_Flip);
+        ObservableList<Deck.DeckType> deckTypesList = FXCollections.observableArrayList(DeckType.Standard_Ichi, DeckType.Classic, DeckType.Classic_Flip);
 
         cboGameDeck = new ComboBox<Deck.DeckType>();
         cboGameDeck.getItems().addAll(deckTypesList);
         cboGameDeck.getSelectionModel().select(0);
         cboGameDeck.setCellFactory(new TextCellFactory());
-        cboGameDeck.setMinWidth(150);
-        cboGameDeck.setMaxWidth(150);
+        cboGameDeck.setMinWidth(200);
+        cboGameDeck.setMaxWidth(200);
         cboGameDeck.setBorder(new Border(new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID, new CornerRadii(0), new BorderWidths(2))));
         cboGameDeck.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32), new CornerRadii(0), new Insets(0))));
 

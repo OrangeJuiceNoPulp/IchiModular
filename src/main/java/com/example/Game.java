@@ -170,6 +170,8 @@ public class Game {
         for (Player player : getPlayers()) {
             player.setHand(playerHandList.remove(0));
         }
+
+        gamePane.addRedistributeHandsAnimation(numOfPlayers);
     }
 
     // Determines if the card is playable at any of the currently active towers.
@@ -208,6 +210,8 @@ public class Game {
 
     private Card drawToMatchSpecificTower(Player targetPlayer, Tower tower) {
         //Draws an initial card
+        int initialHandSize = targetPlayer.getHandSize();
+
         Card card = deck.drawCard();
         targetPlayer.drawCard(card);
 
@@ -217,6 +221,10 @@ public class Game {
             card = deck.drawCard();
             targetPlayer.drawCard(card);
         }
+
+        int numberOfCardsDrawn = targetPlayer.getHandSize() - initialHandSize;
+
+        gamePane.addDrawCardAnimation(targetPlayer.getPlayerNum(), numOfPlayers, numberOfCardsDrawn);
 
         //Once the drawing is terminated, it is checked if the drawing was terminated because the hand was too large.
         if (targetPlayer.getHand().size() >= sizeForBigHandPenalty) {
@@ -247,6 +255,7 @@ public class Game {
 
                     if (chosenTower != null) {
                         chosenTower.destroyTower();
+                        numOfBuiltTowers--;
                     } else {
                         currentPlayer.addPoints(100);
                         // If there are no towers available for the player to choose from
@@ -275,6 +284,7 @@ public class Game {
         // else the tower is not the castle
         else {
             currentTower.destroyTower();
+            numOfBuiltTowers--;
         }
 
     }
@@ -290,6 +300,7 @@ public class Game {
             if (numOfBuiltTowers < numOfPlayers) {
                 try {
                     getNextEmptyTower().startTower(currentPlayer);
+                    numOfBuiltTowers++;
                 } catch (Exception ex) {
                     Tower chosenTower = selectTowerForDispute(currentPlayer);
 
@@ -347,6 +358,7 @@ public class Game {
                 if (numOfBuiltTowers < numOfPlayers) {
                     try {
                         getNextEmptyTower().startTower(currentPlayer);
+                        numOfBuiltTowers++;
                     } catch (Exception ex) {
                         Tower chosenTower = selectTowerForDispute(currentPlayer);
 
@@ -392,6 +404,7 @@ public class Game {
         Card highestCard = drawnCards.get(0);
         int winningIndex = 0;
         int i = 0;
+
         for (Card card : drawnCards) {
             if (comparator.compare(card, highestCard) > 0) {
                 highestCard = card;
@@ -399,8 +412,12 @@ public class Game {
             }
             System.out.println("Player " + players.get(i).getPlayerNum() + ": " + card.toString()); // TODO remove this
                                                                                                     // after debugging
+
             i++;
         }
+
+        gamePane.addDisputeAnimation(numOfPlayers, players, winningIndex, drawnCards, isDarkMode.get());
+
         return players.get(winningIndex);
     }
 
@@ -791,6 +808,8 @@ public class Game {
         ObservableList<Card> temp = player.getHand();
         player.setHand(target.getHand());
         target.setHand(temp);
+
+        gamePane.addSwapAnimation(numOfPlayers, player.getPlayerNum(), target.getPlayerNum());
         gamePane.refreshPlayerHand();
 
         j = 1;
@@ -811,8 +830,6 @@ public class Game {
 
         Player currentPlayer = player;
 
-        //Player finalPlayer = 
-        //ObservableList<Card> tempFinalHand = finalPlayer.getHand();
         for (int i = (getPlayers().size() - 1); i > 0; i--) {
             Player target = currentPlayer.getPrevPlayer();
             ObservableList<Card> temp = currentPlayer.getHand();
@@ -828,6 +845,8 @@ public class Game {
             System.out.println("i = " + i + "\n");
 
         }
+
+        gamePane.addRotateAnimation(numOfPlayers, gameDirectionClockwise);
         gamePane.refreshPlayerHand();
 
         j = 1;
@@ -907,12 +926,19 @@ public class Game {
         }
     }
 
-    private void reverse() {
-        if (gameDirectionClockwise) {
-            gameDirectionClockwise = false;
-        } else {
-            gameDirectionClockwise = true;
+    private void reverse(Player player) {
+        if (numOfPlayers > 2) {
+            if (gameDirectionClockwise) {
+                gameDirectionClockwise = false;
+            } else {
+                gameDirectionClockwise = true;
+            }
+            gamePane.addReverseAnimation(gameDirectionClockwise);
         }
+        else {
+            skipNext(player);
+        }
+        
     }
 
     private void skipAll(Player currentPlayer) {
@@ -931,7 +957,6 @@ public class Game {
 
     private void targetedDraw(int numCards, Player currentPlayer) {
         Player target = currentPlayer.selectTargetPlayer(); // TODO finish me
-        // TODO add draw card animation
 
         System.out.println("Before: Target has " + target.getHandSize() + " cards.");
         // For each iteration, draw a card
@@ -939,6 +964,9 @@ public class Game {
             target.drawCard(deck.drawCard());
         }
         System.out.println("After: Target has " + target.getHandSize() + " cards.\n");
+
+        // TODO add draw card animation
+        gamePane.addDrawCardAnimation(target.getPlayerNum(), numOfPlayers, numCards);
     }
 
     protected void draw(int numCards, Player player) {
@@ -946,6 +974,7 @@ public class Game {
         for (int i = 0; i < numCards; i++) {
             player.drawCard(deck.drawCard());
         }
+        gamePane.addDrawCardAnimation(player.getPlayerNum(), numOfPlayers, numCards);
     }
 
     protected void press(int numPresses, Player player) {
@@ -1067,7 +1096,14 @@ public class Game {
         } else {
             pointsToTake = 100;
         }
-        player.addPoints(player.getNextPlayer().takePoints(pointsToTake));
+
+        gamePane.addThiefAnimationPart1(numOfPlayers, player.getPlayerNum(), player.getNextPlayer().getPlayerNum());
+
+        int pointsTaken = player.getNextPlayer().takePoints(pointsToTake);
+
+        gamePane.addThiefAnimationPart2(numOfPlayers, player.getPlayerNum(), player.getNextPlayer().getPlayerNum());
+        
+        player.addPoints(pointsTaken);
     }
 
     protected void performWild(Player player, Tower tower) {
@@ -1110,6 +1146,8 @@ public class Game {
     }
 
     private void performCardAction(Player currentPlayer, Tower currentTower) {
+
+        gamePane.addPlayCardAnimation(currentPlayer.getPlayerNum(), numOfPlayers, isDarkMode.get(), currentTower.getDisplayedCard(), currentTower.getPosition());
 
         if (isDarkMode.get()) {
             if ( (currentTower.getDisplayedCard().getDarkColor() == Card.DarkColor.WILD) || 
@@ -1185,6 +1223,8 @@ public class Game {
                     break;
                 case FLIP:
                     isDarkMode.setValue(false);
+                    userViewingDarkMode.setValue(false);
+                    gamePane.addFlipAnimation(isDarkMode.get());
                     break;
                 case TOWER_BUILD:
                 System.out.println("Tower build");
@@ -1195,7 +1235,7 @@ public class Game {
                     towerDestroy(currentPlayer, currentTower);
                     break;
                 case REVERSE:
-                    reverse();
+                    reverse(currentPlayer);
                     break;
                 case WILD_REGULAR:
                     break;
@@ -1265,7 +1305,7 @@ public class Game {
                     skipNext(currentPlayer);
                     break;
                 case WILD_REVERSE:
-                    reverse();
+                    reverse(currentPlayer);
                     break;
                 case WILD_SWAP:
                 System.out.println("Swapped wild");
@@ -1367,6 +1407,8 @@ public class Game {
                     break;
                 case FLIP:
                     isDarkMode.setValue(true);
+                    userViewingDarkMode.setValue(true);
+                    gamePane.addFlipAnimation(isDarkMode.get());
                     break;
                 case TOWER_BUILD:
                 System.out.println("Tower build");
@@ -1377,7 +1419,7 @@ public class Game {
                     towerDestroy(currentPlayer, currentTower);
                     break;
                 case REVERSE:
-                    reverse();
+                    reverse(currentPlayer);
                     break;
                 case WILD_REGULAR:
                     break;
@@ -1449,7 +1491,7 @@ public class Game {
                     skipNext(currentPlayer);
                     break;
                 case WILD_REVERSE:
-                    reverse();
+                    reverse(currentPlayer);
                     break;
                 case WILD_SWAP:
                 System.out.println("wild swap");
@@ -1524,9 +1566,7 @@ public class Game {
             //TODO show round start stage
         }
         
-        TurnThread startTurnThread = new TurnThread(curPlayer);
-        startTurnThread.start();
-        //curPlayer.startTurn();
+        curPlayer.startTurn();
     }
 
     public void endRound(Player winner) {
@@ -1536,7 +1576,7 @@ public class Game {
         for (Player player : playerList) {
             int pointsEarned = player.getRoundEndPoints();
             lastRoundVictoryBonus += pointsEarned;
-            winner.addPoints(pointsEarned);
+            winner.addPointsNoAnimation(pointsEarned);
             player.getHand().clear();
             player.setIsSkipped(false);
             player.savePointsFromRound();

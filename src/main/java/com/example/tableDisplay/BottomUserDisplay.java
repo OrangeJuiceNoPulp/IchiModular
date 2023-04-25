@@ -14,6 +14,7 @@ import com.example.SoundEffectPlayer.SoundEffectType;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -45,6 +46,10 @@ public class BottomUserDisplay extends HBox {
     private Button btnPlayCard;
     private Button btnViewMode;
 
+    public Point2D getHandDisplayPosition() {
+        return handDisplay.localToScene((handDisplay.getWidth() / 3.0), 0);
+    }
+
     public Card getSelectedCard() {
         return handDisplay.getFocusModel().getFocusedItem();
     }
@@ -52,6 +57,12 @@ public class BottomUserDisplay extends HBox {
     public void refresh() {
         statsDisplay.updateDisplay();
         refreshHandDisplay();
+        if (user.getGame().getViewingDarkMode()) {
+            btnViewMode.setText("View Light Mode");
+        }
+        else {
+            btnViewMode.setText("View Dark Mode");
+        }
     }
 
     public void clear() {

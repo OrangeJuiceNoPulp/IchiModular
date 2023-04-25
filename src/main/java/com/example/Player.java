@@ -33,6 +33,10 @@ public class Player {
         this.isSkipped = skipped;
     }
 
+    public Game getGame() {
+        return this.game;
+    }
+
     // Applies the penalty for getting too large of a hand of cards, and decreases
     // the number of cards held
     public void performBigHandPenalty() {
@@ -67,6 +71,7 @@ public class Player {
         System.out.println(this.toString() + "'s turn has started.");
         if (this.isSkipped) {
             // TODO add skip animation
+            game.getGamePane().addSkipAnimation();
             System.out.println(this.toString() + " was skipped.\n");
             this.endTurn(); // isSkipped is set to false when the turn ends.
             return;
@@ -124,6 +129,7 @@ public class Player {
                         game.getStack().addToStack(cardToStack, this, game.getStack().getTower());
                         game.getStack().getTower().addCard(cardToStack);
                         this.discardCard(cardToStack);
+                        game.getGamePane().addPlayCardAnimation(playerNum, game.getNumOfPlayers(), game.getIsDarkMode(), game.getStack().getTower().getDisplayedCard(), game.getStack().getTower().getPosition());
                         if (game.getIsDarkMode()) {
                             if (cardToStack.getDarkColor() == Card.DarkColor.WILD) {
                                 game.performWild(this, game.getStack().getTower());
@@ -153,6 +159,7 @@ public class Player {
                             game.getStack().addToStack(topDeckCard, this, game.getStack().getTower());
                             game.getStack().getTower().addCard(topDeckCard);
                             this.discardCard(topDeckCard);
+                            game.getGamePane().addPlayCardAnimation(playerNum, game.getNumOfPlayers(), game.getIsDarkMode(), game.getStack().getTower().getDisplayedCard(), game.getStack().getTower().getPosition());
                             if (game.getIsDarkMode()) {
                                 if (topDeckCard.getDarkColor() == Card.DarkColor.WILD) {
                                     game.performWild(this, game.getStack().getTower());
@@ -178,6 +185,7 @@ public class Player {
             } else {
 
                 StackContributeStage stackContributeStage = new StackContributeStage(this, game);
+                
                 stackContributeStage.showAndWait();
 
                 Card cardToStack = stackContributeStage.getStackedCard();
@@ -187,6 +195,7 @@ public class Player {
                         game.getStack().addToStack(cardToStack, this, game.getStack().getTower());
                         game.getStack().getTower().addCard(cardToStack);
                         this.discardCard(cardToStack);
+                        game.getGamePane().addPlayCardAnimation(playerNum, game.getNumOfPlayers(), game.getIsDarkMode(), game.getStack().getTower().getDisplayedCard(), game.getStack().getTower().getPosition());
                         if (game.getIsDarkMode()) {
                             if (cardToStack.getDarkColor() == Card.DarkColor.WILD) {
                                 game.performWild(this, game.getStack().getTower());
@@ -288,6 +297,7 @@ public class Player {
         // Else, there are no possible moves, so a card is drawn
         else {
             game.drawCard(this);
+            game.getGamePane().addDrawCardAnimation(playerNum, game.getNumOfPlayers());
             return null; // null is returned to tell the doBotTurn method to end this player's turn
         }
     }
@@ -437,9 +447,9 @@ public class Player {
         this.isPlayerTurn = false;
 
         
-        game.refreshGamePane();
+        game.getGamePane().playAnimationsInQueue();
 
-        delay(1500, () -> {
+        delay((game.getGamePane().getDelayTime() + 500), () -> {
             game.checkForBigHandPenalty();
             if (!(game.checkForRoundEnd())) {
                 game.setCurrentPlayer(this.getNextPlayer());
@@ -447,7 +457,9 @@ public class Player {
             }
         });
 
-        
+        game.getGamePane().resetDelayTime();
+
+        //game.refreshGamePane();
     }
 
     public int getHandSize() {
@@ -488,11 +500,21 @@ public class Player {
         return this.playerHand;
     }
 
+    public void addPointsNoAnimation(int points) {
+        score += points;
+    }
+
     public void addPoints(int points) {
+        if (points > 0) {
+            game.getGamePane().addPointChangeAnimation(playerNum, game.getNumOfPlayers(), points);
+        }
         score += points;
     }
 
     public void removePoints(int points) {
+        if (points > 0) {
+            game.getGamePane().addPointChangeAnimation(playerNum, game.getNumOfPlayers(), -1 * points);
+        }
         score -= points;
     }
 
@@ -507,6 +529,10 @@ public class Player {
         score -= points;
         if (score < 0) {
             score = 0;
+        }
+
+        if ((initialScore - score) > 0) {
+            game.getGamePane().addPointChangeAnimation(playerNum, game.getNumOfPlayers(), -1 * (initialScore - score));
         }
         return (initialScore - score);
     }

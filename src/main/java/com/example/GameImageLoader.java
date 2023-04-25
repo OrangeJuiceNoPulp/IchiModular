@@ -114,7 +114,44 @@ public class GameImageLoader {
         imgThief = null;
         imgTimes2 = null;
 
+        imgSkipAnimationImage = null;
+        imgReverseAnimationImage = null;
+        imgReverseBackwardsAnimationImage = null;
+        imgShieldAnimationImage = null;
+        imgThiefAnimationImage = null;
+        imgFlipAnimationImage = null;
     }
+
+    public Image getFlip() {
+        return this.imgFlipAnimationImage;
+    }
+
+    public Image getShield() {
+        return this.imgShieldAnimationImage;
+    }
+
+    public Image getBackwardsReverse() {
+        return this.imgReverseBackwardsAnimationImage;
+    }
+
+    public Image getReverse() {
+        return this.imgReverseAnimationImage;
+    }
+
+    public Image getSkip() {
+        return this.imgSkipAnimationImage;
+    }
+    
+    public Image getThief() {
+        return this.imgThiefAnimationImage;
+    }
+    
+    private Image imgFlipAnimationImage = new Image(this.getClass().getResource("flipAnimationImage.png").toExternalForm());
+    private Image imgThiefAnimationImage = new Image(this.getClass().getResource("thiefAnimationImage.png").toExternalForm());
+    private Image imgShieldAnimationImage = new Image(this.getClass().getResource("shieldAnimationImage.png").toExternalForm());
+    private Image imgReverseAnimationImage = new Image(this.getClass().getResource("reverseAnimationImage.png").toExternalForm());
+    private Image imgReverseBackwardsAnimationImage = new Image(this.getClass().getResource("reverseBackwardsAnimationImage.png").toExternalForm());
+    private Image imgSkipAnimationImage = new Image(this.getClass().getResource("skipAnimationImage.png").toExternalForm());
 
     private Image imgBlank = new Image(this.getClass().getResource("blankSquare.png").toExternalForm());
     private Image imgCardBack = new Image(this.getClass().getResource("cardBackSquare.png").toExternalForm());

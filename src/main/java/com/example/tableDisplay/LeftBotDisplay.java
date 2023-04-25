@@ -5,6 +5,7 @@ import com.example.Game;
 import com.example.HandDisplay;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -27,6 +28,10 @@ public class LeftBotDisplay extends VBox {
         statsDisplay = null;
         handDisplay = null;
         this.getChildren().clear();
+    }
+
+    public Point2D getHandDisplayPosition() {
+        return this.handDisplay.localToScene(0, 0);
     }
 
     public LeftBotDisplay(Game game, int playerNum) {

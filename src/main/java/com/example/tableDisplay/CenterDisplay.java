@@ -7,6 +7,7 @@ import com.example.UserTurnThread;
 import com.example.Tower.TowerPosition;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
@@ -35,6 +36,23 @@ public class CenterDisplay extends HBox {
 
     private double towerHeight;
     private double towerWidth;
+
+    public Point2D getHandDisplayPosition(int playerNum, int numOfPlayers) {
+        if (playerNum == 2) {
+            return rightDisplay.getHandDisplayPosition();
+        }
+        else {
+            return leftDisplay.getHandDisplayPosition();
+        }
+    }
+
+    public Point2D getTowerPositionInScene(TowerPosition position) {
+        return towerPane.getTowerPositionInScene(position);
+    }
+
+    public Point2D getDrawPilePosition() {
+        return imgDeckCard.localToScene(0, 0);
+    }
 
     public void clear() {
         towerPane.stopAnimation();
@@ -142,9 +160,8 @@ public class CenterDisplay extends HBox {
             if (game.getWaitingForUserToTakeTurn()) {
                 game.setWaitingForUserToTakeTurn(false);
                 game.drawCard(game.getUser());
+                game.getGamePane().addDrawCardAnimation(game.getUser().getPlayerNum(), game.getNumOfPlayers());
                 game.getUser().endTurn();
-                //UserTurnThread endUserTurn = new UserTurnThread(game.getUser());
-                //endUserTurn.start();
             }
         });
 
@@ -152,9 +169,8 @@ public class CenterDisplay extends HBox {
             if (game.getWaitingForUserToTakeTurn()) {
                 game.setWaitingForUserToTakeTurn(false);
                 game.drawCard(game.getUser());
+                game.getGamePane().addDrawCardAnimation(game.getUser().getPlayerNum(), game.getNumOfPlayers());
                 game.getUser().endTurn();
-                //UserTurnThread endUserTurn = new UserTurnThread(game.getUser());
-                //endUserTurn.start();
             }
         });
 
