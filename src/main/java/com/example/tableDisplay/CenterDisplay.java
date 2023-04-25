@@ -3,7 +3,6 @@ package com.example.tableDisplay;
 import com.example.CardDisplaySquare;
 import com.example.Game;
 import com.example.TowerPane;
-import com.example.UserTurnThread;
 import com.example.Tower.TowerPosition;
 
 import javafx.geometry.Insets;

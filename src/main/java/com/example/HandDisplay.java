@@ -35,8 +35,6 @@ public class HandDisplay extends StackPane {
         if (player == null) {
             player = game.getPlayer(playerNum);
         }
-
-        //System.out.println("Player is " + player.getPlayerName() + "\nNum Cards is " + player.getHandSize());
         
         if (player != null) {
             numCards = player.getHandSize();

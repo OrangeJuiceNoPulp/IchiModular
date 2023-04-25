@@ -182,7 +182,6 @@ public class Tower {
         this.position = position;
 
         // towerDisplay.setOnDragDropped(e -> {
-        //     // System.out.println("Discard DragDone"); // TODO remove this after debugging
         //     Dragboard db = e.getDragboard();
         //     boolean dropSuccess = false;
         //     boolean turnSuccess = false;
@@ -192,9 +191,6 @@ public class Tower {
 
         //             CardBase draggedCard = (CardBase) db.getContent(CardCellFactory.cardFormat);
         //             Card selectedCard = game.getSelectedCard();
-
-        //             // System.out.println(draggedCard.isTheSameCard(selectedCard)); // TODO remove
-        //             // this after debugging
 
         //             if (draggedCard.isTheSameCard(selectedCard)) {
         //                 turnSuccess = game.playCard(game.getCurrentPlayer(), this, selectedCard);

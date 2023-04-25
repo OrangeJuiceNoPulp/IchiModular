@@ -75,7 +75,6 @@ public class CardCellFactory implements Callback<ListView<Card>, ListCell<Card>>
             e.consume();
         });
         cell.setOnDragDone(e -> {
-            //System.out.println("CellFactory DragDone"); // TODO remove this after debugging
             // if (e.getTransferMode() == TransferMode.MOVE) {
             // }
             e.consume();

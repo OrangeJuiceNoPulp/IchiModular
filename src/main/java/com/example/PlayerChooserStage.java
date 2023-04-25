@@ -233,7 +233,6 @@ public class PlayerChooserStage extends Stage {
 
         btnConfirmSelection = new Button("Confirm Selection");
         btnConfirmSelection.setOnAction(e -> {
-            System.out.println("Selected " + choice.getPlayerName() + ". They have " + choice.getHandSize() + " cards."); //TODO remove after debugging
             this.close();
         });
         btnConfirmSelection.setMinSize(750, 100);

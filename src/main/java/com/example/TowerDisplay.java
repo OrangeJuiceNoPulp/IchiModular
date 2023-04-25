@@ -35,8 +35,6 @@ public class TowerDisplay extends StackPane {
     
         lblOwnerName = new Text(ownerName);
 
-        //System.out.println(lblOwner.getBoundsInLocal().getMaxY() + " " + lblOwner.getBoundsInParent().getMinY()); // TODO remove this after debugging
-
         lblOwner.setFill(Color.WHITESMOKE);
         lblOwnerName.setFill(Color.WHITESMOKE);
 
@@ -53,7 +51,6 @@ public class TowerDisplay extends StackPane {
         this.getChildren().addAll(vboxTowerDisplay);
 
         this.setOnDragDropped(e -> {
-                // System.out.println("Discard DragDone"); // TODO remove this after debugging
                 Dragboard db = e.getDragboard();
                 boolean dropSuccess = false;
                 boolean turnSuccess = false;
@@ -65,9 +62,6 @@ public class TowerDisplay extends StackPane {
         
                             CardBase draggedCard = (CardBase) db.getContent(CardCellFactory.cardFormat);
                             Card selectedCard = tower.getGame().getSelectedCard();
-        
-                            //System.out.println(draggedCard.isTheSameCard(selectedCard)); // TODO remove
-                            // this after debugging
         
                             if (draggedCard.isTheSameCard(selectedCard)) {
                                 turnSuccess = tower.getGame().playCard(tower.getGame().getUser(), tower, selectedCard);

@@ -74,11 +74,9 @@ public class Player {
     // Skips the player if they are skipped.
     // Start's the bot's turn.
     public void startTurn() {
-        System.out.println(this.toString() + "'s turn has started.");
         if (this.isSkipped) {
             // TODO add skip animation
             game.getGamePane().addSkipAnimation();
-            System.out.println(this.toString() + " was skipped.\n");
             this.endTurn(); // isSkipped is set to false when the turn ends.
             return;
         }
@@ -448,7 +446,6 @@ public class Player {
       }
 
     public void endTurn() {
-        System.out.println(this.toString() + "'s turn has ended.\n"); //TODO remove debug text
         this.isSkipped = false;
         this.isPlayerTurn = false;
 

@@ -410,8 +410,6 @@ public class Game {
                 highestCard = card;
                 winningIndex = i;
             }
-            System.out.println("Player " + players.get(i).getPlayerNum() + ": " + card.toString()); // TODO remove this
-                                                                                                    // after debugging
 
             i++;
         }
@@ -797,12 +795,6 @@ public class Game {
 
     private void swapHands(Player player) {
 
-        int j = 1;
-        for (Player person: playerList) {
-            System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-            j++;
-        }
-        System.out.println("");
 
         Player target = player.selectTargetPlayer();
         ObservableList<Card> temp = player.getHand();
@@ -812,21 +804,11 @@ public class Game {
         gamePane.addSwapAnimation(numOfPlayers, player.getPlayerNum(), target.getPlayerNum());
         gamePane.refreshPlayerHand();
 
-        j = 1;
-        for (Player person: playerList) {
-            System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-            j++;
-        }
+
     }
 
     private void rotateHands(Player player) {
 
-        int j = 1;
-        for (Player person: playerList) {
-            System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-            j++;
-        }
-        System.out.println("");
 
         Player currentPlayer = player;
 
@@ -837,23 +819,11 @@ public class Game {
             target.setHand(temp);
             currentPlayer = target;
 
-            j = 1;
-            for (Player person: playerList) {
-                System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-                j++;
-            }
-            System.out.println("i = " + i + "\n");
-
         }
 
         gamePane.addRotateAnimation(numOfPlayers, gameDirectionClockwise);
         gamePane.refreshPlayerHand();
 
-        j = 1;
-        for (Player person: playerList) {
-            System.out.println("Player " + j + ": " + person.getHandSize() + " cards");
-            j++;
-        }
     }
 
     private void discardAllLightColor(Player player, Card.LightColor color) {
@@ -958,12 +928,12 @@ public class Game {
     private void targetedDraw(int numCards, Player currentPlayer) {
         Player target = currentPlayer.selectTargetPlayer(); // TODO finish me
 
-        System.out.println("Before: Target has " + target.getHandSize() + " cards.");
+
         // For each iteration, draw a card
         for (int i = 0; i < numCards; i++) {
             target.drawCard(deck.drawCard());
         }
-        System.out.println("After: Target has " + target.getHandSize() + " cards.\n");
+
 
         // TODO add draw card animation
         gamePane.addDrawCardAnimation(target.getPlayerNum(), numOfPlayers, numCards);
@@ -1227,11 +1197,9 @@ public class Game {
                     gamePane.addFlipAnimation(isDarkMode.get());
                     break;
                 case TOWER_BUILD:
-                System.out.println("Tower build");
                     towerBuild(currentPlayer, currentTower);
                     break;
                 case TOWER_DESTROY:
-                System.out.println("Tower destroy");
                     towerDestroy(currentPlayer, currentTower);
                     break;
                 case REVERSE:
@@ -1243,11 +1211,9 @@ public class Game {
                     doThief(currentPlayer);
                     break;
                 case ROTATE:
-                System.out.println("rotated");
                     rotateHands(currentPlayer);
                     break;
                 case SWAP:
-                System.out.println("Swapped");
                     swapHands(currentPlayer);
                     break;
                 case DISCARD_ALL:
@@ -1260,11 +1226,9 @@ public class Game {
                     skipAll(currentPlayer);
                     break;
                 case TARGET_DRAW_1:
-                System.out.println("Target 1");
                     targetedDraw(1, currentPlayer);
                     break;
                 case TARGET_DRAW_2:
-                System.out.println("Target 2");
                     targetedDraw(2, currentPlayer);
                     break;
                 case DRAW_2:
@@ -1308,7 +1272,6 @@ public class Game {
                     reverse(currentPlayer);
                     break;
                 case WILD_SWAP:
-                System.out.println("Swapped wild");
                     swapHands(currentPlayer);
                     break;
                 case WILD_DRAW_TO_MATCH:
@@ -1411,11 +1374,9 @@ public class Game {
                     gamePane.addFlipAnimation(isDarkMode.get());
                     break;
                 case TOWER_BUILD:
-                System.out.println("Tower build");
                     towerBuild(currentPlayer, currentTower);
                     break;
                 case TOWER_DESTROY:
-                System.out.println("Tower Destroy");
                     towerDestroy(currentPlayer, currentTower);
                     break;
                 case REVERSE:
@@ -1427,11 +1388,9 @@ public class Game {
                     doThief(currentPlayer);
                     break;
                 case ROTATE:
-                System.out.println("Rotate");
                     rotateHands(currentPlayer);
                     break;
                 case SWAP:
-                System.out.println("swap");
                     swapHands(currentPlayer);
                     break;
                 case DISCARD_ALL:
@@ -1444,15 +1403,12 @@ public class Game {
                     skipAll(currentPlayer);
                     break;
                 case TARGET_DRAW_1:
-                System.out.println("Target draw 1");
                     targetedDraw(1, currentPlayer);
                     break;
                 case TARGET_DRAW_2:
-                System.out.println("Target draw 2");
                     targetedDraw(2, currentPlayer);
                     break;
                 case DRAW_2:
-                System.out.println("draw 2");
                     stack.startStack(currentTower.getDisplayedCard(), currentTower);
                     break;
                 case DRAW_5:
@@ -1471,7 +1427,6 @@ public class Game {
                     stack.startStack(currentTower.getDisplayedCard(), currentTower);
                     break;
                 case WILD_DRAW_4:
-                System.out.println("wild draw 4");
                     stack.startStack(currentTower.getDisplayedCard(), currentTower);
                     break;
                 case WILD_PRESS_2:
@@ -1494,7 +1449,6 @@ public class Game {
                     reverse(currentPlayer);
                     break;
                 case WILD_SWAP:
-                System.out.println("wild swap");
                     swapHands(currentPlayer);
                     break;
                 case WILD_DRAW_TO_MATCH:
@@ -1589,7 +1543,6 @@ public class Game {
             this.startRound();
             this.startFirstPlayerTurn();
         } else {
-            System.out.println("Game end"); // TODO end the game
 
             for (Tower tower : getTowers()) {
                 tower.clear();

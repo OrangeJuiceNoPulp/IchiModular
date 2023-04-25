@@ -196,8 +196,7 @@ public class GameInnerPane extends VBox {
     //     // Check if it is the user's turn/ waiting for user input
     //     btnPlayCard.setOnAction(e -> {
 
-    //         System.out.println("Tried Playing Card at " + game.getSelectedTower().getPosition());
-    //         System.out.println("The game is waiting for user turn: " + game.getWaitingForUserToTakeTurn());
+
     //         if(game.getWaitingForUserToTakeTurn()) {
     //             game.setWaitingForUserToTakeTurn(false);
     //             Card selectedCard = getSelectedCard(); //TODO namely, fix this method

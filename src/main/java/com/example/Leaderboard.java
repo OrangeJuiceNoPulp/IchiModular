@@ -107,12 +107,10 @@ public class Leaderboard {
             for (PlayerScorePair pair : newScorePairs) {
                 playerFileWriter.write(pair.playerName+ "\n"); 
                 scoreFileWriter.write(pair.score + "\n");
-                System.out.println("write success");
+
             }
         }
-        catch (Exception ex) {
-            System.out.println("write failure");
-        }
+        catch (Exception ex) {}
         
         try {
             playerFileWriter.close();
@@ -175,11 +173,8 @@ public class Leaderboard {
                     fileScores = new File(this.getClass().getResource("Leaderboard4Player5RoundScores.txt").toURI());
                 }
             }
-            System.out.println("loading success");
         }
         catch (Exception ex) {
-            System.out.println("loading failed");
-
             filePlayers = null;
             fileScores = null;
         }

@@ -47,7 +47,6 @@ public class TowerPane extends StackPane {
 
     public void refresh() {
         towerCardPane.refresh();
-        //new Exception().printStackTrace(System.out); //TODO remove this after debugging
     }
 
     public void clear() {
@@ -191,12 +190,10 @@ public class TowerPane extends StackPane {
 
         if (Math.abs(size - towerSize) > 0.5) {
             towerSize = size;
-            //System.out.println("Height: " + input + " " + this.getWidth() + " " + size);
             super.setHeight(size);
             super.setWidth(size);
         
             scale(size);
-            //new Error().printStackTrace();
         }
     }
 
@@ -207,7 +204,6 @@ public class TowerPane extends StackPane {
 
         if (Math.abs(size - towerSize) > 0.5) {
             towerSize = size;
-            //System.out.println("Width: " + input + " " + this.getHeight() + " " + size);
             super.setHeight(size);
             super.setWidth(size);
             
@@ -312,27 +308,22 @@ public class TowerPane extends StackPane {
 
             castleTower.setOnMouseClicked(e -> {
                 towerCardPane.refresh();
-                System.out.println("Clicked c");
                 background.selectTower(TowerPosition.CENTER);
             });
             northTower.setOnMouseClicked(e -> {
                 towerCardPane.refresh();
-                System.out.println("Clicked n");
                 background.selectTower(TowerPosition.NORTH);
             });
             southTower.setOnMouseClicked(e -> {
                 towerCardPane.refresh();
-                System.out.println("Clicked s");
                 background.selectTower(TowerPosition.SOUTH);
             });
             eastTower.setOnMouseClicked(e -> {
                 towerCardPane.refresh();
-                System.out.println("Clicked e");
                 background.selectTower(TowerPosition.EAST);
             });
             westTower.setOnMouseClicked(e -> {
                 towerCardPane.refresh();
-                System.out.println("Clicked w");
                 background.selectTower(TowerPosition.WEST);
             });
 

@@ -9,7 +9,6 @@ import com.example.CardLightValueComparator;
 import com.example.Game;
 import com.example.Player;
 import com.example.UserStatsDisplay;
-import com.example.UserTurnThread;
 import com.example.SoundEffectPlayer.SoundEffectType;
 
 import javafx.geometry.Insets;
@@ -112,8 +111,7 @@ public class BottomUserDisplay extends HBox {
         });
 
         btnPlayCard.setOnAction(e -> {
-            System.out.println("Tried Playing Card at " + game.getSelectedTower().getPosition()); //TODO remove debug text
-            System.out.println("The game is waiting for user turn: " + game.getWaitingForUserToTakeTurn()); //TODO remove debug text
+
             if(game.getWaitingForUserToTakeTurn()) {
                 game.setWaitingForUserToTakeTurn(false);
                 Card selectedCard = getSelectedCard(); 
@@ -240,11 +238,9 @@ public class BottomUserDisplay extends HBox {
 
 
         handDisplay.setOnMouseClicked(e -> {
-            System.out.println("Mouse clicked");
+
             if (e.getClickCount() == 2) {
-                System.out.println("Mouse double clicked");
-                System.out.println("Tried Playing Card at " + game.getSelectedTower().getPosition()); //TODO remove debug text
-                System.out.println("The game is waiting for user turn: " + game.getWaitingForUserToTakeTurn()); //TODO remove debug text
+
                 if(game.getWaitingForUserToTakeTurn()) {
                     game.setWaitingForUserToTakeTurn(false);
                     Card selectedCard = getSelectedCard(); 
