@@ -172,6 +172,7 @@ public class Game {
         }
 
         gamePane.addRedistributeHandsAnimation(numOfPlayers);
+        gamePane.refreshPlayerHand();
     }
 
     // Determines if the card is playable at any of the currently active towers.
