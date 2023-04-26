@@ -172,6 +172,7 @@ public class Game {
         }
 
         gamePane.addRedistributeHandsAnimation(numOfPlayers);
+        
         gamePane.refreshPlayerHand();
     }
 

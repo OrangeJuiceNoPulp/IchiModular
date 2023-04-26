@@ -84,6 +84,7 @@ public class BottomUserDisplay extends HBox {
 
     public void refreshPlayerHand() {
         handDisplay.setItems(user.getHand());
+        handDisplay.refresh();
     }
 
     public BottomUserDisplay(Game game) {

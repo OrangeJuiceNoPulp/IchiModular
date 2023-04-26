@@ -181,7 +181,7 @@ public class Stack {
                     // ends (by having the player accept it)
                     case WILD_SHIELD:
                         this.stackMagnitude = 0;
-                        game.getGamePane().addShieldAnimation();
+                        //game.getGamePane().addShieldAnimation(); //Done in the player class
                         acceptStack(player);
                         break;
                     default:

@@ -134,13 +134,20 @@ public class Player {
                         game.getStack().getTower().addCard(cardToStack);
                         this.discardCard(cardToStack);
                         game.getGamePane().addPlayCardAnimation(playerNum, game.getNumOfPlayers(), game.getIsDarkMode(), game.getStack().getTower().getDisplayedCard(), game.getStack().getTower().getPosition());
+                        
                         if (game.getIsDarkMode()) {
                             if (cardToStack.getDarkColor() == Card.DarkColor.WILD) {
                                 game.performWild(this, game.getStack().getTower());
                             }
+                            if (cardToStack.getDarkValue() == Card.Value.WILD_SHIELD) {
+                                game.getGamePane().addShieldAnimation();
+                            }
                         } else {
                             if (cardToStack.getLightColor() == Card.LightColor.WILD) {
                                 game.performWild(this, game.getStack().getTower());
+                            }
+                            if (cardToStack.getLightValue() == Card.Value.WILD_SHIELD) {
+                                game.getGamePane().addShieldAnimation();
                             }
                         }
                     } 
@@ -168,9 +175,15 @@ public class Player {
                                 if (topDeckCard.getDarkColor() == Card.DarkColor.WILD) {
                                     game.performWild(this, game.getStack().getTower());
                                 }
+                                if (topDeckCard.getDarkValue() == Card.Value.WILD_SHIELD) {
+                                    game.getGamePane().addShieldAnimation();
+                                }
                             } else {
                                 if (topDeckCard.getLightColor() == Card.LightColor.WILD) {
                                     game.performWild(this, game.getStack().getTower());
+                                }
+                                if (topDeckCard.getLightValue() == Card.Value.WILD_SHIELD) {
+                                    game.getGamePane().addShieldAnimation();
                                 }
                             }
                         } 
@@ -204,9 +217,15 @@ public class Player {
                             if (cardToStack.getDarkColor() == Card.DarkColor.WILD) {
                                 game.performWild(this, game.getStack().getTower());
                             }
+                            if (cardToStack.getDarkValue() == Card.Value.WILD_SHIELD) {
+                                game.getGamePane().addShieldAnimation();
+                            }
                         } else {
                             if (cardToStack.getLightColor() == Card.LightColor.WILD) {
                                 game.performWild(this, game.getStack().getTower());
+                            }
+                            if (cardToStack.getLightValue() == Card.Value.WILD_SHIELD) {
+                                game.getGamePane().addShieldAnimation();
                             }
                         }
                     } else {
