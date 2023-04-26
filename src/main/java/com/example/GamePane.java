@@ -160,7 +160,7 @@ public class GamePane extends StackPane {
 
         txtPointsChange.setFont(new Font("Perpetua Bold Italic", Math.max(textDimensions * 0.9, 14)));
         txtPointsChange.setTextFill(Color.WHITESMOKE);
-        txtPointsChange.setEffect(new DropShadow(1000 * 0.125, Color.BLACK));
+        txtPointsChange.setEffect(new DropShadow(100 * 0.250, Color.BLACK));
 
 
         txtPointsChange.setVisible(false);
@@ -844,40 +844,42 @@ public class GamePane extends StackPane {
     }
 
     public void addDrawCardAnimation(int playerNum, int numOfPlayers, int numOfCards) {
-        CardDisplaySquare playedCardDisplay = new CardDisplaySquare(gameTable.getGame().getImageLoader());
-        playedCardDisplay.setVisible(false);
-
-        double cardDimensions = Math.min(this.getScene().getHeight() * 0.1, this.getScene().getWidth()* 0.1);
-        playedCardDisplay.setHeight(cardDimensions);
-
-        animationPane.getChildren().add(playedCardDisplay);
-        Timeline cardDrawingAnimation = new Timeline();
-
-        Point2D startingLocation = gameTable.getDrawPilePosition();
-
-        double xCord = startingLocation.getX();
-        double yCord = startingLocation.getY();
-
-        double finalXCord = getStartXCord(playerNum, numOfPlayers, playedCardDisplay.getWidth());
-        double finalYCord = getStartYCord(playerNum, numOfPlayers, playedCardDisplay.getHeight());
-
-        int drawDuration = DEFAULT_WAIT_TIME / numOfCards;
-
-        cardDrawingAnimation.setCycleCount(numOfCards);
-        cardDrawingAnimation.getKeyFrames().add(new KeyFrame(Duration.millis(0), e -> {
-            soundEffectPlayer.playSoundEffect(SoundEffectType.DRAW);
-        }, new KeyValue(playedCardDisplay.visibleProperty(), false, Interpolator.LINEAR)));
-        cardDrawingAnimation.getKeyFrames().addAll(
-                new KeyFrame(Duration.millis(0), new KeyValue(playedCardDisplay.translateXProperty(), xCord, Interpolator.EASE_OUT)),
-                new KeyFrame(Duration.millis(0), new KeyValue(playedCardDisplay.translateYProperty(), yCord, Interpolator.EASE_OUT)),
-                new KeyFrame(Duration.millis(1), new KeyValue(playedCardDisplay.visibleProperty(), true, Interpolator.LINEAR)),
-                new KeyFrame(Duration.millis(drawDuration), new KeyValue(playedCardDisplay.translateXProperty(), finalXCord, Interpolator.LINEAR)),
-                new KeyFrame(Duration.millis(drawDuration), new KeyValue(playedCardDisplay.translateYProperty(), finalYCord, Interpolator.LINEAR)),
-                new KeyFrame(Duration.millis(drawDuration), new KeyValue(playedCardDisplay.visibleProperty(), false, Interpolator.LINEAR))
-            );
-
-        animationQueue.add(cardDrawingAnimation);
-        this.delayTime += DEFAULT_WAIT_TIME;
+        if (numOfCards > 0) {
+            CardDisplaySquare playedCardDisplay = new CardDisplaySquare(gameTable.getGame().getImageLoader());
+            playedCardDisplay.setVisible(false);
+    
+            double cardDimensions = Math.min(this.getScene().getHeight() * 0.1, this.getScene().getWidth()* 0.1);
+            playedCardDisplay.setHeight(cardDimensions);
+    
+            animationPane.getChildren().add(playedCardDisplay);
+            Timeline cardDrawingAnimation = new Timeline();
+    
+            Point2D startingLocation = gameTable.getDrawPilePosition();
+    
+            double xCord = startingLocation.getX();
+            double yCord = startingLocation.getY();
+    
+            double finalXCord = getStartXCord(playerNum, numOfPlayers, playedCardDisplay.getWidth());
+            double finalYCord = getStartYCord(playerNum, numOfPlayers, playedCardDisplay.getHeight());
+    
+            int drawDuration = DEFAULT_WAIT_TIME / numOfCards;
+    
+            cardDrawingAnimation.setCycleCount(numOfCards);
+            cardDrawingAnimation.getKeyFrames().add(new KeyFrame(Duration.millis(0), e -> {
+                soundEffectPlayer.playSoundEffect(SoundEffectType.DRAW);
+            }, new KeyValue(playedCardDisplay.visibleProperty(), false, Interpolator.LINEAR)));
+            cardDrawingAnimation.getKeyFrames().addAll(
+                    new KeyFrame(Duration.millis(0), new KeyValue(playedCardDisplay.translateXProperty(), xCord, Interpolator.EASE_OUT)),
+                    new KeyFrame(Duration.millis(0), new KeyValue(playedCardDisplay.translateYProperty(), yCord, Interpolator.EASE_OUT)),
+                    new KeyFrame(Duration.millis(1), new KeyValue(playedCardDisplay.visibleProperty(), true, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.millis(drawDuration), new KeyValue(playedCardDisplay.translateXProperty(), finalXCord, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.millis(drawDuration), new KeyValue(playedCardDisplay.translateYProperty(), finalYCord, Interpolator.LINEAR)),
+                    new KeyFrame(Duration.millis(drawDuration), new KeyValue(playedCardDisplay.visibleProperty(), false, Interpolator.LINEAR))
+                );
+    
+            animationQueue.add(cardDrawingAnimation);
+            this.delayTime += DEFAULT_WAIT_TIME;
+        }
     }
 
     public void refreshPlayerHand() {

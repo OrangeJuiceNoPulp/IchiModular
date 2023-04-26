@@ -10,7 +10,7 @@ import javafx.collections.ObservableList;
 public class Deck {
 
     public enum DeckType {
-        Standard_Ichi, Classic, Classic_Flip
+        Ichi, Classic, Classic_Flip
     }
 
     private ObservableList<Card> pile; // The pile of cards from which cards are drawn
@@ -102,7 +102,7 @@ public class Deck {
 
                 break;
 
-            case Standard_Ichi:
+            case Ichi:
 
                 addLightPairs(2, 2, 2, 2, 2, 2, Card.Value.N_NINE, lightSides);
                 addLightPairs(2, 2, 2, 2, 2, 2, Card.Value.N_EIGHT, lightSides);

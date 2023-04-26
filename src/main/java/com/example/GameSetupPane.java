@@ -211,7 +211,7 @@ public class GameSetupPane extends StackPane {
         txtGameDeck.setFont(new Font("Perpetua Bold Italic", 25));
 
 
-        ObservableList<Deck.DeckType> deckTypesList = FXCollections.observableArrayList(DeckType.Standard_Ichi, DeckType.Classic, DeckType.Classic_Flip);
+        ObservableList<Deck.DeckType> deckTypesList = FXCollections.observableArrayList(DeckType.Ichi, DeckType.Classic, DeckType.Classic_Flip);
 
         cboGameDeck = new ComboBox<Deck.DeckType>();
         cboGameDeck.getItems().addAll(deckTypesList);
